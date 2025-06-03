@@ -5,7 +5,7 @@ author:
   - name: "Seismic Minds (Cedric Destin, Weston Scott)"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Exploration of Seismic Activity: Mt. Vesuvius"
+description: "Exploratory Analysis of Seismic Activity: Mt. Vesuvius"
 format:
   html:
     code-tools: true

@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "Mt. Vesuvius Lives"
 subtitle: "INFO 526 - Summer 2025 - Final Project"
 author: "Cedric Destin & Weston Scott"
 title-slide-attributes:

@@ -1,11 +1,11 @@
 ---
-title: "Project Title"
+title: "Mt. Vesuvius Lives"
 subtitle: "INFO 526 - Summer 2025 - Final Project"
 author: 
   - name: "Seismic Minds"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Project description"
+description: "Exploratory Analysis of Seismic Activity: Mt. Vesuvius"
 format:
    html:
     code-tools: true
