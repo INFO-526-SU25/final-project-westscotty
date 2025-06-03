@@ -50,7 +50,19 @@ This dataset was selected because volcanoes are exciting! Mount Vesuvius is a hi
 ## Analysis plan
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
-    -   In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data or manipulate to illustrate if there has been any particular trends in the events. Therefore we will ss
+    -   In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:
+        -   Line plots in the time domain
+        -   Histogram
+        -   Box plots
+        -   Joint plots
+            -   This can be used to observe any specific trends
+        -   Pair plots
+    -   On the other hand, the second question can be answered by reviewing the seismic events as follow:
+        -   Scatter plot of lat & lon
+            -   Including the geographical features
+            -   Vary the size of the markers based on the magnitude
+        -   Plot the data in 3D
+            -   Our data is in lat, lon, depth and magnitude
 
 ## Plan of attack
 
