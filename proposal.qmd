@@ -1,8 +1,8 @@
 ---
 title: "Proposal title"
 subtitle: "Proposal"
-author: 
-  - name: "Team Name"
+author:
+  - name: "Seismic Minds"
     affiliations:
       - name: "School of Information, University of Arizona"
 description: "Project description"
@@ -16,12 +16,14 @@ editor: visual
 code-annotations: hover
 execute:
   warning: false
+  render-on-save: true
 ---
 
 ```{r}
 #| label: load-pkgs
 #| message: false
 library(tidyverse)
+library(dplyr)
 ```
 
 ## Dataset
@@ -29,6 +31,9 @@ library(tidyverse)
 ```{r}
 #| label: load-dataset
 #| message: false
+
+vesuvius <- readr::read_csv("./data/vesuvius.csv")
+glimpse(vesuvius)
 ```
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
