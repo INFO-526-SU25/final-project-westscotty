@@ -50,6 +50,7 @@ This dataset was selected because volcanoes are exciting! Mount Vesuvius is a hi
 ## Analysis plan
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+    -   In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data or manipulate to illustrate if there has been any particular trends in the events. Therefore we will ss
 
 ## Plan of attack
 
