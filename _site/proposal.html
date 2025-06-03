@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Seismic Minds">
-<meta name="description" content="Project description">
+<meta name="author" content="Seismic Minds (Cedric Destin, Weston Scott)">
+<meta name="description" content="Exploration of Seismic Activity: Mt. Vesuvius">
 
-<title>Proposal title – Project Title</title>
+<title>Mt. Vesuvius Lives – Project Title</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4064,6 +4064,7 @@ vertical-align: -.125em;
   <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset">Dataset</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
   <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a></li>
+  <li><a href="#plan-of-attack" id="toc-plan-of-attack" class="nav-link" data-scroll-target="#plan-of-attack">Plan of attack</a></li>
   </ul>
 </nav>
     </div>
@@ -4073,13 +4074,13 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Proposal title</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Mt. Vesuvius Lives</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">Proposal</p>
 </div>
 
 <div>
   <div class="description">
-    Project description
+    Exploration of Seismic Activity: Mt. Vesuvius
   </div>
 </div>
 
@@ -4088,7 +4089,7 @@ vertical-align: -.125em;
   <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
-    <p class="author">Seismic Minds </p>
+    <p class="author">Seismic Minds (Cedric Destin, Weston Scott) </p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
@@ -4134,18 +4135,66 @@ $ review_level          &lt;chr&gt; &quot;revised&quot;, &quot;revised&quot;, &q
 $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 2013, …</code></pre>
 </div>
 </div>
-<p>A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.</p>
-<p>Make sure to load the data and use inline code for some of this information.</p>
+<p>The Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event’s timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (<code>duration_magnitude_md</code>), and an associated error estimate. Additional fields identify the type of event (such as “earthquake”), the review level of the data (e.g., “revised” or “preliminary”), and the year in which the event occurred. All events are local to the Mount Vesuvius region.</p>
+<p>This dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis.</p>
 </section>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
-<p>The two questions you want to answer.</p>
+<ol type="1">
+<li><p>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</p></li>
+<li><p>How does the depth of seismic events relate to their magnitude or frequency? Are deeper events less frequent but more powerful?</p></li>
+</ol>
 </section>
 <section id="analysis-plan" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
 <ul>
 <li>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</li>
 </ul>
+</section>
+<section id="plan-of-attack" class="level2">
+<h2 class="anchored" data-anchor-id="plan-of-attack">Plan of attack</h2>
+<table class="caption-top table">
+<caption>Plan of attack for completing the outlined project above.</caption>
+<thead>
+<tr class="header">
+<th>Task Name</th>
+<th>Status</th>
+<th>Due</th>
+<th>Priority</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
 
 <!-- -->
@@ -4656,13 +4705,13 @@ $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 20
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
 <div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="an">title:</span><span class="co"> &quot;Proposal title&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="an">title:</span><span class="co"> &quot;Mt. Vesuvius Lives&quot;</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="an">subtitle:</span><span class="co"> &quot;Proposal&quot;</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="an">author:</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">  - name: &quot;Seismic Minds&quot;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">  - name: &quot;Seismic Minds (Cedric Destin, Weston Scott)&quot;</span></span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="co">    affiliations:</span></span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="co">      - name: &quot;School of Information, University of Arizona&quot;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="an">description:</span><span class="co"> &quot;Project description&quot;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="an">description:</span><span class="co"> &quot;Exploration of Seismic Activity: Mt. Vesuvius&quot;</span></span>
 <span id="cb4-9"><a href="#cb4-9"></a><span class="an">format:</span></span>
 <span id="cb4-10"><a href="#cb4-10"></a><span class="co">  html:</span></span>
 <span id="cb4-11"><a href="#cb4-11"></a><span class="co">    code-tools: true</span></span>
@@ -4693,17 +4742,30 @@ $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 20
 <span id="cb4-40"><a href="#cb4-40"></a><span class="fu">glimpse</span>(vesuvius)</span>
 <span id="cb4-41"><a href="#cb4-41"></a><span class="in">```</span></span>
 <span id="cb4-42"><a href="#cb4-42"></a></span>
-<span id="cb4-43"><a href="#cb4-43"></a>A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.</span>
+<span id="cb4-43"><a href="#cb4-43"></a>The Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event&#39;s timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (<span class="in">`duration_magnitude_md`</span>), and an associated error estimate. Additional fields identify the type of event (such as &quot;earthquake&quot;), the review level of the data (e.g., &quot;revised&quot; or &quot;preliminary&quot;), and the year in which the event occurred. All events are local to the Mount Vesuvius region.</span>
 <span id="cb4-44"><a href="#cb4-44"></a></span>
-<span id="cb4-45"><a href="#cb4-45"></a>Make sure to load the data and use inline code for some of this information.</span>
+<span id="cb4-45"><a href="#cb4-45"></a>This dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis.</span>
 <span id="cb4-46"><a href="#cb4-46"></a></span>
 <span id="cb4-47"><a href="#cb4-47"></a><span class="fu">## Questions</span></span>
 <span id="cb4-48"><a href="#cb4-48"></a></span>
-<span id="cb4-49"><a href="#cb4-49"></a>The two questions you want to answer.</span>
+<span id="cb4-49"><a href="#cb4-49"></a><span class="ss">1.  </span>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</span>
 <span id="cb4-50"><a href="#cb4-50"></a></span>
-<span id="cb4-51"><a href="#cb4-51"></a><span class="fu">## Analysis plan</span></span>
+<span id="cb4-51"><a href="#cb4-51"></a><span class="ss">2.  </span>How does the depth of seismic events relate to their magnitude or frequency? Are deeper events less frequent but more powerful?</span>
 <span id="cb4-52"><a href="#cb4-52"></a></span>
-<span id="cb4-53"><a href="#cb4-53"></a><span class="ss">-   </span>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</span>
+<span id="cb4-53"><a href="#cb4-53"></a><span class="fu">## Analysis plan</span></span>
+<span id="cb4-54"><a href="#cb4-54"></a></span>
+<span id="cb4-55"><a href="#cb4-55"></a><span class="ss">-   </span>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</span>
+<span id="cb4-56"><a href="#cb4-56"></a></span>
+<span id="cb4-57"><a href="#cb4-57"></a><span class="fu">## Plan of attack</span></span>
+<span id="cb4-58"><a href="#cb4-58"></a></span>
+<span id="cb4-59"><a href="#cb4-59"></a><span class="pp">|</span> Task Name <span class="pp">|</span> Status <span class="pp">|</span> Due <span class="pp">|</span> Priority <span class="pp">|</span> Summary <span class="pp">|</span></span>
+<span id="cb4-60"><a href="#cb4-60"></a><span class="pp">|-----------|--------|-----|----------|---------|</span></span>
+<span id="cb4-61"><a href="#cb4-61"></a><span class="pp">|</span>           <span class="pp">|</span>        <span class="pp">|</span>     <span class="pp">|</span>          <span class="pp">|</span>         <span class="pp">|</span></span>
+<span id="cb4-62"><a href="#cb4-62"></a><span class="pp">|</span>           <span class="pp">|</span>        <span class="pp">|</span>     <span class="pp">|</span>          <span class="pp">|</span>         <span class="pp">|</span></span>
+<span id="cb4-63"><a href="#cb4-63"></a><span class="pp">|</span>           <span class="pp">|</span>        <span class="pp">|</span>     <span class="pp">|</span>          <span class="pp">|</span>         <span class="pp">|</span></span>
+<span id="cb4-64"><a href="#cb4-64"></a><span class="pp">|</span>           <span class="pp">|</span>        <span class="pp">|</span>     <span class="pp">|</span>          <span class="pp">|</span>         <span class="pp">|</span></span>
+<span id="cb4-65"><a href="#cb4-65"></a></span>
+<span id="cb4-66"><a href="#cb4-66"></a>: Plan of attack for completing the outlined project above.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

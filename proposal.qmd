@@ -1,11 +1,11 @@
 ---
-title: "Proposal title"
+title: "Mt. Vesuvius Lives"
 subtitle: "Proposal"
 author:
-  - name: "Seismic Minds"
+  - name: "Seismic Minds (Cedric Destin, Weston Scott)"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Project description"
+description: "Exploration of Seismic Activity: Mt. Vesuvius"
 format:
   html:
     code-tools: true
@@ -36,14 +36,27 @@ vesuvius <- readr::read_csv("./data/vesuvius.csv")
 glimpse(vesuvius)
 ```
 
-A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
+The Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event's timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (`duration_magnitude_md`), and an associated error estimate. Additional fields identify the type of event (such as "earthquake"), the review level of the data (e.g., "revised" or "preliminary"), and the year in which the event occurred. All events are local to the Mount Vesuvius region.
 
-Make sure to load the data and use inline code for some of this information.
+This dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis.
 
 ## Questions
 
-The two questions you want to answer.
+1.  How have the frequency and depth of seismic events at Mount Vesuvius changed over time?
+
+2.  How does the depth of seismic events relate to their magnitude or frequency? Are deeper events less frequent but more powerful?
 
 ## Analysis plan
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+
+## Plan of attack
+
+| Task Name | Status | Due | Priority | Summary |
+|-----------|--------|-----|----------|---------|
+|           |        |     |          |         |
+|           |        |     |          |         |
+|           |        |     |          |         |
+|           |        |     |          |         |
+
+: Plan of attack for completing the outlined project above.
