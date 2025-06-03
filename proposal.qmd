@@ -22,8 +22,9 @@ execute:
 ```{r}
 #| label: load-pkgs
 #| message: false
-library(tidyverse)
 library(dplyr)
+library(readr)
+library(tidyverse)
 ```
 
 ## Dataset
@@ -32,7 +33,7 @@ library(dplyr)
 #| label: load-dataset
 #| message: false
 
-vesuvius <- readr::read_csv("./data/vesuvius.csv")
+vesuvius <- read_csv("./data/vesuvius.csv")
 glimpse(vesuvius)
 ```
 
