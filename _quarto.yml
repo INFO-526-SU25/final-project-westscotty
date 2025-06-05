@@ -6,8 +6,7 @@ website:
   navbar:
     right:
       - icon: github
-        href: https://github.com/INFO-526-SU25/final-project-westscotty.git # Needs to be changed to your project repo
-    left:
+        href: https://github.com/INFO-526-SU25/final-project-westscotty.git
       - text: Project
         href: index.qmd
       - text: Proposal

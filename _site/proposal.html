@@ -4020,7 +4020,12 @@ vertical-align: -.125em;
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/INFO-526-SU25/final-project-westscotty.git"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Project</span></a>
@@ -4036,13 +4041,6 @@ vertical-align: -.125em;
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/INFO-526-SU25/final-project-westscotty.git"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -4149,15 +4147,49 @@ $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 20
 <section id="analysis-plan" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
 <ul>
-<li>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</li>
+<li>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+<ul>
+<li>In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:
+<ul>
+<li>Line plots in the time domain</li>
+<li>Histogram</li>
+<li>Box plots</li>
+<li>Joint plots
+<ul>
+<li>This can be used to observe any specific trends</li>
+</ul></li>
+<li>Pair plots</li>
+</ul></li>
+<li>On the other hand, the second question can be answered by reviewing the seismic events as follow:
+<ul>
+<li>Scatter plot of lat &amp; lon
+<ul>
+<li>Including the geographical features</li>
+<li>Vary the size of the markers based on the magnitude</li>
+</ul></li>
+<li>Plot the data in 3D
+<ul>
+<li>Our data is in lat, lon, depth and magnitude</li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
 </section>
 <section id="plan-of-attack" class="level2">
 <h2 class="anchored" data-anchor-id="plan-of-attack">Plan of attack</h2>
 <table class="caption-top table">
 <caption>Plan of attack for completing the outlined project above.</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 26%">
+</colgroup>
 <thead>
 <tr class="header">
+<th>Task ID</th>
 <th>Task Name</th>
 <th>Status</th>
 <th>Due</th>
@@ -4167,32 +4199,68 @@ $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 20
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>1</td>
+<td>Plan out layer mappings</td>
+<td>Not Started</td>
+<td>06/09/2025</td>
+<td>High</td>
+<td>Map out the various layers needed for displaying the data for each plots</td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2</td>
+<td>Plan out functions/packages</td>
+<td>Not Started</td>
+<td>06/11/2025</td>
+<td>High</td>
+<td>List functions and packages needed for working with said layers</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>3</td>
+<td>Plan out data wrangling methods</td>
+<td>Not Started</td>
+<td>06/13/2025</td>
+<td>High</td>
+<td>Determine necessary data fields (filters?) Any new data fields (data wrangling - mutate?)</td>
 </tr>
 <tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>4</td>
+<td>Plan out data mappings to aesthetics</td>
+<td>Not Started</td>
+<td>06/16/2025</td>
+<td>High</td>
+<td>Map out aesthetic choices (what axes should look like, colors, etc.)</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Development stage 1</td>
+<td>Not Started</td>
+<td>06/19/2025</td>
+<td>High</td>
+<td>Create initial pass at plot 1</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Development stage 2</td>
+<td>Not Started</td>
+<td>06/23/2025</td>
+<td>High</td>
+<td>Create initial pass at plot 2</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Review stage</td>
+<td>Not Started</td>
+<td>06/25/2025</td>
+<td>High</td>
+<td>Review plots, plan changes</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Project summary</td>
+<td>Not Started</td>
+<td>06/27/2025</td>
+<td>High</td>
+<td>Report development (presentation planning)</td>
 </tr>
 </tbody>
 </table>
@@ -4757,17 +4825,34 @@ $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 20
 <span id="cb4-54"><a href="#cb4-54"></a><span class="fu">## Analysis plan</span></span>
 <span id="cb4-55"><a href="#cb4-55"></a></span>
 <span id="cb4-56"><a href="#cb4-56"></a><span class="ss">-   </span>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</span>
-<span id="cb4-57"><a href="#cb4-57"></a></span>
-<span id="cb4-58"><a href="#cb4-58"></a><span class="fu">## Plan of attack</span></span>
-<span id="cb4-59"><a href="#cb4-59"></a></span>
-<span id="cb4-60"><a href="#cb4-60"></a><span class="pp">|</span> Task Name <span class="pp">|</span> Status <span class="pp">|</span> Due <span class="pp">|</span> Priority <span class="pp">|</span> Summary <span class="pp">|</span></span>
-<span id="cb4-61"><a href="#cb4-61"></a><span class="pp">|-----------|--------|-----|----------|---------|</span></span>
-<span id="cb4-62"><a href="#cb4-62"></a><span class="pp">|</span>           <span class="pp">|</span>        <span class="pp">|</span>     <span class="pp">|</span>          <span class="pp">|</span>         <span class="pp">|</span></span>
-<span id="cb4-63"><a href="#cb4-63"></a><span class="pp">|</span>           <span class="pp">|</span>        <span class="pp">|</span>     <span class="pp">|</span>          <span class="pp">|</span>         <span class="pp">|</span></span>
-<span id="cb4-64"><a href="#cb4-64"></a><span class="pp">|</span>           <span class="pp">|</span>        <span class="pp">|</span>     <span class="pp">|</span>          <span class="pp">|</span>         <span class="pp">|</span></span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="pp">|</span>           <span class="pp">|</span>        <span class="pp">|</span>     <span class="pp">|</span>          <span class="pp">|</span>         <span class="pp">|</span></span>
-<span id="cb4-66"><a href="#cb4-66"></a></span>
-<span id="cb4-67"><a href="#cb4-67"></a>: Plan of attack for completing the outlined project above.</span>
+<span id="cb4-57"><a href="#cb4-57"></a><span class="ss">    -   </span>In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:</span>
+<span id="cb4-58"><a href="#cb4-58"></a><span class="ss">        -   </span>Line plots in the time domain</span>
+<span id="cb4-59"><a href="#cb4-59"></a><span class="ss">        -   </span>Histogram</span>
+<span id="cb4-60"><a href="#cb4-60"></a><span class="ss">        -   </span>Box plots</span>
+<span id="cb4-61"><a href="#cb4-61"></a><span class="ss">        -   </span>Joint plots</span>
+<span id="cb4-62"><a href="#cb4-62"></a><span class="ss">            -   </span>This can be used to observe any specific trends</span>
+<span id="cb4-63"><a href="#cb4-63"></a><span class="ss">        -   </span>Pair plots</span>
+<span id="cb4-64"><a href="#cb4-64"></a><span class="ss">    -   </span>On the other hand, the second question can be answered by reviewing the seismic events as follow:</span>
+<span id="cb4-65"><a href="#cb4-65"></a><span class="ss">        -   </span>Scatter plot of lat &amp; lon</span>
+<span id="cb4-66"><a href="#cb4-66"></a><span class="ss">            -   </span>Including the geographical features</span>
+<span id="cb4-67"><a href="#cb4-67"></a><span class="ss">            -   </span>Vary the size of the markers based on the magnitude</span>
+<span id="cb4-68"><a href="#cb4-68"></a><span class="ss">        -   </span>Plot the data in 3D</span>
+<span id="cb4-69"><a href="#cb4-69"></a><span class="ss">            -   </span>Our data is in lat, lon, depth and magnitude</span>
+<span id="cb4-70"><a href="#cb4-70"></a></span>
+<span id="cb4-71"><a href="#cb4-71"></a><span class="fu">## Plan of attack</span></span>
+<span id="cb4-72"><a href="#cb4-72"></a></span>
+<span id="cb4-73"><a href="#cb4-73"></a><span class="pp">|</span> Task ID <span class="pp">|</span> Task Name <span class="pp">|</span> Status <span class="pp">|</span> Due <span class="pp">|</span> Priority <span class="pp">|</span> Summary <span class="pp">|</span></span>
+<span id="cb4-74"><a href="#cb4-74"></a><span class="pp">|-------|-----------|-----------|-----------|-----------|------------------|</span></span>
+<span id="cb4-75"><a href="#cb4-75"></a><span class="pp">|</span> 1 <span class="pp">|</span> Plan out layer mappings <span class="pp">|</span> Not Started <span class="pp">|</span> 06/09/2025 <span class="pp">|</span> High <span class="pp">|</span> Map out the various layers needed for displaying the data for each plots <span class="pp">|</span></span>
+<span id="cb4-76"><a href="#cb4-76"></a><span class="pp">|</span> 2 <span class="pp">|</span> Plan out functions/packages <span class="pp">|</span> Not Started <span class="pp">|</span> 06/11/2025 <span class="pp">|</span> High <span class="pp">|</span> List functions and packages needed for working with said layers <span class="pp">|</span></span>
+<span id="cb4-77"><a href="#cb4-77"></a><span class="pp">|</span> 3 <span class="pp">|</span> Plan out data wrangling methods <span class="pp">|</span> Not Started <span class="pp">|</span> 06/13/2025 <span class="pp">|</span> High <span class="pp">|</span> Determine necessary data fields (filters?) Any new data fields (data wrangling - mutate?) <span class="pp">|</span></span>
+<span id="cb4-78"><a href="#cb4-78"></a><span class="pp">|</span> 4 <span class="pp">|</span> Plan out data mappings to aesthetics <span class="pp">|</span> Not Started <span class="pp">|</span> 06/16/2025 <span class="pp">|</span> High <span class="pp">|</span> Map out aesthetic choices (what axes should look like, colors, etc.) <span class="pp">|</span></span>
+<span id="cb4-79"><a href="#cb4-79"></a><span class="pp">|</span> 5 <span class="pp">|</span> Development stage 1 <span class="pp">|</span> Not Started <span class="pp">|</span> 06/19/2025 <span class="pp">|</span> High <span class="pp">|</span> Create initial pass at plot 1 <span class="pp">|</span></span>
+<span id="cb4-80"><a href="#cb4-80"></a><span class="pp">|</span> 6 <span class="pp">|</span> Development stage 2 <span class="pp">|</span> Not Started <span class="pp">|</span> 06/23/2025 <span class="pp">|</span> High <span class="pp">|</span> Create initial pass at plot 2 <span class="pp">|</span></span>
+<span id="cb4-81"><a href="#cb4-81"></a><span class="pp">|</span> 7 <span class="pp">|</span> Review stage <span class="pp">|</span> Not Started <span class="pp">|</span> 06/25/2025 <span class="pp">|</span> High <span class="pp">|</span> Review plots, plan changes <span class="pp">|</span></span>
+<span id="cb4-82"><a href="#cb4-82"></a><span class="pp">|</span> 8 <span class="pp">|</span> Project summary <span class="pp">|</span> Not Started <span class="pp">|</span> 06/27/2025 <span class="pp">|</span> High <span class="pp">|</span> Report development (presentation planning) <span class="pp">|</span></span>
+<span id="cb4-83"><a href="#cb4-83"></a></span>
+<span id="cb4-84"><a href="#cb4-84"></a>: Plan of attack for completing the outlined project above.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
