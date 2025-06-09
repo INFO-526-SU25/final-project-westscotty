@@ -11,6 +11,8 @@ website:
         href: index.qmd
       - text: Proposal
         href: proposal.qmd
+      - text: Plan of Attack
+        href: plan_of_attack.qmd
       - text: Presentation
         href: presentation.qmd
       - text: About

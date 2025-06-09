@@ -14,6 +14,41 @@
     "text": "Add project abstract here."
   },
   {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Mt. Vesuvius Lives",
+    "section": "",
+    "text": "library(dplyr)\nlibrary(readr)\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "proposal.html#dataset",
+    "href": "proposal.html#dataset",
+    "title": "Mt. Vesuvius Lives",
+    "section": "Dataset",
+    "text": "Dataset\n\nvesuvius &lt;- read_csv(\"./data/vesuvius.csv\")\nglimpse(vesuvius)\n\nRows: 12,027\nColumns: 11\n$ event_id              &lt;dbl&gt; 4251, 4252, 22547, 22546, 22545, 22544, 22543, 2…\n$ time                  &lt;dttm&gt; 2011-04-20 00:27:24, 2012-06-19 21:29:48, 2013-…\n$ latitude              &lt;dbl&gt; 40.81800, 40.80883, 40.82217, NA, NA, NA, NA, NA…\n$ longitude             &lt;dbl&gt; 14.43000, 14.42717, 14.42800, NA, NA, NA, NA, NA…\n$ depth_km              &lt;dbl&gt; 0.42, 1.31, 0.06, NA, NA, NA, NA, NA, NA, NA, NA…\n$ duration_magnitude_md &lt;dbl&gt; 1.2, 0.7, 2.2, 0.2, 0.2, 0.0, 0.8, 1.4, -0.2, 0.…\n$ md_error              &lt;dbl&gt; 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3…\n$ area                  &lt;chr&gt; \"Mount Vesuvius\", \"Mount Vesuvius\", \"Mount Vesuv…\n$ type                  &lt;chr&gt; \"earthquake\", \"earthquake\", \"earthquake\", \"earth…\n$ review_level          &lt;chr&gt; \"revised\", \"revised\", \"preliminary\", \"preliminar…\n$ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 2013, …\n\n\nThe Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event’s timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (duration_magnitude_md), and an associated error estimate. Additional fields identify the type of event (such as “earthquake”), the review level of the data (e.g., “revised” or “preliminary”), and the year in which the event occurred. All events are local to the Mount Vesuvius region.\nThis dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis."
+  },
+  {
+    "objectID": "proposal.html#questions",
+    "href": "proposal.html#questions",
+    "title": "Mt. Vesuvius Lives",
+    "section": "Questions",
+    "text": "Questions\n\nHow have the frequency and depth of seismic events at Mount Vesuvius changed over time?\nHow does the depth of seismic events relate to their magnitude or frequency? Are deeper events less frequent but more powerful?"
+  },
+  {
+    "objectID": "proposal.html#analysis-plan",
+    "href": "proposal.html#analysis-plan",
+    "title": "Mt. Vesuvius Lives",
+    "section": "Analysis plan",
+    "text": "Analysis plan\n\nA plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).\n\nIn our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:\n\nLine plots in the time domain\nHistogram\nBox plots\nJoint plots\n\nThis can be used to observe any specific trends\n\nPair plots\n\nOn the other hand, the second question can be answered by reviewing the seismic events as follow:\n\nScatter plot of lat & lon\n\nIncluding the geographical features\nVary the size of the markers based on the magnitude\n\nPlot the data in 3D\n\nOur data is in lat, lon, depth and magnitude"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was developed by Seismic Minds for INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nCedric Destin: One sentence description of Team member 1 (e.g., year, major, etc.).\nWeston Scott: I am an Algorithms and Signal Processing Engineer in my second to last semester for my Master’s in Electrical and Computer Engineering program. (e.g., year, major, etc.)."
+  },
+  {
     "objectID": "presentation.html#quarto",
     "href": "presentation.html#quarto",
     "title": "Mt. Vesuvius Lives",
@@ -77,45 +112,10 @@
     "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This project was developed by Seismic Minds for INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nCedric Destin: One sentence description of Team member 1 (e.g., year, major, etc.).\nWeston Scott: One sentence description of Team member 2 (e.g., year, major, etc.)."
-  },
-  {
-    "objectID": "proposal.html",
-    "href": "proposal.html",
+    "objectID": "plan_of_attack.html",
+    "href": "plan_of_attack.html",
     "title": "Mt. Vesuvius Lives",
     "section": "",
-    "text": "library(dplyr)\nlibrary(readr)\nlibrary(tidyverse)"
-  },
-  {
-    "objectID": "proposal.html#dataset",
-    "href": "proposal.html#dataset",
-    "title": "Mt. Vesuvius Lives",
-    "section": "Dataset",
-    "text": "Dataset\n\nvesuvius &lt;- read_csv(\"./data/vesuvius.csv\")\nglimpse(vesuvius)\n\nRows: 12,027\nColumns: 11\n$ event_id              &lt;dbl&gt; 4251, 4252, 22547, 22546, 22545, 22544, 22543, 2…\n$ time                  &lt;dttm&gt; 2011-04-20 00:27:24, 2012-06-19 21:29:48, 2013-…\n$ latitude              &lt;dbl&gt; 40.81800, 40.80883, 40.82217, NA, NA, NA, NA, NA…\n$ longitude             &lt;dbl&gt; 14.43000, 14.42717, 14.42800, NA, NA, NA, NA, NA…\n$ depth_km              &lt;dbl&gt; 0.42, 1.31, 0.06, NA, NA, NA, NA, NA, NA, NA, NA…\n$ duration_magnitude_md &lt;dbl&gt; 1.2, 0.7, 2.2, 0.2, 0.2, 0.0, 0.8, 1.4, -0.2, 0.…\n$ md_error              &lt;dbl&gt; 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3…\n$ area                  &lt;chr&gt; \"Mount Vesuvius\", \"Mount Vesuvius\", \"Mount Vesuv…\n$ type                  &lt;chr&gt; \"earthquake\", \"earthquake\", \"earthquake\", \"earth…\n$ review_level          &lt;chr&gt; \"revised\", \"revised\", \"preliminary\", \"preliminar…\n$ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 2013, …\n\n\nThe Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event’s timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (duration_magnitude_md), and an associated error estimate. Additional fields identify the type of event (such as “earthquake”), the review level of the data (e.g., “revised” or “preliminary”), and the year in which the event occurred. All events are local to the Mount Vesuvius region.\nThis dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis."
-  },
-  {
-    "objectID": "proposal.html#questions",
-    "href": "proposal.html#questions",
-    "title": "Mt. Vesuvius Lives",
-    "section": "Questions",
-    "text": "Questions\n\nHow have the frequency and depth of seismic events at Mount Vesuvius changed over time?\nHow does the depth of seismic events relate to their magnitude or frequency? Are deeper events less frequent but more powerful?"
-  },
-  {
-    "objectID": "proposal.html#analysis-plan",
-    "href": "proposal.html#analysis-plan",
-    "title": "Mt. Vesuvius Lives",
-    "section": "Analysis plan",
-    "text": "Analysis plan\n\nA plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).\n\nIn our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:\n\nLine plots in the time domain\nHistogram\nBox plots\nJoint plots\n\nThis can be used to observe any specific trends\n\nPair plots\n\nOn the other hand, the second question can be answered by reviewing the seismic events as follow:\n\nScatter plot of lat & lon\n\nIncluding the geographical features\nVary the size of the markers based on the magnitude\n\nPlot the data in 3D\n\nOur data is in lat, lon, depth and magnitude"
-  },
-  {
-    "objectID": "proposal.html#plan-of-attack",
-    "href": "proposal.html#plan-of-attack",
-    "title": "Mt. Vesuvius Lives",
-    "section": "Plan of attack",
-    "text": "Plan of attack\n\nPlan of attack for completing the outlined project above.\n\n\n\n\n\n\n\n\n\n\nTask ID\nTask Name\nStatus\nDue\nPriority\nSummary\n\n\n\n\n1\nPlan out layer mappings\nNot Started\n06/09/2025\nHigh\nMap out the various layers needed for displaying the data for each plots\n\n\n2\nPlan out functions/packages\nNot Started\n06/11/2025\nHigh\nList functions and packages needed for working with said layers\n\n\n3\nPlan out data wrangling methods\nNot Started\n06/13/2025\nHigh\nDetermine necessary data fields (filters?) Any new data fields (data wrangling - mutate?)\n\n\n4\nPlan out data mappings to aesthetics\nNot Started\n06/16/2025\nHigh\nMap out aesthetic choices (what axes should look like, colors, etc.)\n\n\n5\nDevelopment stage 1\nNot Started\n06/19/2025\nHigh\nCreate initial pass at plot 1\n\n\n6\nDevelopment stage 2\nNot Started\n06/23/2025\nHigh\nCreate initial pass at plot 2\n\n\n7\nReview stage\nNot Started\n06/25/2025\nHigh\nReview plots, plan changes\n\n\n8\nProject summary\nNot Started\n06/27/2025\nHigh\nReport development (presentation planning)"
+    "text": "Plan of attack for completing the outlined project in the proposal.\n\n\n\n\n\n\n\n\n\n\nTask ID\nTask Name\nStatus\nDue\nPriority\nSummary\n\n\n\n\n1\nPlan out data wrangling methods\nNot Started\n06/13/2025\nHigh\nDetermine necessary data fields (filters?) Any new data fields (data wrangling - mutate?)\n\n\n2\nPlan out layer mappings\nNot Started\n06/09/2025\nHigh\nMap out the various layers needed for displaying the data for each plots\n\n\n3\nPlan out functions/packages\nNot Started\n06/11/2025\nHigh\nList functions and packages needed for working with said layers\n\n\n4\nPlan out data mappings to aesthetics\nNot Started\n06/16/2025\nModerate\nMap out aesthetic choices (what axes should look like, colors, etc.)\n\n\n5\nDevelopment stage 1\nNot Started\n06/19/2025\nModerate\nCreate initial pass at plot 1\n\n\n6\nDevelopment stage 2\nNot Started\n06/23/2025\nModerate\nCreate initial pass at plot 2\n\n\n7\nReview stage\nNot Started\n06/25/2025\nLow\nReview plots, plan changes\n\n\n8\nProject summary\nNot Started\n06/27/2025\nLow\nReport development (presentation planning)"
   }
 ]
