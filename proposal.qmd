@@ -45,7 +45,7 @@ This dataset was selected because volcanoes are exciting! Mount Vesuvius is a hi
 
 1.  How have the frequency and depth of seismic events at Mount Vesuvius changed over time?
 
-2.  How does the depth of seismic events relate to their magnitude or frequency? Are deeper events less frequent but more powerful?
+2.  How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?
 
 ## Analysis plan
 
