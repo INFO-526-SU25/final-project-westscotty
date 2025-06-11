@@ -1,0 +1,102 @@
+---
+title: "Project Question 1"
+format: html
+---
+
+```{r}
+# Load necessary libraries
+options(warn=-1)
+if (!require("pacman")) 
+  install.packages("pacman")
+
+# use this line for installing/loading
+pacman::p_load(tidyverse,
+               glue,
+               scales,
+               openintro,
+               gridExtra,
+               ggrepel,
+               ggmap,
+               ggridges,
+               dsbox,
+               devtools,
+               fs,
+               janitor,
+               here,
+               dplyr) 
+  
+```
+
+## Plan out layer mappings
+
+The following libraries / functions will be used in order to answer Question 1, "How have the frequency and depth of seismic events at Mount Vesuvius changed over time?"
+
+-   geom_point:
+
+```         
+-   Creating a scatter plot of the seismic events (depth and duration-magnitude) over time
+```
+
+-   geom_line:
+
+    -   Creating a scatter plot of the seismic events (depth and duration-magnitude) over time
+
+-   geom_bar:
+
+    -   View the frequency of the seismic events aggregated per year or year, month
+
+```{r}
+vesuvius_data <- read.csv(here("data","vesuvius.csv"))
+vesuvius_data <- vesuvius_data |>
+    mutate(
+        date = str_replace_all(time, "T", " "),
+        date = str_replace_all(date, "Z", ""),
+        date = as.POSIXct(date, format = "%Y-%m-%d %H:%M:%S")
+    )
+vesuvius_data_filtered <- vesuvius_data %>% filter(!is.na(duration_magnitude_md))
+glimpse(vesuvius_data)
+glimpse(vesuvius_data_filtered)
+
+```
+
+```{r}
+vesuvius_data_filtered$year <- format(vesuvius_data_filtered$date, "%Y")
+vesuvius_data_filtered$month <- format(vesuvius_data_filtered$date, "%m")
+vesuvius_data_filtered$year <- as.numeric(as.character(vesuvius_data_filtered$year))
+vesuvius_data_filtered$year <- as.numeric(as.character(vesuvius_data_filtered$year))
+```
+
+```{r}
+aggregated_data <- vesuvius_data_filtered %>%
+  group_by(year, month) %>%
+  summarise(mean = mean(duration_magnitude_md))
+```
+
+```{r}
+aggregated_data$date <- paste0(aggregated_data$year, " ", aggregated_data$month)
+glimpse(aggregated_data)
+```
+
+```{r}
+ggplot(aggregated_data, 
+            aes(x = year, y = mean, color = year)) +
+            geom_jitter() +
+  geom_smooth(method = "loess", 
+              se = FALSE)
+```
+
+## Plan out data wrangling methods
+
+This section summarizes the data wrangling completed:
+
+-   time:
+
+    -   Replace "T" with " "
+
+    -   Remove "Z"
+
+    -   Convert into a date variable
+
+    -   Extract the years
+
+    -   Extract the months
