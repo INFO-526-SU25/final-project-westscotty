@@ -53,7 +53,7 @@ vesuvius_data <- vesuvius_data |>
         date = str_replace_all(date, "Z", ""),
         date = as.POSIXct(date, format = "%Y-%m-%d %H:%M:%S")
     )
-vesuvius_data_filtered <- vesuvius_data %>% filter(!is.na(duration_magnitude_md))
+vesuvius_data_filtered <- vesuvius_data %>% filter(!is.na(duration_magnitude_md) & !is.na(depth_km))
 glimpse(vesuvius_data)
 glimpse(vesuvius_data_filtered)
 
@@ -69,7 +69,8 @@ vesuvius_data_filtered$year <- as.numeric(as.character(vesuvius_data_filtered$ye
 ```{r}
 aggregated_data <- vesuvius_data_filtered %>%
   group_by(year, month) %>%
-  summarise(mean = mean(duration_magnitude_md))
+  summarise(mean_duration_magnitude_md = mean(duration_magnitude_md), 
+           mean_depth_km = mean(depth_km))
 ```
 
 ```{r}
@@ -79,7 +80,7 @@ glimpse(aggregated_data)
 
 ```{r}
 ggplot(aggregated_data, 
-            aes(x = year, y = mean, color = year)) +
+            aes(x = year, y = mean_duration_magnitude_md, color = mean_depth_km)) +
             geom_jitter() +
   geom_smooth(method = "loess", 
               se = FALSE)
