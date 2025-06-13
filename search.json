@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mt. Vesuvius Lives",
+    "section": "",
+    "text": "Add project abstract here."
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Mt. Vesuvius Lives",
+    "section": "",
+    "text": "Add project abstract here."
+  },
+  {
     "objectID": "proposal.html",
     "href": "proposal.html",
     "title": "Mt. Vesuvius Lives",
@@ -18,7 +32,7 @@
     "href": "proposal.html#questions",
     "title": "Mt. Vesuvius Lives",
     "section": "Questions",
-    "text": "Questions\n\nHow have the frequency and depth of seismic events at Mount Vesuvius changed over time?\nHow does the depth of seismic events relate to their magnitude or frequency? Are deeper events less frequent but more powerful?"
+    "text": "Questions\n\nHow have the frequency and depth of seismic events at Mount Vesuvius changed over time?\nHow does the depth of seismic events relate to their magnitude? Are deeper events more powerful?"
   },
   {
     "objectID": "proposal.html#analysis-plan",
@@ -28,32 +42,11 @@
     "text": "Analysis plan\n\nA plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).\n\nIn our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:\n\nLine plots in the time domain\nHistogram\nBox plots\nJoint plots\n\nThis can be used to observe any specific trends\n\nPair plots\n\nOn the other hand, the second question can be answered by reviewing the seismic events as follow:\n\nScatter plot of lat & lon\n\nIncluding the geographical features\nVary the size of the markers based on the magnitude\n\nPlot the data in 3D\n\nOur data is in lat, lon, depth and magnitude"
   },
   {
-    "objectID": "plan_of_attack.html",
-    "href": "plan_of_attack.html",
-    "title": "Mt. Vesuvius Lives",
-    "section": "",
-    "text": "Plan of attack for completing the outlined project in the proposal.\n\n\n\n\n\n\n\n\n\n\nTask ID\nTask Name\nStatus\nDue\nPriority\nSummary\n\n\n\n\n1\nPlan out data wrangling methods\nNot Started\n06/13/2025\nHigh\nDetermine necessary data fields (filters?) Any new data fields (data wrangling - mutate?)\n\n\n2\nPlan out layer mappings\nNot Started\n06/09/2025\nHigh\nMap out the various layers needed for displaying the data for each plots\n\n\n3\nPlan out functions/packages\nNot Started\n06/11/2025\nHigh\nList functions and packages needed for working with said layers\n\n\n4\nPlan out data mappings to aesthetics\nNot Started\n06/16/2025\nModerate\nMap out aesthetic choices (what axes should look like, colors, etc.)\n\n\n5\nDevelopment stage 1\nNot Started\n06/19/2025\nModerate\nCreate initial pass at plot 1\n\n\n6\nDevelopment stage 2\nNot Started\n06/23/2025\nModerate\nCreate initial pass at plot 2\n\n\n7\nReview stage\nNot Started\n06/25/2025\nLow\nReview plots, plan changes\n\n\n8\nProject summary\nNot Started\n06/27/2025\nLow\nReport development (presentation planning)"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
     "text": "This project was developed by Seismic Minds for INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nCedric Destin: One sentence description of Team member 1 (e.g., year, major, etc.).\nWeston Scott: I am an Algorithms and Signal Processing Engineer in my second to last semester for my Master’s in Electrical and Computer Engineering program. (e.g., year, major, etc.)."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Mt. Vesuvius Lives",
-    "section": "",
-    "text": "Add project abstract here."
-  },
-  {
-    "objectID": "index.html#abstract",
-    "href": "index.html#abstract",
-    "title": "Mt. Vesuvius Lives",
-    "section": "",
-    "text": "Add project abstract here."
   },
   {
     "objectID": "presentation.html#quarto",
@@ -117,5 +110,19 @@
     "title": "Mt. Vesuvius Lives",
     "section": "Feeling adventurous?",
     "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+  },
+  {
+    "objectID": "plan_of_attack.html",
+    "href": "plan_of_attack.html",
+    "title": "Mt. Vesuvius Lives",
+    "section": "",
+    "text": "Plan of attack for completing the outlined project in the proposal.\n\n\n\n\n\n\n\n\n\n\nTask ID\nTask Name\nStatus\nDue\nPriority\nSummary\n\n\n\n\n1\nPlan out data wrangling methods\nNot Started\n06/13/2025\nHigh\nDetermine necessary data fields (filters?) Any new data fields (data wrangling - mutate?)\n\n\n2\nPlan out layer mappings\nNot Started\n06/09/2025\nHigh\nMap out the various layers needed for displaying the data for each plots\n\n\n3\nPlan out functions/packages\nNot Started\n06/11/2025\nHigh\nList functions and packages needed for working with said layers\n\n\n4\nPlan out data mappings to aesthetics\nNot Started\n06/16/2025\nModerate\nMap out aesthetic choices (what axes should look like, colors, etc.)\n\n\n5\nDevelopment stage 1\nNot Started\n06/19/2025\nModerate\nCreate initial pass at plot 1\n\n\n6\nDevelopment stage 2\nNot Started\n06/23/2025\nModerate\nCreate initial pass at plot 2\n\n\n7\nReview stage\nNot Started\n06/25/2025\nLow\nReview plots, plan changes\n\n\n8\nProject summary\nNot Started\n06/27/2025\nLow\nReport development (presentation planning)"
+  },
+  {
+    "objectID": "plan_of_attack.html#data-wrangling",
+    "href": "plan_of_attack.html#data-wrangling",
+    "title": "Mt. Vesuvius Lives",
+    "section": "Data Wrangling:",
+    "text": "Data Wrangling:"
   }
 ]
