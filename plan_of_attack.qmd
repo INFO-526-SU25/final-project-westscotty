@@ -31,3 +31,5 @@ execute:
 | 8 | Project summary | Not Started | 06/27/2025 | Low | Report development (presentation planning) |
 
 : Plan of attack for completing the outlined project in the proposal.
+
+## Data Wrangling:
