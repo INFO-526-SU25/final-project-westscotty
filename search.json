@@ -116,7 +116,7 @@
     "href": "project_question_1.html",
     "title": "Project Question 1",
     "section": "",
-    "text": "# Load necessary libraries\noptions(warn=-1)\nif (!require(\"pacman\")) \n  install.packages(\"pacman\")\n\nLoading required package: pacman\n\n# use this line for installing/loading\npacman::p_load(tidyverse,\n               glue,\n               scales,\n               openintro,\n               gridExtra,\n               ggrepel,\n               ggmap,\n               ggridges,\n               dsbox,\n               devtools,\n               fs,\n               janitor,\n               here,\n               dplyr) \n\nInstalling package into '/home/wscott/R/x86_64-pc-linux-gnu-library/4.5'\n(as 'lib' is unspecified)\n\n\n\nggrepel installed\n\n\nInstalling package into '/home/wscott/R/x86_64-pc-linux-gnu-library/4.5'\n(as 'lib' is unspecified)\n\n\nalso installing the dependency 'bitops'\n\n\n\nggmap installed\n\n\nInstalling package into '/home/wscott/R/x86_64-pc-linux-gnu-library/4.5'\n(as 'lib' is unspecified)\n\n\n\nhere installed"
+    "text": "# Load necessary libraries\noptions(warn=-1)\nif (!require(\"pacman\")) \n  install.packages(\"pacman\")\n\nLoading required package: pacman\n\n# use this line for installing/loading\npacman::p_load(tidyverse,\n               glue,\n               scales,\n               openintro,\n               gridExtra,\n               ggrepel,\n               ggmap,\n               ggridges,\n               dsbox,\n               devtools,\n               fs,\n               janitor,\n               here,\n               dplyr)"
   },
   {
     "objectID": "project_question_1.html#plan-out-layer-mappings",
