@@ -42,13 +42,6 @@
     "text": "Analysis plan\n\nA plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).\n\nIn our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:\n\nLine plots in the time domain\nHistogram\nBox plots\nJoint plots\n\nThis can be used to observe any specific trends\n\nPair plots\n\nOn the other hand, the second question can be answered by reviewing the seismic events as follow:\n\nScatter plot of lat & lon\n\nIncluding the geographical features\nVary the size of the markers based on the magnitude\n\nPlot the data in 3D\n\nOur data is in lat, lon, depth and magnitude"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This project was developed by Seismic Minds for INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nCedric Destin: One sentence description of Team member 1 (e.g., year, major, etc.).\nWeston Scott: I am an Algorithms and Signal Processing Engineer in my second to last semester for my Master’s in Electrical and Computer Engineering program. (e.g., year, major, etc.)."
-  },
-  {
     "objectID": "presentation.html#quarto",
     "href": "presentation.html#quarto",
     "title": "Mt. Vesuvius Lives",
@@ -110,6 +103,34 @@
     "title": "Mt. Vesuvius Lives",
     "section": "Feeling adventurous?",
     "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was developed by Seismic Minds for INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nCedric Destin: One sentence description of Team member 1 (e.g., year, major, etc.).\nWeston Scott: I am an Algorithms and Signal Processing Engineer in my second to last semester for my Master’s in Electrical and Computer Engineering program. (e.g., year, major, etc.)."
+  },
+  {
+    "objectID": "project_question_1.html",
+    "href": "project_question_1.html",
+    "title": "Project Question 1",
+    "section": "",
+    "text": "# Load necessary libraries\noptions(warn=-1)\nif (!require(\"pacman\")) \n  install.packages(\"pacman\")\n\nLoading required package: pacman\n\n# use this line for installing/loading\npacman::p_load(tidyverse,\n               glue,\n               scales,\n               openintro,\n               gridExtra,\n               ggrepel,\n               ggmap,\n               ggridges,\n               dsbox,\n               devtools,\n               fs,\n               janitor,\n               here,\n               dplyr) \n\nInstalling package into '/home/wscott/R/x86_64-pc-linux-gnu-library/4.5'\n(as 'lib' is unspecified)\n\n\n\nggrepel installed\n\n\nInstalling package into '/home/wscott/R/x86_64-pc-linux-gnu-library/4.5'\n(as 'lib' is unspecified)\n\n\nalso installing the dependency 'bitops'\n\n\n\nggmap installed\n\n\nInstalling package into '/home/wscott/R/x86_64-pc-linux-gnu-library/4.5'\n(as 'lib' is unspecified)\n\n\n\nhere installed"
+  },
+  {
+    "objectID": "project_question_1.html#plan-out-layer-mappings",
+    "href": "project_question_1.html#plan-out-layer-mappings",
+    "title": "Project Question 1",
+    "section": "Plan out layer mappings",
+    "text": "Plan out layer mappings\nThe following libraries / functions will be used in order to answer Question 1, “How have the frequency and depth of seismic events at Mount Vesuvius changed over time?”\n\ngeom_point:\n\n-   Creating a scatter plot of the seismic events (depth and duration-magnitude) over time\n\ngeom_line:\n\nCreating a scatter plot of the seismic events (depth and duration-magnitude) over time\n\ngeom_bar:\n\nView the frequency of the seismic events aggregated per year or year, month\n\n\n\nvesuvius_data &lt;- read.csv(here(\"data\",\"vesuvius.csv\"))\nvesuvius_data &lt;- vesuvius_data |&gt;\n    mutate(\n        date = str_replace_all(time, \"T\", \" \"),\n        date = str_replace_all(date, \"Z\", \"\"),\n        date = as.POSIXct(date, format = \"%Y-%m-%d %H:%M:%S\")\n    )\nvesuvius_data_filtered &lt;- vesuvius_data %&gt;% filter(!is.na(duration_magnitude_md) & !is.na(depth_km))\nglimpse(vesuvius_data)\n\nRows: 12,027\nColumns: 12\n$ event_id              &lt;int&gt; 4251, 4252, 22547, 22546, 22545, 22544, 22543, 2…\n$ time                  &lt;chr&gt; \"2011-04-20T00:27:24Z\", \"2012-06-19T21:29:48Z\", …\n$ latitude              &lt;dbl&gt; 40.81800, 40.80883, 40.82217, NA, NA, NA, NA, NA…\n$ longitude             &lt;dbl&gt; 14.43000, 14.42717, 14.42800, NA, NA, NA, NA, NA…\n$ depth_km              &lt;dbl&gt; 0.42, 1.31, 0.06, NA, NA, NA, NA, NA, NA, NA, NA…\n$ duration_magnitude_md &lt;dbl&gt; 1.2, 0.7, 2.2, 0.2, 0.2, 0.0, 0.8, 1.4, -0.2, 0.…\n$ md_error              &lt;dbl&gt; 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3…\n$ area                  &lt;chr&gt; \"Mount Vesuvius\", \"Mount Vesuvius\", \"Mount Vesuv…\n$ type                  &lt;chr&gt; \"earthquake\", \"earthquake\", \"earthquake\", \"earth…\n$ review_level          &lt;chr&gt; \"revised\", \"revised\", \"preliminary\", \"preliminar…\n$ year                  &lt;int&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 2013, …\n$ date                  &lt;dttm&gt; 2011-04-20 00:27:24, 2012-06-19 21:29:48, 2013-…\n\nglimpse(vesuvius_data_filtered)\n\nRows: 8,475\nColumns: 12\n$ event_id              &lt;int&gt; 4251, 4252, 22547, 22532, 22508, 22496, 22494, 2…\n$ time                  &lt;chr&gt; \"2011-04-20T00:27:24Z\", \"2012-06-19T21:29:48Z\", …\n$ latitude              &lt;dbl&gt; 40.81800, 40.80883, 40.82217, 40.82300, 40.81833…\n$ longitude             &lt;dbl&gt; 14.43000, 14.42717, 14.42800, 14.42733, 14.42400…\n$ depth_km              &lt;dbl&gt; 0.42, 1.31, 0.06, 1.14, 1.71, 0.31, 1.06, 1.42, …\n$ duration_magnitude_md &lt;dbl&gt; 1.2, 0.7, 2.2, 1.7, 1.0, 0.5, 0.0, 1.9, 1.3, 1.2…\n$ md_error              &lt;dbl&gt; 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3…\n$ area                  &lt;chr&gt; \"Mount Vesuvius\", \"Mount Vesuvius\", \"Mount Vesuv…\n$ type                  &lt;chr&gt; \"earthquake\", \"earthquake\", \"earthquake\", \"earth…\n$ review_level          &lt;chr&gt; \"revised\", \"revised\", \"preliminary\", \"preliminar…\n$ year                  &lt;int&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 2013, …\n$ date                  &lt;dttm&gt; 2011-04-20 00:27:24, 2012-06-19 21:29:48, 2013-…\n\n\n\nvesuvius_data_filtered$year &lt;- format(vesuvius_data_filtered$date, \"%Y\")\nvesuvius_data_filtered$month &lt;- format(vesuvius_data_filtered$date, \"%m\")\nvesuvius_data_filtered$year &lt;- as.numeric(as.character(vesuvius_data_filtered$year))\nvesuvius_data_filtered$year &lt;- as.numeric(as.character(vesuvius_data_filtered$year))\n\n\naggregated_data &lt;- vesuvius_data_filtered %&gt;%\n  group_by(year, month) %&gt;%\n  summarise(mean_duration_magnitude_md = mean(duration_magnitude_md), \n           mean_depth_km = mean(depth_km))\n\n`summarise()` has grouped output by 'year'. You can override using the\n`.groups` argument.\n\n\n\naggregated_data$date &lt;- paste0(aggregated_data$year, \" \", aggregated_data$month)\nglimpse(aggregated_data)\n\nRows: 146\nColumns: 5\nGroups: year [14]\n$ year                       &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 2…\n$ month                      &lt;chr&gt; \"04\", \"06\", \"01\", \"02\", \"03\", \"04\", \"05\", \"…\n$ mean_duration_magnitude_md &lt;dbl&gt; 1.2000000, 0.7000000, 1.0800000, 1.3333333,…\n$ mean_depth_km              &lt;dbl&gt; 0.4200000, 1.3100000, 0.8560000, 1.0350000,…\n$ date                       &lt;chr&gt; \"2011 04\", \"2012 06\", \"2013 01\", \"2013 02\",…\n\n\n\nggplot(aggregated_data, \n            aes(x = year, y = mean_duration_magnitude_md, color = mean_depth_km)) +\n            geom_jitter() +\n  geom_smooth(method = \"loess\", \n              se = FALSE)\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "project_question_1.html#plan-out-data-wrangling-methods",
+    "href": "project_question_1.html#plan-out-data-wrangling-methods",
+    "title": "Project Question 1",
+    "section": "Plan out data wrangling methods",
+    "text": "Plan out data wrangling methods\nThis section summarizes the data wrangling completed:\n\ntime:\n\nReplace “T” with ” ”\nRemove “Z”\nConvert into a date variable\nExtract the years\nExtract the months"
   },
   {
     "objectID": "plan_of_attack.html",
