@@ -25,6 +25,9 @@ execute:
 library(dplyr)
 library(readr)
 library(tidyverse)
+pacman::p_load(dplyr,
+               readr,
+               tidyverse) 
 ```
 
 ## Dataset
@@ -52,8 +55,11 @@ This dataset was selected because volcanoes are exciting! Mount Vesuvius is a hi
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
     -   In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:
         -   Line plots in the time domain
+            -   This kind of plot are best to show trends over time
         -   Histogram
+            -   This plot will be used to view if there are more activities at certain time of the year
         -   Box plots
+            -   This can be used to view the deviation of the seismic event within a month or within the year
         -   Joint plots
             -   This can be used to observe any specific trends
         -   Pair plots
