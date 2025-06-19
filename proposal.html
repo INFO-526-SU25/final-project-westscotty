@@ -4114,7 +4114,10 @@ vertical-align: -.125em;
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr,</span>
+<span id="cb1-5"><a href="#cb1-5"></a>               readr,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>               tidyverse) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
@@ -4154,9 +4157,18 @@ $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 20
 <ul>
 <li>In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:
 <ul>
-<li>Line plots in the time domain</li>
-<li>Histogram</li>
-<li>Box plots</li>
+<li>Line plots in the time domain
+<ul>
+<li>This kind of plot are best to show trends over time</li>
+</ul></li>
+<li>Histogram
+<ul>
+<li>This plot will be used to view if there are more activities at certain time of the year</li>
+</ul></li>
+<li>Box plots
+<ul>
+<li>This can be used to view the deviation of the seismic event within a month or within the year</li>
+</ul></li>
 <li>Joint plots
 <ul>
 <li>This can be used to observe any specific trends</li>
@@ -4713,44 +4725,50 @@ $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 20
 <span id="cb4-27"><a href="#cb4-27"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb4-28"><a href="#cb4-28"></a><span class="fu">library</span>(readr)</span>
 <span id="cb4-29"><a href="#cb4-29"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="in">```</span></span>
-<span id="cb4-31"><a href="#cb4-31"></a></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="fu">## Dataset</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="in">```{r}</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#| label: load-dataset</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#| message: false</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a></span>
-<span id="cb4-40"><a href="#cb4-40"></a>vesuvius <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./data/vesuvius.csv&quot;</span>)</span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="fu">glimpse</span>(vesuvius)</span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="in">```</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a></span>
-<span id="cb4-44"><a href="#cb4-44"></a>The Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event&#39;s timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (<span class="in">`duration_magnitude_md`</span>), and an associated error estimate. Additional fields identify the type of event (such as &quot;earthquake&quot;), the review level of the data (e.g., &quot;revised&quot; or &quot;preliminary&quot;), and the year in which the event occurred. All events are local to the Mount Vesuvius region.</span>
-<span id="cb4-45"><a href="#cb4-45"></a></span>
-<span id="cb4-46"><a href="#cb4-46"></a>This dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis.</span>
-<span id="cb4-47"><a href="#cb4-47"></a></span>
-<span id="cb4-48"><a href="#cb4-48"></a><span class="fu">## Questions</span></span>
-<span id="cb4-49"><a href="#cb4-49"></a></span>
-<span id="cb4-50"><a href="#cb4-50"></a><span class="ss">1.  </span>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</span>
-<span id="cb4-51"><a href="#cb4-51"></a></span>
-<span id="cb4-52"><a href="#cb4-52"></a><span class="ss">2.  </span>How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?</span>
-<span id="cb4-53"><a href="#cb4-53"></a></span>
-<span id="cb4-54"><a href="#cb4-54"></a><span class="fu">## Analysis plan</span></span>
-<span id="cb4-55"><a href="#cb4-55"></a></span>
-<span id="cb4-56"><a href="#cb4-56"></a><span class="ss">-   </span>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</span>
-<span id="cb4-57"><a href="#cb4-57"></a><span class="ss">    -   </span>In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:</span>
-<span id="cb4-58"><a href="#cb4-58"></a><span class="ss">        -   </span>Line plots in the time domain</span>
-<span id="cb4-59"><a href="#cb4-59"></a><span class="ss">        -   </span>Histogram</span>
-<span id="cb4-60"><a href="#cb4-60"></a><span class="ss">        -   </span>Box plots</span>
-<span id="cb4-61"><a href="#cb4-61"></a><span class="ss">        -   </span>Joint plots</span>
-<span id="cb4-62"><a href="#cb4-62"></a><span class="ss">            -   </span>This can be used to observe any specific trends</span>
-<span id="cb4-63"><a href="#cb4-63"></a><span class="ss">        -   </span>Pair plots</span>
-<span id="cb4-64"><a href="#cb4-64"></a><span class="ss">    -   </span>On the other hand, the second question can be answered by reviewing the seismic events as follow:</span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="ss">        -   </span>Scatter plot of lat &amp; lon</span>
-<span id="cb4-66"><a href="#cb4-66"></a><span class="ss">            -   </span>Including the geographical features</span>
-<span id="cb4-67"><a href="#cb4-67"></a><span class="ss">            -   </span>Vary the size of the markers based on the magnitude</span>
-<span id="cb4-68"><a href="#cb4-68"></a><span class="ss">        -   </span>Plot the data in 3D</span>
-<span id="cb4-69"><a href="#cb4-69"></a><span class="ss">            -   </span>Our data is in lat, lon, depth and magnitude</span>
+<span id="cb4-30"><a href="#cb4-30"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr,</span>
+<span id="cb4-31"><a href="#cb4-31"></a>               readr,</span>
+<span id="cb4-32"><a href="#cb4-32"></a>               tidyverse) </span>
+<span id="cb4-33"><a href="#cb4-33"></a><span class="in">```</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a></span>
+<span id="cb4-35"><a href="#cb4-35"></a><span class="fu">## Dataset</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="in">```{r}</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#| label: load-dataset</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#| message: false</span></span>
+<span id="cb4-42"><a href="#cb4-42"></a></span>
+<span id="cb4-43"><a href="#cb4-43"></a>vesuvius <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./data/vesuvius.csv&quot;</span>)</span>
+<span id="cb4-44"><a href="#cb4-44"></a><span class="fu">glimpse</span>(vesuvius)</span>
+<span id="cb4-45"><a href="#cb4-45"></a><span class="in">```</span></span>
+<span id="cb4-46"><a href="#cb4-46"></a></span>
+<span id="cb4-47"><a href="#cb4-47"></a>The Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event&#39;s timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (<span class="in">`duration_magnitude_md`</span>), and an associated error estimate. Additional fields identify the type of event (such as &quot;earthquake&quot;), the review level of the data (e.g., &quot;revised&quot; or &quot;preliminary&quot;), and the year in which the event occurred. All events are local to the Mount Vesuvius region.</span>
+<span id="cb4-48"><a href="#cb4-48"></a></span>
+<span id="cb4-49"><a href="#cb4-49"></a>This dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis.</span>
+<span id="cb4-50"><a href="#cb4-50"></a></span>
+<span id="cb4-51"><a href="#cb4-51"></a><span class="fu">## Questions</span></span>
+<span id="cb4-52"><a href="#cb4-52"></a></span>
+<span id="cb4-53"><a href="#cb4-53"></a><span class="ss">1.  </span>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</span>
+<span id="cb4-54"><a href="#cb4-54"></a></span>
+<span id="cb4-55"><a href="#cb4-55"></a><span class="ss">2.  </span>How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?</span>
+<span id="cb4-56"><a href="#cb4-56"></a></span>
+<span id="cb4-57"><a href="#cb4-57"></a><span class="fu">## Analysis plan</span></span>
+<span id="cb4-58"><a href="#cb4-58"></a></span>
+<span id="cb4-59"><a href="#cb4-59"></a><span class="ss">-   </span>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</span>
+<span id="cb4-60"><a href="#cb4-60"></a><span class="ss">    -   </span>In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:</span>
+<span id="cb4-61"><a href="#cb4-61"></a><span class="ss">        -   </span>Line plots in the time domain</span>
+<span id="cb4-62"><a href="#cb4-62"></a><span class="ss">            -   </span>This kind of plot are best to show trends over time</span>
+<span id="cb4-63"><a href="#cb4-63"></a><span class="ss">        -   </span>Histogram</span>
+<span id="cb4-64"><a href="#cb4-64"></a><span class="ss">            -   </span>This plot will be used to view if there are more activities at certain time of the year</span>
+<span id="cb4-65"><a href="#cb4-65"></a><span class="ss">        -   </span>Box plots</span>
+<span id="cb4-66"><a href="#cb4-66"></a><span class="ss">            -   </span>This can be used to view the deviation of the seismic event within a month or within the year</span>
+<span id="cb4-67"><a href="#cb4-67"></a><span class="ss">        -   </span>Joint plots</span>
+<span id="cb4-68"><a href="#cb4-68"></a><span class="ss">            -   </span>This can be used to observe any specific trends</span>
+<span id="cb4-69"><a href="#cb4-69"></a><span class="ss">        -   </span>Pair plots</span>
+<span id="cb4-70"><a href="#cb4-70"></a><span class="ss">    -   </span>On the other hand, the second question can be answered by reviewing the seismic events as follow:</span>
+<span id="cb4-71"><a href="#cb4-71"></a><span class="ss">        -   </span>Scatter plot of lat &amp; lon</span>
+<span id="cb4-72"><a href="#cb4-72"></a><span class="ss">            -   </span>Including the geographical features</span>
+<span id="cb4-73"><a href="#cb4-73"></a><span class="ss">            -   </span>Vary the size of the markers based on the magnitude</span>
+<span id="cb4-74"><a href="#cb4-74"></a><span class="ss">        -   </span>Plot the data in 3D</span>
+<span id="cb4-75"><a href="#cb4-75"></a><span class="ss">            -   </span>Our data is in lat, lon, depth and magnitude</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
