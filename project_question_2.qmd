@@ -131,7 +131,7 @@ vesuvius_data_filtered <- vesuvius_data_filtered |>
 
 ```{r}
 ggplot(
-    vesuvius_data_filtered,  # Use the data with depth_category created
+    vesuvius_data_filtered,
     aes(x = longitude, y = latitude)
 ) +
 geom_point(
@@ -151,7 +151,7 @@ facet_wrap(~ depth_boundary, ncol = 1) +
 coord_fixed() +
 scale_x_continuous(
     limits = c(14.3, 14.5),
-    expand = c(0, 0)                     # no extra padding
+    expand = c(0, 0)
 ) +
 scale_y_continuous(
     limits = c(40.75, 40.9),
@@ -207,39 +207,4 @@ theme(
     axis.title = element_text(size = 14),
     axis.text = element_text(size = 12)
 )
-```
-
-```{r}
-
-# for (db in unique(vesuvius_data_filtered$depth_boundary)) {
-#     p <- ggplot(
-#         vesuvius_data_filtered[vesuvius_data_filtered$depth_boundary == db, ],
-#         aes(x = longitude, y = latitude)
-#     ) +
-#         geom_point(
-#             aes(color = duration_magnitude_md, alpha = abs(depth_km)),
-#             size = 3
-#         ) +
-#         scale_color_viridis_c(option = "magma", name = "Magnitude") +
-#         scale_alpha_continuous(name = "Depth (km)", range = c(0.1, 0.8)) +
-#         scale_x_continuous(limits = c(14.3, 14.5), expand = c(0, 0)) +
-#         scale_y_continuous(limits = c(40.75, 40.9), expand = c(0, 0)) +
-#         coord_fixed() +
-#         labs(
-#             title = "Seismic Events at Mount Vesuvius",
-#             subtitle = paste("Depth Category:", db),
-#             x = "Longitude",
-#             y = "Latitude"
-#         ) +
-#         theme(axis.title = element_text(size = 14),
-#               axis.text = element_text(size = 12))
-#     ggsave(
-#         paste0("frame_", db, ".png"),
-#         p,
-#         width = 8,
-#         height = 6,
-#         dpi = 100,
-#         pointsize = 12
-#     )
-# }
 ```
