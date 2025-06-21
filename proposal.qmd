@@ -19,15 +19,16 @@ execute:
   render-on-save: true
 ---
 
-```{r}
-#| label: load-pkgs
-#| message: false
-library(dplyr)
-library(readr)
-library(tidyverse)
-pacman::p_load(dplyr,
-               readr,
-               tidyverse) 
+```{r library_setup, include=FALSE}
+if (!require("pacman")) 
+    install.packages("pacman")
+
+# Use pacman::p_load to install and load CRAN packages
+pacman::p_load(
+    dplyr,
+    readr,
+    tidyverse
+)
 ```
 
 ## Dataset

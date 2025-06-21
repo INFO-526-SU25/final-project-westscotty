@@ -1,0 +1,245 @@
+---
+title: "Project Question 2"
+format: 
+  html:
+    embed-resources: true
+toc: true
+editor:
+  render-on-save: true
+execute:
+  warning: false
+---
+
+## 0 - Setup
+
+```{r library_setup}
+if (!require("pacman")) 
+    install.packages("pacman")
+
+# Use pacman::p_load to install and load CRAN packages
+pacman::p_load(
+    dplyr,
+    gganimate,
+    ggplot2,
+    ggthemes,
+    glue,
+    grid,
+    gridExtra,
+    here,
+    hms,
+    knitr,
+    lubridate,
+    openintro,
+    readr,
+    scales,
+    tidyverse,
+    viridis
+)
+
+# Handle GitHub package separately
+if (!require("dsbox")) {
+      # Install devtools if not present
+      if (!require("devtools")) 
+          install.packages("devtools")
+devtools::install_github("tidyverse/dsbox")
+      library(dsbox)
+}
+
+# ggplot2::theme_set(ggplot2::theme_minimal(base_size = 14))
+# options(width = 65)
+
+# knitr::opts_chunk$set(
+#   fig.width = 7.5,
+#   fig.asp = 0.718,
+#   fig.retina = 3,
+#   fig.align = "center",
+#   dpi = 300
+# )
+```
+
+```{r}
+vesuvius_data <- read.csv(here("data","vesuvius.csv"))
+vesuvius_data <- vesuvius_data |>
+    mutate(
+        time = str_replace_all(time, "T", " "),
+        time = str_replace_all(time, "Z", ""),
+        time = as.POSIXct(time, format = "%Y-%m-%d %H:%M:%S"),
+        date = as.Date(time),
+        time = hms::as_hms(time)
+    ) |> glimpse()
+
+vesuvius_data_filtered <- vesuvius_data |>
+    drop_na(
+        latitude, 
+        longitude, 
+        depth_km, 
+        duration_magnitude_md
+    ) |> glimpse()
+```
+
+```{r}
+ggplot(
+    vesuvius_data, 
+    aes(x = longitude, 
+        y = latitude)
+) +
+
+geom_point(
+    aes(color = duration_magnitude_md,
+        alpha = abs(depth_km)),
+    size = 3
+) +                     
+
+scale_color_viridis_c(
+    option = "inferno",
+    name = "Magnitude"
+) +
+
+scale_alpha_continuous(
+    name = "Depth (km)",
+    range = c(0.1, 0.8)
+) +
+
+labs(
+    title = "Seismic Events at Mount Vesuvius",
+    subtitle = "Point Color by Magnitude (Inferno), Transparency by Depth",
+    x = "Longitude",
+    y = "Latitude",
+    caption = NULL
+) 
+
+```
+
+```{r}
+max_depth <- max(vesuvius_data$depth_km, na.rm = TRUE)
+min_depth <- min(vesuvius_data$depth_km, na.rm = TRUE)
+
+print(paste("Maximum depth (km):", max_depth))
+print(paste("Minimum depth (km):", min_depth))
+```
+
+```{r}
+vesuvius_data_filtered <- vesuvius_data_filtered |>
+    mutate(
+        depth_boundary = cut(depth_km,
+                             breaks = seq(0, max(depth_km, na.rm = TRUE) + 1, by = 1),
+                             right = FALSE, 
+                             include.lowest = TRUE,
+                             labels = paste0("< ", seq(1, max(depth_km, na.rm = TRUE) + 1, by = 1), " km"))
+    ) |> glimpse()
+```
+
+```{r}
+ggplot(
+    vesuvius_data_filtered,  # Use the data with depth_category created
+    aes(x = longitude, y = latitude)
+) +
+geom_point(
+    aes(color = duration_magnitude_md),
+        # alpha = abs(depth_km)),
+    size = 2
+) +
+scale_color_viridis_c(
+    option = "magma",
+    name = "Magnitude"
+) +
+# scale_alpha_continuous(
+#     name = "Depth (km)",
+#     range = c(0.1, 0.8)
+# ) +
+facet_wrap(~ depth_boundary, ncol = 1) +
+coord_fixed() +
+scale_x_continuous(
+    limits = c(14.3, 14.5),
+    expand = c(0, 0)                     # no extra padding
+) +
+scale_y_continuous(
+    limits = c(40.75, 40.9),
+    expand = c(0, 0)
+) +
+labs(
+    title = "Seismic Events at Mount Vesuvius",
+    subtitle = "Faceted by Depth Category\nPoint Color = Magnitude, Transparency = Depth",
+    x = "Longitude",
+    y = "Latitude",
+    caption = NULL,
+    Depth = NULL
+) +
+theme(
+    strip.text = element_blank(),        # remove facet labels
+    panel.spacing = unit(1, "lines"),    # increase space between facets
+    axis.title = element_text(size = 14),# larger axis titles
+    axis.text = element_text(size = 12)  # larger axis tick labels
+)
+```
+
+```{r}
+ggplot(
+    vesuvius_data_filtered,
+    aes(x = longitude, y = latitude)
+) +
+geom_point(
+    aes(color = duration_magnitude_md),
+    size = 2
+) +
+scale_color_viridis_c(
+    option = "magma",
+    name = "Magnitude"
+) +
+facet_wrap(~ depth_boundary, ncol = 1) +
+theme(plot.margin = unit(c(1, 2, 1, 2), "cm")) +
+scale_x_continuous(
+    limits = c(14.3, 14.5),
+    expand = c(0, 0)
+) +
+scale_y_continuous(
+    limits = c(40.75, 40.9),
+    expand = c(0, 0)
+) +
+labs(
+    title = "Seismic Events at Mount Vesuvius",
+    subtitle = "Faceted by Depth Category\nPoint Color = Magnitude",
+    x = "Longitude",
+    y = "Latitude"
+) +
+theme(
+    panel.spacing = unit(1, "lines"),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12)
+)
+```
+
+```{r}
+
+# for (db in unique(vesuvius_data_filtered$depth_boundary)) {
+#     p <- ggplot(
+#         vesuvius_data_filtered[vesuvius_data_filtered$depth_boundary == db, ],
+#         aes(x = longitude, y = latitude)
+#     ) +
+#         geom_point(
+#             aes(color = duration_magnitude_md, alpha = abs(depth_km)),
+#             size = 3
+#         ) +
+#         scale_color_viridis_c(option = "magma", name = "Magnitude") +
+#         scale_alpha_continuous(name = "Depth (km)", range = c(0.1, 0.8)) +
+#         scale_x_continuous(limits = c(14.3, 14.5), expand = c(0, 0)) +
+#         scale_y_continuous(limits = c(40.75, 40.9), expand = c(0, 0)) +
+#         coord_fixed() +
+#         labs(
+#             title = "Seismic Events at Mount Vesuvius",
+#             subtitle = paste("Depth Category:", db),
+#             x = "Longitude",
+#             y = "Latitude"
+#         ) +
+#         theme(axis.title = element_text(size = 14),
+#               axis.text = element_text(size = 12))
+#     ggsave(
+#         paste0("frame_", db, ".png"),
+#         p,
+#         width = 8,
+#         height = 6,
+#         dpi = 100,
+#         pointsize = 12
+#     )
+# }
+```
