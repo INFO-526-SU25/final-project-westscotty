@@ -23,7 +23,9 @@ pacman::p_load(tidyverse,
                fs,
                janitor,
                here,
-               dplyr) 
+               dplyr,
+              ggdist,
+              distributional) 
   
 ```
 
@@ -68,22 +70,362 @@ vesuvius_data_filtered$year <- as.numeric(as.character(vesuvius_data_filtered$ye
 
 ```{r}
 aggregated_data <- vesuvius_data_filtered %>%
+  group_by(year) %>%
+  summarise(mean_duration_magnitude_md = mean(duration_magnitude_md), 
+           mean_depth_km = mean(depth_km))
+```
+
+```{r}
+# aggregated_data$date <- paste0(aggregated_data$year, " ", aggregated_data$month)
+glimpse(aggregated_data)
+```
+
+```{r}
+ggplot(aggregated_data, 
+            aes(x = year, y = mean_duration_magnitude_md)) +
+            geom_jitter() +
+  geom_smooth(method = "loess", 
+              se = FALSE) +
+ scale_x_continuous(breaks = pretty(aggregated_data$year, n = 10))
+```
+
+```{r}
+ggplot(aggregated_data, 
+            aes(x = year, y = mean_depth_km)) +
+            geom_jitter() +
+  geom_smooth(method = "loess", 
+              se = FALSE) +
+ scale_x_continuous(breaks = pretty(aggregated_data$year, n = 10))
+```
+
+```{r}
+aggregated_data_2 <- vesuvius_data_filtered %>%
   group_by(year, month) %>%
   summarise(mean_duration_magnitude_md = mean(duration_magnitude_md), 
            mean_depth_km = mean(depth_km))
 ```
 
 ```{r}
-aggregated_data$date <- paste0(aggregated_data$year, " ", aggregated_data$month)
+aggregated_data_2$date <- paste0(aggregated_data_2$year, " ", aggregated_data_2$month)
 glimpse(aggregated_data)
 ```
 
 ```{r}
-ggplot(aggregated_data, 
-            aes(x = year, y = mean_duration_magnitude_md, color = mean_depth_km)) +
+aggregated_data_2$date <- as.Date(with(aggregated_data_2, paste(year, month, "01", sep = "-")))
+ggplot(aggregated_data_2, 
+            aes(x = date, y = mean_depth_km)) +
             geom_jitter() +
   geom_smooth(method = "loess", 
-              se = FALSE)
+              se = FALSE) 
+```
+
+```{r}
+ggplot(aggregated_data_2, 
+            aes(x = date, y = mean_duration_magnitude_md)) +
+            geom_line() +
+  geom_smooth(method = "loess", 
+              se = FALSE) 
+
+```
+
+```{r}
+
+p1 <- ggplot(filter(vesuvius_data_filtered, year == 2013), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+
+p2 <- ggplot(filter(vesuvius_data_filtered, year == 2014), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+
+p3 <- ggplot(filter(vesuvius_data_filtered, year == 2015), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+
+p4 <- ggplot(filter(vesuvius_data_filtered, year == 2016), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p5 <- ggplot(filter(vesuvius_data_filtered, year == 2017), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p6 <- ggplot(filter(vesuvius_data_filtered, year == 2018), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p7 <- ggplot(filter(vesuvius_data_filtered, year == 2019), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p8 <- ggplot(filter(vesuvius_data_filtered, year == 2020), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p9 <- ggplot(filter(vesuvius_data_filtered, year == 2021), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p10 <- ggplot(filter(vesuvius_data_filtered, year == 2022), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p11 <- ggplot(filter(vesuvius_data_filtered, year == 2023), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p12 <- ggplot(filter(vesuvius_data_filtered, year == 2024), aes(x = depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+
+grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, ncol = 3)   
+```
+
+```{r}
+p1 <- ggplot(filter(vesuvius_data_filtered, year == 2013), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+
+p2 <- ggplot(filter(vesuvius_data_filtered, year == 2014), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+
+p3 <- ggplot(filter(vesuvius_data_filtered, year == 2015), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+
+p4 <- ggplot(filter(vesuvius_data_filtered, year == 2016), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p5 <- ggplot(filter(vesuvius_data_filtered, year == 2017), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p6 <- ggplot(filter(vesuvius_data_filtered, year == 2018), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p7 <- ggplot(filter(vesuvius_data_filtered, year == 2019), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p8 <- ggplot(filter(vesuvius_data_filtered, year == 2020), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p9 <- ggplot(filter(vesuvius_data_filtered, year == 2021), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p10 <- ggplot(filter(vesuvius_data_filtered, year == 2022), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p11 <- ggplot(filter(vesuvius_data_filtered, year == 2023), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+p12 <- ggplot(filter(vesuvius_data_filtered, year == 2024), aes(x = duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+
+grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, ncol = 3)   
+```
+
+```{r}
+ggplot(vesuvius_data_filtered, aes(x = date, y = duration_magnitude_md)) +
+  geom_point(position = position_dodge(width = 0.5)) +
+  stat_dist_halfeye(
+    aes(dist = dist_normal(mu = AME, sigma = SE)),
+    color = "#0072B2",
+    fill =  "#0072B288",
+    alpha = NA,
+    point_size = 4
+  ) +
+  facet_grid(rows = vars(date),
+              # labeller = labeller(response = label_wrap_gen(15),
+              #                     explanatory = label_wrap_gen(15)),
+              space = "free_y",
+              scales = "free_y") 
+  # labs(x = "Mean likert score \n (Error bars range from 10th to 90th percentile)", y = "") + 
+  # theme_minimal() +
+  # theme(
+  #   strip.background = element_rect(fill = "gray90", color = "lightgray"),
+  #   strip.text.x = element_text(angle = 0),
+  #   strip.text.y = element_text(angle = 0)
+  )
+```
+
+```{r}
+ggplot(aggregated_data_2, aes(x = mean_duration_magnitude_md)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+```
+
+```{r}
+ggplot(aggregated_data_2, aes(x = mean_depth_km)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 100) +
+  labs(title = "Histogram of your_column", x = "your_column", y = "Count")
+```
+
+```{r}
+library(GGally)
+
+# Replace 'aggregated_data', 'x_column', and 'y_column' with your data and columns
+ggpairs(aggregated_data_2, columns = c("mean_depth_km", "mean_duration_magnitude_md"))
+```
+
+```{r}
+ggplot(aggregated_data_2, aes(y = mean_depth_km)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(title = "Box Plot of your_column", y = "your_column")
+```
+
+```{r}
+vesuvius_data_summary <- vesuvius_data_filtered %>%
+  group_by(year) %>%
+  summarize(
+    avg_depth_km = mean(depth_km, na.rm = TRUE),
+    sd_depth_km = sd(depth_km, na.rm = TRUE),
+    max_depth_km = max(depth_km, na.rm = TRUE),
+    min_depth_km = min(depth_km, na.rm = TRUE),
+    avg_duration_magnitude_md = mean(duration_magnitude_md, na.rm = TRUE),
+    sd_duration_magnitude_md = sd(duration_magnitude_md, na.rm = TRUE),
+    max_duration_magnitude_md = max(duration_magnitude_md, na.rm = TRUE),
+    min_duration_magnitude_md = min(duration_magnitude_md, na.rm = TRUE)
+  )
+```
+
+```{r}
+ggplot(vesuvius_data_summary) +
+  aes(y = avg_depth_km, x = year) +
+  # geom_vline(xintercept = 0, color = "gray20") +
+  stat_dist_halfeye(
+    aes(dist = dist_normal(mu = avg_depth_km, sigma = sd_depth_km)),
+    color = "#0072B2",
+    fill =  "#0072B288",
+    alpha = NA,
+    point_size = 4
+  )
+```
+
+```{r}
+ggplot(vesuvius_data_summary) +
+  aes(y = avg_duration_magnitude_md, x = year) +
+  geom_point() + 
+  geom_linerange(aes(ymin = min_duration_magnitude_md, ymax = max_duration_magnitude_md)) +
+geom_errorbar(aes(ymin = min_duration_magnitude_md, ymax = max_duration_magnitude_md), width = 0.2) +
+  geom_smooth(method = "loess", 
+              se = FALSE) 
+
+  # geom_vline(xintercept = 0, color = "gray20") +
+  # geom_errorbarh(aes(xmin = min_duration_magnitude_md, xmax = max_duration_magnitude_md), 
+  #                height = 0.2, position = position_dodge(width = 0.5))
+  # stat_dist_halfeye(
+  #   aes(dist = dist_normal(mu = avg_duration_magnitude_md, sigma = sd_duration_magnitude_md)),
+  #   color = "#0072B2",
+  #   fill =  "#0072B288",
+  #   alpha = NA,
+  #   point_size = 4
+  # )
+```
+
+```{r}
+ggplot(vesuvius_data_summary) +
+  aes(y = avg_depth_km, x = year) +
+  geom_point() + 
+  geom_linerange(aes(ymin = min_depth_km, ymax = max_depth_km)) +
+geom_errorbar(aes(ymin = min_depth_km, ymax = max_depth_km), width = 0.2) +
+  geom_smooth(method = "loess", 
+              se = FALSE) 
+```
+
+```{r}
+head(vesuvius_data_filtered)
+vesuvius_data_filtered$binned_duration <- cut(
+  vesuvius_data_filtered$duration_magnitude_md,
+  breaks = seq(
+    floor(min(vesuvius_data_filtered$duration_magnitude_md, na.rm = TRUE)),
+    ceiling(max(vesuvius_data_filtered$duration_magnitude_md, na.rm = TRUE)),
+    by = 0.25
+  ),
+  include.lowest = TRUE
+)
+vesuvius_data_filtered$bin_midpoint <- as.numeric(sub("\\((.+),(.+)\\]", "\\1", levels(vesuvius_data_filtered$binned_duration)))[vesuvius_data_filtered$binned_duration] + 0.25
+```
+
+```{r}
+aggregated_data_3 <- vesuvius_data_filtered %>%
+  group_by(year, binned_duration, bin_midpoint) %>%
+  summarise(mean_duration_magnitude_md = mean(duration_magnitude_md), 
+           count_duration_magnitude_md = n())
+```
+
+```{r}
+glimpse(aggregated_data_3)
+```
+
+```{r}
+ggplot(aggregated_data_3) +
+  aes(y = bin_midpoint, x = year, 
+           size = count_duration_magnitude_md) +
+  geom_point() +
+#   geom_linerange(aes(ymin = min_depth_km, ymax = max_depth_km)) +
+# geom_errorbar(aes(ymin = min_depth_km, ymax = max_depth_km), width = 0.2) +
+  geom_smooth(method = "loess", 
+              se = FALSE) 
+```
+
+```{r}
+# First, create the base plot with the first dataset
+p <- ggplot() +
+  # Layer 1: vesuvius_data_summary
+  geom_point(data = vesuvius_data_summary, 
+             aes(x = year, y = avg_duration_magnitude_md), 
+             color = "Average Duration Magnitude", shape = 7) +
+  geom_linerange(data = vesuvius_data_summary, 
+                 aes(x = year, ymin = min_duration_magnitude_md, ymax = max_duration_magnitude_md), 
+                 color = "Average Duration Magnitude") +
+  geom_errorbar(data = vesuvius_data_summary, 
+                aes(x = year, ymin = min_duration_magnitude_md, ymax = max_duration_magnitude_md), 
+                width = 0.2, color = "Average Duration Magnitude") +
+  geom_smooth(data = vesuvius_data_summary, aes(x = year, y = avg_duration_magnitude_md), 
+              method = "loess", se = FALSE, color = "Trend") +
+  # Layer 2: aggregated_data_3
+  geom_point(data = aggregated_data_3, aes(x = year, y = bin_midpoint, size = count_duration_magnitude_md), 
+             color = "Duration Bin", alpha = 0.6) +
+  labs(size = "Count Duration Magnitude", y = "Duration Magnitude", x = "Year") +
+  scale_x_continuous(breaks = pretty(aggregated_data$year, n = 10)) +
+scale_color_manual(
+    name = "Layer",
+    values = c(
+      "Average Duration Magnitude" = "blue",
+      "Duration Magnitude Range" = "darkblue",
+      "Trend" = "skyblue",
+      "Duration Bin" = "red"
+    )
+  )
+
+p
+```
+
+```{r}
+# Example overlay plot with legends for each layer
+p <- ggplot() +
+  # Layer 1: vesuvius_data_summary (blue)
+  geom_point(data = vesuvius_data_summary, 
+             aes(x = year, y = avg_duration_magnitude_md, color = "Average Depth")) +
+  geom_linerange(data = vesuvius_data_summary, 
+                 aes(x = year, ymin = min_duration_magnitude_md, ymax = max_duration_magnitude_md, color = "Depth Range")) +
+  geom_errorbar(data = vesuvius_data_summary, 
+                aes(x = year, ymin = min_duration_magnitude_md, ymax = max_duration_magnitude_md, color = "Depth Range"), width = 0.2) +
+  geom_smooth(data = vesuvius_data_summary, 
+              aes(x = year, y = avg_duration_magnitude_md, color = "Trend"), method = "loess", se = FALSE) +
+  # Layer 2: aggregated_data_3 (red, size mapped)
+  geom_point(data = aggregated_data_3, 
+             aes(x = year, y = bin_midpoint, size = count_duration_magnitude_md, color = "Duration Bin"), alpha = 0.6) +
+  scale_color_manual(
+    name = "Layer",
+    values = c(
+      "Average Depth" = "blue",
+      "Depth Range" = "darkblue",
+      "Trend" = "skyblue",
+      "Duration Bin" = "red"
+    )
+  ) +
+  scale_size_continuous(
+    name = "Count Duration Magnitude",
+    guide = guide_legend(override.aes = list(color = "red"))
+  )+
+  labs(size = "Count Duration Magnitude", y = "Depth / Bin Midpoint", x = "Year")+
+  scale_x_continuous(breaks = pretty(aggregated_data$year, n = 10))
+
+p
 ```
 
 ## Plan out data wrangling methods
