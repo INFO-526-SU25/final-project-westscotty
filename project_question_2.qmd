@@ -18,11 +18,14 @@ if (!require("pacman"))
 
 # Use pacman::p_load to install and load CRAN packages
 pacman::p_load(
+    countdown,
+    datasauRus,
     dplyr,
-    # gganimate,
+    gganimate,
     ggplot2,
     ggthemes,
     ggspatial,
+    gifski,
     glue,
     grid,
     gridExtra,
@@ -32,6 +35,7 @@ pacman::p_load(
     lubridate,
     openintro,
     readr,
+    rnaturalearth,
     scales,
     sf,
     tidyverse,
@@ -78,19 +82,42 @@ vesuvius_data_filtered <- vesuvius_data |>
         duration_magnitude_md
     ) |>
     mutate(
-        depth_boundary = case_when(depth_km < 1 ~ "< 1 km",
+        depth_boundary_1km = case_when(depth_km < 1 ~ "< 1 km",
                                    depth_km < 2 ~ "< 2 km",
                                    depth_km < 3 ~ "< 3 km",
                                    depth_km < 4 ~ "< 4 km",
                                    depth_km < 5 ~ "< 5 km",
                                    TRUE ~ "> 5 km"),
-        depth_boundary = factor(depth_boundary, 
+        depth_boundary_1km = factor(depth_boundary_1km, 
                                 levels = c("< 1 km", 
                                            "< 2 km", 
                                            "< 3 km", 
                                            "< 4 km", 
                                            "< 5 km", 
-                                           "> 5 km"))
+                                           "> 5 km")),
+        depth_boundary_0.5km = case_when(depth_km < 0.5 ~ "< 0.5 km",
+                                   depth_km < 1 ~ "0.5 ~ 1 km",
+                                   depth_km < 1.5 ~ "1 ~ 1.5 km",
+                                   depth_km < 2 ~ "1.5 ~ 2 km",
+                                   depth_km < 2.5 ~ "2 ~ 2.5 km",
+                                   depth_km < 3 ~ "2.5 ~ 3 km",
+                                   depth_km < 3.5 ~ "3 ~ 3.5 km",
+                                   depth_km < 4 ~ "3.5 ~ 4 km",
+                                   depth_km < 4.5 ~ "4 ~ 4.5 km",
+                                   depth_km < 5 ~ "4.5 ~ 5 km",
+                                   TRUE ~ "> 5 km"),
+        depth_boundary_0.5km = factor(depth_boundary_0.5km, 
+                                levels = rev(c("< 0.5 km", 
+                                           "0.5 ~ 1 km", 
+                                           "1 ~ 1.5 km", 
+                                           "1.5 ~ 2 km", 
+                                           "2 ~ 2.5 km", 
+                                           "2.5 ~ 3 km",
+                                           "3 ~ 3.5 km", 
+                                           "3.5 ~ 4 km", 
+                                           "4 ~ 4.5 km", 
+                                           "4.5 ~ 5 km", 
+                                           "> 5 km")))
     ) |> glimpse()
 ```
 
@@ -143,13 +170,11 @@ print(paste("Minimum Magnitude:", min_mag))
 
 ```{r}
 vesuvius_data_filtered <- vesuvius_data_filtered |>
-    group_by(depth_boundary) |>
     mutate(
         depth_rescaled = rescale(depth_km, to = c(1, 10)),
-        mag_rescaled = rescale(duration_magnitude_md, to = c(0.3, 0.9))
+        mag_rescaled = rescale(duration_magnitude_md, to = c(0.4, 0.9))
     ) |>
-    arrange(depth_boundary, desc(depth_rescaled)) |>
-    ungroup()
+    arrange(depth_boundary_0.5km, desc(depth_rescaled))
 ```
 
 ```{r}
@@ -168,15 +193,15 @@ scale_color_viridis_c(
     option = "magma",
     name = "Magnitude"
 ) +
-facet_wrap(~ depth_boundary, ncol = 2, scales = "free_y") +
-scale_x_continuous(
-    limits = c(14.3, 14.5),
+facet_wrap(~ depth_boundary_1km, ncol = 2, scales = "free_y") +
+  scale_x_continuous(
+    limits = c(14.33, 14.48),
     expand = c(0, 0)
-) +
-scale_y_continuous(
-    limits = c(40.75, 40.9),
+  ) +
+  scale_y_continuous(
+    limits = c(40.78, 40.89),
     expand = c(0, 0)
-) +
+  ) +
 labs(
     title = "Seismic Events at Mount Vesuvius",
     subtitle = "Faceted by Depth Category\nPoint Color = Magnitude",
@@ -194,41 +219,200 @@ guides(alpha = "none")
 ```
 
 ```{r}
-ggplot(
-    vesuvius_data_filtered,
-    aes(x = longitude, y = latitude)
-) +
-annotation_map_tile(zoom = 10, type = "osm") +
-geom_point(
-    aes(color = duration_magnitude_md, 
+library(elevatr)
+library(terra)
+# library(sf)
+# library(ggplot2)
+library(metR)
+
+# Define Vesuvius bounding box (in WGS84 lon/lat)
+vesuvius_bbox <- matrix(c(14.33, 40.78, 14.48, 40.89), ncol = 2, byrow = TRUE)
+
+# Convert bbox to sf polygon
+vesuvius_sf <- st_as_sf(
+  st_sfc(st_polygon(list(rbind(
+    c(vesuvius_bbox[1,1], vesuvius_bbox[1,2]),
+    c(vesuvius_bbox[2,1], vesuvius_bbox[1,2]),
+    c(vesuvius_bbox[2,1], vesuvius_bbox[2,2]),
+    c(vesuvius_bbox[1,1], vesuvius_bbox[2,2]),
+    c(vesuvius_bbox[1,1], vesuvius_bbox[1,2])
+  ))), crs = 4326)
+)
+
+# Get elevation data from AWS Terrain Tiles (zoom 10)
+elev_raster <- get_elev_raster(locations = vesuvius_sf, z = 10, clip = "locations")
+
+# Convert to dataframe for ggplot
+elev_df <- as.data.frame(elev_raster, xy = TRUE)
+colnames(elev_df) <- c("x", "y", "elevation")
+
+# Plot with contour lines
+ggplot(elev_df, aes(x = x, y = y, z = elevation)) +
+  geom_contour_filled(bins = 15) +        # Filled contours
+  geom_contour(color = "black", bins = 15) + # Contour lines
+  scale_fill_manual(
+    values = gray.colors(15, start = 0.9, end = 0.2)   # 15 shades of grey, light to dark
+  ) +
+  coord_equal() +
+  labs(title = "Mt. Vesuvius Elevation Contours",
+       x = "Longitude", y = "Latitude", fill = "Elevation (m)") +
+  theme_minimal()
+```
+
+```{r}
+ggplot() +
+  # Elevation background (greyscale filled contours)
+metR::geom_contour_fill(
+    data = elev_df,
+    aes(x = x, y = y, z = elevation, group = NULL),  # Ensure static
+    bins = 20  # Increased bins for smoother contours
+  ) +
+  # Use continuous fill scale
+  scale_fill_gradientn(
+    colors = gray.colors(20, start = 0.9, end = 0.2),
+    name = "Elevation (m)",
+    limits = c(-111, 1246),  # Match elevation range from elev_df
+    breaks = seq(0, 1200, by = 200)  # Optional: set breaks for legend
+  ) +
+
+  # Seismic points on top
+  geom_point(
+    data = vesuvius_data_filtered,
+    aes(x = longitude, y = latitude,
+        color = duration_magnitude_md, 
         size = depth_rescaled,
         alpha = mag_rescaled)
-) +
-scale_size_identity() +
-scale_color_viridis_c(
+  ) +
+  scale_size_identity() +
+  scale_color_viridis_c(
     option = "magma",
     name = "Magnitude"
-) +
-facet_wrap(~ depth_boundary, ncol = 2) +
-scale_x_continuous(
-    limits = c(14.3, 14.5),
+  ) +
+
+  facet_wrap(~ depth_boundary_1km, ncol = 2, scales = "free_y") +
+
+  # Axis scales to match both elevation & seismic data
+  scale_x_continuous(
+    limits = c(14.33, 14.48),
     expand = c(0, 0)
-) +
-scale_y_continuous(
-    limits = c(40.75, 40.9),
+  ) +
+  scale_y_continuous(
+    limits = c(40.78, 40.89),
     expand = c(0, 0)
-) +
-labs(
-    title = "Seismic Events at Mount Vesuvius",
+  ) +
+
+  labs(
+    title = "Seismic Events at Mount Vesuvius with Elevation Contours",
     subtitle = "Faceted by Depth Category\nPoint Color = Magnitude",
     x = "Longitude",
     y = "Latitude"
-) +
-theme(
+  ) +
+
+  theme_light() +
+  theme(
     panel.spacing = unit(1, "lines"),
     axis.title = element_text(size = 14),
     axis.text = element_text(size = 12),
     plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm")
+  ) +
 
-)
+  guides(alpha = "none")  # hide alpha legend
+```
+
+```{r}
+
+vesuvius_anim_plot <- ggplot() +
+  # Elevation background (static greyscale filled contours)
+metR::geom_contour_fill(
+    data = elev_df,
+    aes(x = x, y = y, z = elevation, group = NULL),  # Ensure static
+    bins = 20  # Increased bins for smoother contours
+  ) +
+  # Use continuous fill scale
+  scale_fill_gradientn(
+    colors = gray.colors(20, start = 0.9, end = 0.2),
+    name = "Elevation (m)",
+    limits = c(-111, 1246),  # Match elevation range from elev_df
+    breaks = seq(0, 1200, by = 200)  # Optional: set breaks for legend
+  ) +
+  # Seismic points, animated by depth_boundary
+  geom_point(
+    data = vesuvius_data_filtered,
+    aes(x = longitude, y = latitude,
+        color = duration_magnitude_md, 
+        size = depth_rescaled,
+        alpha = mag_rescaled)
+  ) +
+  scale_size_identity() +
+  scale_color_viridis_c(option = "magma", name = "Magnitude") +
+
+  # Set coordinate limits (no coord_sf needed)
+  scale_x_continuous(
+    limits = c(14.33, 14.48),
+    expand = c(0, 0)
+  ) +
+  scale_y_continuous(
+    limits = c(40.78, 40.89),
+    expand = c(0, 0)
+  ) +
+
+  labs(
+    title = "Seismic Events at Mount Vesuvius",
+    subtitle = "Depth: {closest_state}",
+    x = "Longitude",
+    y = "Latitude"
+  ) +
+
+  theme_light() +
+  theme(
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "cm")
+  ) +
+  guides(alpha = "none") +
+
+  # Animate by depth category
+  transition_states(
+    depth_boundary_0.5km,
+    transition_length = 3,
+    state_length = 2
+  ) +
+    shadow_mark(past = TRUE, future = FALSE, alpha = 0.3) +
+enter_fade() +
+exit_fade()
+
+gganimate::animate(vesuvius_anim_plot)
+
+# gganimate::anim_save("vesuvius_animation.gif", vesuvius_anim_plot)
+```
+
+```{r}
+static_plot <- ggplot() +
+metR::geom_contour_fill(
+    data = elev_df,
+    aes(x = x, y = y, z = elevation, group = NULL),  # Ensure static
+    bins = 20  # Increased bins for smoother contours
+  ) +
+  # Use continuous fill scale
+  scale_fill_gradientn(
+    colors = gray.colors(20, start = 0.9, end = 0.2),
+    name = "Elevation (m)",
+    limits = c(-111, 1246),  # Match elevation range from elev_df
+    breaks = seq(0, 1200, by = 200)  # Optional: set breaks for legend
+  ) +
+  geom_point(
+    data = vesuvius_data_filtered,
+    aes(x = longitude, y = latitude,
+        color = duration_magnitude_md,
+        size = depth_rescaled,
+        alpha = mag_rescaled)
+  ) +
+  scale_size_identity() +
+  scale_color_viridis_c(option = "magma", name = "Magnitude") +
+  scale_x_continuous(limits = c(14.33, 14.48), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(40.78, 40.89), expand = c(0, 0)) +
+  theme_light()
+
+static_plot
+# ggsave("static_vesuvius_plot.png", static_plot, width = 8, height = 6)
 ```
