@@ -21,6 +21,7 @@ pacman::p_load(
     countdown,
     datasauRus,
     dplyr,
+    elevatr,
     gganimate,
     ggplot2,
     ggthemes,
@@ -33,11 +34,15 @@ pacman::p_load(
     hms,
     knitr,
     lubridate,
+    metR,
     openintro,
     readr,
     rnaturalearth,
+    rnaturalearthdata,
+    rnaturalearthhires,
+    terra,
     scales,
-    sf,
+    sf, 
     tidyverse,
     viridis
 )
@@ -118,6 +123,9 @@ vesuvius_data_filtered <- vesuvius_data |>
                                            "4 ~ 4.5 km", 
                                            "4.5 ~ 5 km", 
                                            "> 5 km")))
+    ) |>
+    filter(
+        !is.na(depth_boundary_0.5km)
     ) |> glimpse()
 ```
 
@@ -219,12 +227,6 @@ guides(alpha = "none")
 ```
 
 ```{r}
-library(elevatr)
-library(terra)
-# library(sf)
-# library(ggplot2)
-library(metR)
-
 # Define Vesuvius bounding box (in WGS84 lon/lat)
 vesuvius_bbox <- matrix(c(14.33, 40.78, 14.48, 40.89), ncol = 2, byrow = TRUE)
 
@@ -323,18 +325,18 @@ metR::geom_contour_fill(
 
 vesuvius_anim_plot <- ggplot() +
   # Elevation background (static greyscale filled contours)
-metR::geom_contour_fill(
-    data = elev_df,
-    aes(x = x, y = y, z = elevation, group = NULL),  # Ensure static
-    bins = 20  # Increased bins for smoother contours
-  ) +
-  # Use continuous fill scale
-  scale_fill_gradientn(
-    colors = gray.colors(20, start = 0.9, end = 0.2),
-    name = "Elevation (m)",
-    limits = c(-111, 1246),  # Match elevation range from elev_df
-    breaks = seq(0, 1200, by = 200)  # Optional: set breaks for legend
-  ) +
+# metR::geom_contour_fill(
+#     data = elev_df,
+#     aes(x = x, y = y, z = elevation, group = NULL),  # Ensure static
+#     bins = 20  # Increased bins for smoother contours
+#   ) +
+#   # Use continuous fill scale
+#   scale_fill_gradientn(
+#     colors = gray.colors(20, start = 0.9, end = 0.2),
+#     name = "Elevation (m)",
+#     limits = c(-111, 1246),  # Match elevation range from elev_df
+#     breaks = seq(0, 1200, by = 200)  # Optional: set breaks for legend
+#   ) +
   # Seismic points, animated by depth_boundary
   geom_point(
     data = vesuvius_data_filtered,
@@ -352,7 +354,7 @@ metR::geom_contour_fill(
     expand = c(0, 0)
   ) +
   scale_y_continuous(
-    limits = c(40.78, 40.89),
+    limits = c(40.78, 40.88),
     expand = c(0, 0)
   ) +
 
@@ -405,7 +407,7 @@ metR::geom_contour_fill(
     aes(x = longitude, y = latitude,
         color = duration_magnitude_md,
         size = depth_rescaled,
-        alpha = mag_rescaled)
+        alpha = 0.7)
   ) +
   scale_size_identity() +
   scale_color_viridis_c(option = "magma", name = "Magnitude") +
@@ -415,4 +417,16 @@ metR::geom_contour_fill(
 
 static_plot
 # ggsave("static_vesuvius_plot.png", static_plot, width = 8, height = 6)
+```
+
+```{r}
+ggplot(vesuvius_data_filtered, aes(x = duration_magnitude_md)) +
+  geom_histogram(binwidth = 0.1, fill = "steelblue", color = "white") +
+  facet_wrap(~ depth_boundary_0.5km, scales = "free_y") +
+  labs(
+    title = "Histogram of Duration Magnitude by Depth Bin",
+    x = "Duration Magnitude",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
 ```
