@@ -3,7 +3,7 @@ title: "Mt. Vesuvius Lives"
 subtitle: "INFO 526 - Summer 2025 - Final Project"
 author: "Cedric Destin & Weston Scott"
 title-slide-attributes:
-  data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
+  data-background-image: images/cracks.jpg
   data-background-size: stretch
   data-background-opacity: "0.7"
   data-slide-number: none
@@ -22,8 +22,14 @@ execute:
 #| include: false
 
 # Load packages here
-pacman::p_load(tidymodels,
-               tidyverse)
+pacman::p_load(
+    tidymodels,
+    tidyverse,
+    here,
+    dplyr,
+    tidyr,
+    scales
+)
 
 ```
 
@@ -43,124 +49,91 @@ knitr::opts_chunk$set(
   )
 ```
 
-```{r}
-#| label: load-data
-#| include: false
-# Load data here
-data(mtcars)
-mtcars$speed <- mtcars$hp / mtcars$wt
+## The Data
 
-data("penguins")
-```
+-   Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025)
 
-# Using Quarto for presentations
+-   The data contains records of seismic activity at or near Mt. Vesuvius, Italy over the last decade or so
 
-## Quarto
+-   Source: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md>
 
--   The presentation is created using the Quarto CLI
-
--   `##` sets the start of a new slide
-
-## Layouts
-
-You can use plain text
+## The Goal
 
 ::::: columns
-::: {.column width="40%"}
--   or bullet points[^1]
+::: {.column width="60%"}
+Interpret the underlying relationships between variables of interest including time series and static analysis of the seismic data recorded at the famous Mt. Vesuvius.
 :::
 
-::: {.column width="60%"}
-or in two columns
+::: {.column width="40%"}
+![](images/mt_vesuvius.jpg){fig-alt="https://www.pexels.com/photo/buildings-near-the-rock-mountains-6540758/"}
 :::
 :::::
 
-[^1]: And add footnotes
+## Question 1
 
--   like
+**How have the frequency and depth of seismic events at Mount Vesuvius changed over time?**
 
--   this
+-   \<Add stuff here\>
 
-## Code
-
-```{r, echo=FALSE}
-model <- lm(mpg ~ speed, data = mtcars) 
-
-model |> tidy()
-
-model |> glance()
-
-```
+## Approach
 
 ## Plots
 
-```{r}
-penguins |>
-  mutate(species = ifelse(species == "Adelie", "Adelie", "Other")) |>
-  ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
-  geom_point()
-```
+## Analysis
 
-## Plot and text
+## Challenges Faced
 
-::::: columns
+## Question 2
+
+**How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?**
+
+-   \<Add stuff here\>
+
+## Approach
+
+-   The first step was to remove bad (or missing) data by dropping rows with NA in `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`
+-   The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled `depth_boundary_0.5km`, plotting in ascending depth order meaning that deeper values will appear first
+-   A size re-scaling for points was created from this new depth layer variable
+
+## Histogram
+
 ::: {.column width="50%"}
--   Some text
+-   Plotting a histogram of the `duration_magnitude_md` values for each points, faceted by the `depth_boundary_0.5km` variable allows for verification that each depth layer has valid data
 
--   goes here
+-   The statistical distributions are also shown, indicating that shallower depths
 :::
 
 ::: {.column width="50%"}
-```{r, warning=FALSE, fig.width=5.5}
-penguins |>
-  ggplot(aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot(linewidth = 0.75,
-               outlier.size = 2.5) +
-  theme_minimal(base_size = 15) +
-  theme(legend.key.size = unit(0.8, "cm"))
-```
+![](images/histogram_vesuvius_plot.png){fig-align="right"}
 :::
-:::::
 
-# A new section...
+## Seismic Activity Plots
 
-## Tables
+::: panel-tabset
+## Histogram View
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+![Histogram of Events](images/histogram_vesuvius_plot.png)
+*Note: Plotting a histogram of the `duration_magnitude_md` values, faceted by `depth_boundary_0.5km` allows for verification of valid data in each layer and shape of distribution visibility*
 
-```{r}
-penguins |> 
-  head() |>
-  kableExtra::kable() |>
-  kableExtra::kable_styling()
-```
+## Static View
 
-## Images
+![Static Seismic Events](images/static_vesuvius_plot.png)
+*Note:*
 
-![Image credit: Danielle Navarro, Percolate.](images/watercolour_sys02_img34_teacup-ocean.png){fig-align="center" width="500"}
+## Animated View
 
-## Math Expressions {.smaller}
+![Animated Seismic Events](images/vesuvius_animation.gif)
+*Note:*
+:::
 
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\alpha+\\beta\$ renders $\alpha + \beta$. You can use the display style with double dollar signs:
+## Analysis
 
-```         
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
+\<Add stuff here\>
 
-$$
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-$$
+## Challenges Faced
 
-Limitations:
+\<Add stuff here\>
 
-1.  The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
+## Final Remarks
 
-2.  There should not be spaces after the opening `$` or before the closing `$`.
-
-# Wrap up
-
-## Feeling adventurous?
-
--   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
-
--   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+\<Add stuff here\>
