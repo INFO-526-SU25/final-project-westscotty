@@ -97,21 +97,18 @@ Interpret the underlying relationships between variables of interest including t
 
 ## Seismic Activity Plots
 
-::: panel-tabset
+::: {.panel-tabset width="80%"}
 ## Histogram View
 
-![Histogram of Events](images/histogram_vesuvius_plot.png)
-*Note: Plotting a histogram of the `duration_magnitude_md` values, faceted by `depth_boundary_0.5km` allows for verification of valid data in each layer and shape of distribution visibility*
+![Histogram of Events](images/histogram_vesuvius_plot.png) *Note: Plotting a histogram of the `duration_magnitude_md` values, faceted by `depth_boundary_0.5km` allows for verification of valid data in each layer and shape of distribution visibility*
 
 ## Static View
 
-![Static Seismic Events](images/static_vesuvius_plot.png)
-*Note:*
+![Static Seismic Events](images/static_vesuvius_plot.png) *Note:*
 
 ## Animated View
 
-![Animated Seismic Events](images/vesuvius_animation.gif)
-*Note:*
+![Animated Seismic Events](images/vesuvius_animation.gif) *Note:*
 :::
 
 ## Analysis

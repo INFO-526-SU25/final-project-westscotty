@@ -167,7 +167,7 @@ original <-
     
     geom_point(
         aes(color = duration_magnitude_md,
-            alpha = abs(depth_km)),
+            alpha = depth_km),
         size = 3
     ) +                     
     
@@ -178,8 +178,17 @@ original <-
     
     scale_alpha_continuous(
         name = "Depth (km)",
-        range = c(0.1, 0.8)
+        range = c(0.2, 0.9)
     ) +
+
+        scale_x_continuous(
+            limits = c(14.34, 14.48), 
+            expand = c(0, 0)
+        ) +
+        scale_y_continuous(
+            limits = c(40.78, 40.88), 
+            expand = c(0, 0)
+        ) +
     
     labs(
         title = "Seismic Events at Mount Vesuvius",
@@ -187,7 +196,36 @@ original <-
         x = "Longitude",
         y = "Latitude",
         caption = "Source: Seismic data for Mount Vesuvius\nTidyTuesday 2025-05-13\nGraphic: Weston Scott"
-    ) 
+    ) +
+
+    theme(
+        plot.title.position = "plot",
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12),
+        legend.direction = "horizontal",
+        legend.box = "vertical",  # stack legends on top of each other
+        legend.box.just = "left",
+        legend.spacing.x = unit(0.3, "cm"),  # tighter spacing
+        legend.spacing.y = unit(0.3, "cm"),  # tighter spacing
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size = 10)
+    ) +
+
+    guides(
+        color = guide_colorbar(  # Magnitude
+            direction = "horizontal",
+            title.position = "top",
+            barwidth = unit(2.8, "cm"),
+            barheight = unit(0.4, "cm"),
+            order = 1),
+        alpha = guide_colorbar(  # Depth as alpha
+            direction = "horizontal",
+            title.position = "top",
+            barwidth = unit(2.8, "cm"),
+            barheight = unit(0.4, "cm"),
+            order = 2
+        )
+    )
 
 original
 
