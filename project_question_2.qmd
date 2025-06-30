@@ -81,6 +81,7 @@ vesuvius_data_filtered <- vesuvius_data |>
         duration_magnitude_md
     ) |>
     mutate(
+        depth_abs = abs(depth_km),
         depth_boundary_1km = case_when(
             depth_km < 1 ~ "< 1 km",
             depth_km < 2 ~ "< 2 km",
@@ -160,14 +161,14 @@ print(paste("Minimum Magnitude:", min_mag))
 ```{r}
 original <-
     ggplot(
-        vesuvius_data, 
+        vesuvius_data_filtered, 
         aes(x = longitude, 
             y = latitude)
     ) +
     
     geom_point(
         aes(color = duration_magnitude_md,
-            alpha = depth_km),
+            alpha = depth_abs),
         size = 3
     ) +                     
     
@@ -178,7 +179,7 @@ original <-
     
     scale_alpha_continuous(
         name = "Depth (km)",
-        range = c(0.2, 0.9)
+        range = c(0.75, 0.25)
     ) +
 
         scale_x_continuous(
@@ -208,7 +209,9 @@ original <-
         legend.spacing.x = unit(0.3, "cm"),  # tighter spacing
         legend.spacing.y = unit(0.3, "cm"),  # tighter spacing
         legend.title = element_text(size = 12),
-        legend.text = element_text(size = 10)
+        legend.text = element_text(size = 10),
+        legend.background = element_rect(fill = "transparent", colour = NA),
+        legend.box.background = element_rect(fill = "transparent", colour = NA)
     ) +
 
     guides(
@@ -218,19 +221,20 @@ original <-
             barwidth = unit(2.8, "cm"),
             barheight = unit(0.4, "cm"),
             order = 1),
-        alpha = guide_colorbar(  # Depth as alpha
-            direction = "horizontal",
-            title.position = "top",
-            barwidth = unit(2.8, "cm"),
-            barheight = unit(0.4, "cm"),
-            order = 2
-        )
+    alpha = guide_legend(
+        direction = "horizontal",
+        title.position = "top",
+        label.position = "bottom",
+        override.aes = list(alpha = c(0.75, 0.5, 0.25)),
+        keywidth = unit(0.4, "cm"),
+        keyheight = unit(0.4, "cm"),
+        order = 2)
     )
-
+        
 original
 
 if (save_figs) {
-    ggsave("images/orignal_vesuvius_plot.png", original)
+    ggsave("images/original_vesuvius_plot.png", original)
 }
 ```
 
@@ -364,7 +368,9 @@ static_plot <- ggplot() +
         legend.spacing.x = unit(0.3, "cm"),  # tighter spacing
         legend.spacing.y = unit(0.3, "cm"),  # tighter spacing
         legend.title = element_text(size = 12),
-        legend.text = element_text(size = 10)
+        legend.text = element_text(size = 10),
+        legend.background = element_rect(fill = "transparent", colour = NA),
+        legend.box.background = element_rect(fill = "transparent", colour = NA)
     ) +
 
     guides(
@@ -448,13 +454,7 @@ vesuvius_anim_plot <- ggplot() +
         subtitle = "Point Color by Magnitude\nPoint Size by Depth: {closest_state}",
         x = "Longitude",
         y = "Latitude",
-        caption = paste(
-            "Source: Seismic data for Mount Vesuvius",
-            "TidyTuesday 2025-05-13",
-            "Graphic: Weston Scott",
-            sep = "\n"
-        )
-        # caption = "Source: Seismic data for Mount Vesuvius\nTidyTuesday 2025-05-13\nGraphic: Weston Scott"
+        caption = "Source: Seismic data for Mount Vesuvius\nTidyTuesday 2025-05-13\nGraphic: Weston Scott"
     ) +
 
     theme(
@@ -469,7 +469,9 @@ vesuvius_anim_plot <- ggplot() +
         legend.spacing.y = unit(0.3, "cm"),  # tighter spacing
         legend.title = element_text(size = 12),
         legend.text = element_text(size = 10),
-        plot.caption = element_text(margin = margin(t = 30), size = 10, hjust = 1)
+        plot.caption = element_text(margin = margin(t = 30), size = 10, hjust = 1),
+        legend.background = element_rect(fill = "transparent", colour = NA),
+        legend.box.background = element_rect(fill = "transparent", colour = NA)
     ) +
 
     guides(
