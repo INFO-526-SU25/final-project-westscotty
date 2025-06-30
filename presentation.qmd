@@ -95,18 +95,6 @@ Interpret the underlying relationships between variables of interest including t
 -   The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled `depth_boundary_0.5km`, plotting in ascending depth order meaning that deeper values will appear first
 -   A size re-scaling for points was created from this new depth layer variable
 
-## Histogram
-
-::: {.column width="50%"}
--   Plotting a histogram of the `duration_magnitude_md` values for each points, faceted by the `depth_boundary_0.5km` variable allows for verification that each depth layer has valid data
-
--   The statistical distributions are also shown, indicating that shallower depths
-:::
-
-::: {.column width="50%"}
-![](images/histogram_vesuvius_plot.png){fig-align="right"}
-:::
-
 ## Seismic Activity Plots
 
 ::: panel-tabset

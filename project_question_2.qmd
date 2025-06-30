@@ -422,7 +422,7 @@ vesuvius_anim_plot <- ggplot() +
     theme(
         plot.title.position = "plot",
         plot.title = element_text(margin = margin(b = 23), 
-                                  size = 18),
+                                  size = 16),
         axis.text = element_text(size = 12),
         legend.direction = "horizontal",
         legend.box = "vertical",  # stack legends on top of each other
