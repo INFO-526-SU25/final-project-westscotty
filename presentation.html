@@ -29,7 +29,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-6cdba8845797a0b5a60f808f0334ef8f.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-6ce922b8680ebe0bca138a5c7813e404.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -121,14 +121,12 @@
       margin-right: 0; 
     }
   </style>
-  <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="images/watercolour_sys02_img34_teacup-ocean.jpg" data-background-opacity="0.7" data-background-size="stretch" data-slide-number="none" class="quarto-title-block center">
+<section id="title-slide" data-background-image="images/cracks.jpg" data-background-opacity="0.7" data-background-size="stretch" data-slide-number="none" class="quarto-title-block center">
   <h1 class="title">Mt. Vesuvius Lives</h1>
   <p class="subtitle">INFO 526 - Summer 2025 - Final Project</p>
 
@@ -141,191 +139,102 @@ Cedric Destin &amp; Weston Scott
 </div>
 
 </section>
-<section>
-<section id="using-quarto-for-presentations" class="title-slide slide level1 center">
-<h1>Using Quarto for presentations</h1>
-
-</section>
-<section id="quarto" class="slide level2">
-<h2>Quarto</h2>
+<section id="the-data" class="slide level2">
+<h2>The Data</h2>
 <ul>
-<li><p>The presentation is created using the Quarto CLI</p></li>
-<li><p><code>##</code> sets the start of a new slide</p></li>
+<li><p>Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025)</p></li>
+<li><p>The data contains records of seismic activity at or near Mt. Vesuvius, Italy over the last decade or so</p></li>
+<li><p>Source: <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md" class="uri">https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md</a></p></li>
 </ul>
 </section>
-<section id="layouts" class="slide level2">
-<h2>Layouts</h2>
-<p>You can use plain text</p>
+<section id="the-goal" class="slide level2">
+<h2>The Goal</h2>
 <div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li>or bullet points<sup>1</sup></li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p>or in two columns</p>
+<div class="column" style="width:60%;">
+<p>Interpret the underlying relationships between variables of interest including time series and static analysis of the seismic data recorded at the famous Mt. Vesuvius.</p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/mt_vesuvius.jpg" alt="https://www.pexels.com/photo/buildings-near-the-rock-mountains-6540758/"></p>
 </div></div>
+</section>
+<section id="question-1" class="slide level2">
+<h2>Question 1</h2>
+<p><strong>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</strong></p>
 <ul>
-<li><p>like</p></li>
-<li><p>this</p></li>
+<li>&lt;Add stuff here&gt;</li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>And add footnotes</p></li></ol></aside></section>
-<section id="code" class="slide level2">
-<h2>Code</h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term        estimate std.error statistic       p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-1 (Intercept)   25.3      3.08        8.22 0.00000000358
-2 speed         -0.116    0.0642     -1.81 0.0806       </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.
-# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
-</div>
-</div>
+</section>
+<section id="approach" class="slide level2">
+<h2>Approach</h2>
 </section>
 <section id="plots" class="slide level2">
 <h2>Plots</h2>
-
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="1800" class="r-stretch"></section>
-<section id="plot-and-text" class="slide level2">
-<h2>Plot and text</h2>
-<div class="columns">
+</section>
+<section id="analysis" class="slide level2">
+<h2>Analysis</h2>
+</section>
+<section id="challenges-faced" class="slide level2">
+<h2>Challenges Faced</h2>
+</section>
+<section id="question-2" class="slide level2">
+<h2>Question 2</h2>
+<p><strong>How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?</strong></p>
+<ul>
+<li>&lt;Add stuff here&gt;</li>
+</ul>
+</section>
+<section id="approach-1" class="slide level2">
+<h2>Approach</h2>
+<ul>
+<li>The first step was to remove bad (or missing) data by dropping rows with NA in <code>latitude</code>, <code>longitude</code>, <code>depth_km</code>, and <code>duration_magnitude_md</code></li>
+<li>The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled <code>depth_boundary_0.5km</code>, plotting in ascending depth order meaning that deeper values will appear first</li>
+<li>A size re-scaling for points was created from this new depth layer variable</li>
+</ul>
+</section>
+<section id="histogram" class="slide level2">
+<h2>Histogram</h2>
 <div class="column" style="width:50%;">
 <ul>
-<li><p>Some text</p></li>
-<li><p>goes here</p></li>
+<li><p>Plotting a histogram of the <code>duration_magnitude_md</code> values for each points, faceted by the <code>depth_boundary_0.5km</code> variable allows for verification that each depth layer has valid data</p></li>
+<li><p>The statistical distributions are also shown, indicating that shallower depths</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-right">
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/unnamed-chunk-3-1.png" width="1650"></p>
+<p><img data-src="images/histogram_vesuvius_plot.png" class="quarto-figure quarto-figure-right"></p>
 </figure>
 </div>
+</div></section>
+<section id="seismic-activity-plots" class="slide level2">
+<h2>Seismic Activity Plots</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Histogram View</a></li><li><a href="#tabset-1-2">Static View</a></li><li><a href="#tabset-1-3">Animated View</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p><img data-src="images/histogram_vesuvius_plot.png" alt="Histogram of Events"> <em>Note: Plotting a histogram of the <code>duration_magnitude_md</code> values, faceted by <code>depth_boundary_0.5km</code> allows for verification of valid data in each layer and shape of distribution visibility</em></p>
 </div>
+<div id="tabset-1-2">
+<p><img data-src="images/static_vesuvius_plot.png" alt="Static Seismic Events"> <em>Note:</em></p>
 </div>
-</div></div>
-</section></section>
-<section>
-<section id="a-new-section" class="title-slide slide level1 center">
-<h1>A new section…</h1>
-
-</section>
-<section id="tables" class="slide level2">
-<h2>Tables</h2>
-<p>If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table caption-top" data-quarto-postprocess="true" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">species</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">island</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">bill_length_mm</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">bill_depth_mm</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">flipper_length_mm</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">body_mass_g</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">sex</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">Torgersen</td>
-<td style="text-align: right;">39.1</td>
-<td style="text-align: right;">18.7</td>
-<td style="text-align: right;">181</td>
-<td style="text-align: right;">3750</td>
-<td style="text-align: left;">male</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">Torgersen</td>
-<td style="text-align: right;">39.5</td>
-<td style="text-align: right;">17.4</td>
-<td style="text-align: right;">186</td>
-<td style="text-align: right;">3800</td>
-<td style="text-align: left;">female</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">Torgersen</td>
-<td style="text-align: right;">40.3</td>
-<td style="text-align: right;">18.0</td>
-<td style="text-align: right;">195</td>
-<td style="text-align: right;">3250</td>
-<td style="text-align: left;">female</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">Torgersen</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">Torgersen</td>
-<td style="text-align: right;">36.7</td>
-<td style="text-align: right;">19.3</td>
-<td style="text-align: right;">193</td>
-<td style="text-align: right;">3450</td>
-<td style="text-align: left;">female</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Adelie</td>
-<td style="text-align: left;">Torgersen</td>
-<td style="text-align: right;">39.3</td>
-<td style="text-align: right;">20.6</td>
-<td style="text-align: right;">190</td>
-<td style="text-align: right;">3650</td>
-<td style="text-align: left;">male</td>
-</tr>
-</tbody>
-</table>
+<div id="tabset-1-3">
+<p><img data-src="images/vesuvius_animation.gif" alt="Animated Seismic Events"> <em>Note:</em></p>
+</div>
 </div>
 </div>
 </section>
-<section id="images" class="slide level2">
-<h2>Images</h2>
+<section id="analysis-1" class="slide level2">
+<h2>Analysis</h2>
+<p>&lt;Add stuff here&gt;</p>
+</section>
+<section id="challenges-faced-1" class="slide level2">
+<h2>Challenges Faced</h2>
+<p>&lt;Add stuff here&gt;</p>
+</section>
+<section id="final-remarks" class="slide level2">
+<h2>Final Remarks</h2>
+<p>&lt;Add stuff here&gt;</p>
 
-<img data-src="images/watercolour_sys02_img34_teacup-ocean.png" width="500" class="r-stretch quarto-figure-center"><p class="caption">Image credit: Danielle Navarro, Percolate.</p></section>
-<section id="math-expressions" class="slide level2 smaller">
-<h2>Math Expressions</h2>
-<p>You can write LaTeX math expressions inside a pair of dollar signs, e.g.&nbsp;$\alpha+\beta$ renders <span class="math inline">\(\alpha + \beta\)</span>. You can use the display style with double dollar signs:</p>
-<pre><code>$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$</code></pre>
-<p><span class="math display">\[
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-\]</span></p>
-<p>Limitations:</p>
-<ol type="1">
-<li><p>The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting <code>$$</code> must appear in the very beginning of a line, followed immediately by a non-space character, and the ending <code>$$</code> must be at the end of a line, led by a non-space character;</p></li>
-<li><p>There should not be spaces after the opening <code>$</code> or before the closing <code>$</code>.</p></li>
-</ol>
-</section></section>
-<section>
-<section id="wrap-up" class="title-slide slide level1 center">
-<h1>Wrap up</h1>
 
 </section>
-<section id="feeling-adventurous" class="slide level2">
-<h2>Feeling adventurous?</h2>
-<ul>
-<li><p>You are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.</p></li>
-<li><p>But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.</p></li>
-</ul>
-
-
-</section></section>
-
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

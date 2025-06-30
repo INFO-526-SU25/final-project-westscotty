@@ -4111,19 +4111,11 @@ vertical-align: -.125em;
 </header>
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr,</span>
-<span id="cb1-5"><a href="#cb1-5"></a>               readr,</span>
-<span id="cb1-6"><a href="#cb1-6"></a>               tidyverse) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>vesuvius <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./data/vesuvius.csv&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">glimpse</span>(vesuvius)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>vesuvius <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./data/vesuvius.csv&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">glimpse</span>(vesuvius)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 12,027
 Columns: 11
@@ -4698,77 +4690,78 @@ $ year                  &lt;dbl&gt; 2011, 2012, 2013, 2013, 2013, 2013, 2013, 20
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="an">title:</span><span class="co"> &quot;Mt. Vesuvius Lives&quot;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="an">subtitle:</span><span class="co"> &quot;Proposal&quot;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="an">author:</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">  - name: &quot;Seismic Minds (Cedric Destin, Weston Scott)&quot;</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">    affiliations:</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">      - name: &quot;School of Information, University of Arizona&quot;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="an">description:</span><span class="co"> &quot;Exploratory Analysis of Seismic Activity: Mt. Vesuvius&quot;</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="an">format:</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">  html:</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">    code-tools: true</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">    code-overflow: wrap</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">    code-line-numbers: true</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">    embed-resources: true</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="an">code-annotations:</span><span class="co"> hover</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="an">execute:</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">  warning: false</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">  render-on-save: true</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">---</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="in">```{r}</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#| label: load-pkgs</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#| message: false</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb4-28"><a href="#cb4-28"></a><span class="fu">library</span>(readr)</span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-30"><a href="#cb4-30"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr,</span>
-<span id="cb4-31"><a href="#cb4-31"></a>               readr,</span>
-<span id="cb4-32"><a href="#cb4-32"></a>               tidyverse) </span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="in">```</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="fu">## Dataset</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="in">```{r}</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#| label: load-dataset</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#| message: false</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a></span>
-<span id="cb4-43"><a href="#cb4-43"></a>vesuvius <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./data/vesuvius.csv&quot;</span>)</span>
-<span id="cb4-44"><a href="#cb4-44"></a><span class="fu">glimpse</span>(vesuvius)</span>
-<span id="cb4-45"><a href="#cb4-45"></a><span class="in">```</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a></span>
-<span id="cb4-47"><a href="#cb4-47"></a>The Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event&#39;s timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (<span class="in">`duration_magnitude_md`</span>), and an associated error estimate. Additional fields identify the type of event (such as &quot;earthquake&quot;), the review level of the data (e.g., &quot;revised&quot; or &quot;preliminary&quot;), and the year in which the event occurred. All events are local to the Mount Vesuvius region.</span>
-<span id="cb4-48"><a href="#cb4-48"></a></span>
-<span id="cb4-49"><a href="#cb4-49"></a>This dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis.</span>
-<span id="cb4-50"><a href="#cb4-50"></a></span>
-<span id="cb4-51"><a href="#cb4-51"></a><span class="fu">## Questions</span></span>
-<span id="cb4-52"><a href="#cb4-52"></a></span>
-<span id="cb4-53"><a href="#cb4-53"></a><span class="ss">1.  </span>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</span>
-<span id="cb4-54"><a href="#cb4-54"></a></span>
-<span id="cb4-55"><a href="#cb4-55"></a><span class="ss">2.  </span>How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?</span>
-<span id="cb4-56"><a href="#cb4-56"></a></span>
-<span id="cb4-57"><a href="#cb4-57"></a><span class="fu">## Analysis plan</span></span>
-<span id="cb4-58"><a href="#cb4-58"></a></span>
-<span id="cb4-59"><a href="#cb4-59"></a><span class="ss">-   </span>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</span>
-<span id="cb4-60"><a href="#cb4-60"></a><span class="ss">    -   </span>In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:</span>
-<span id="cb4-61"><a href="#cb4-61"></a><span class="ss">        -   </span>Line plots in the time domain</span>
-<span id="cb4-62"><a href="#cb4-62"></a><span class="ss">            -   </span>This kind of plot are best to show trends over time</span>
-<span id="cb4-63"><a href="#cb4-63"></a><span class="ss">        -   </span>Histogram</span>
-<span id="cb4-64"><a href="#cb4-64"></a><span class="ss">            -   </span>This plot will be used to view if there are more activities at certain time of the year</span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="ss">        -   </span>Box plots</span>
-<span id="cb4-66"><a href="#cb4-66"></a><span class="ss">            -   </span>This can be used to view the deviation of the seismic event within a month or within the year</span>
-<span id="cb4-67"><a href="#cb4-67"></a><span class="ss">        -   </span>Joint plots</span>
-<span id="cb4-68"><a href="#cb4-68"></a><span class="ss">            -   </span>This can be used to observe any specific trends</span>
-<span id="cb4-69"><a href="#cb4-69"></a><span class="ss">        -   </span>Pair plots</span>
-<span id="cb4-70"><a href="#cb4-70"></a><span class="ss">    -   </span>On the other hand, the second question can be answered by reviewing the seismic events as follow:</span>
-<span id="cb4-71"><a href="#cb4-71"></a><span class="ss">        -   </span>Scatter plot of lat &amp; lon</span>
-<span id="cb4-72"><a href="#cb4-72"></a><span class="ss">            -   </span>Including the geographical features</span>
-<span id="cb4-73"><a href="#cb4-73"></a><span class="ss">            -   </span>Vary the size of the markers based on the magnitude</span>
-<span id="cb4-74"><a href="#cb4-74"></a><span class="ss">        -   </span>Plot the data in 3D</span>
-<span id="cb4-75"><a href="#cb4-75"></a><span class="ss">            -   </span>Our data is in lat, lon, depth and magnitude</span>
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> &quot;Mt. Vesuvius Lives&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="an">subtitle:</span><span class="co"> &quot;Proposal&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="an">author:</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">  - name: &quot;Seismic Minds (Cedric Destin, Weston Scott)&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">    affiliations:</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">      - name: &quot;School of Information, University of Arizona&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="an">description:</span><span class="co"> &quot;Exploratory Analysis of Seismic Activity: Mt. Vesuvius&quot;</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="an">format:</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">  html:</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">    code-tools: true</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">    code-overflow: wrap</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">    code-line-numbers: true</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">    embed-resources: true</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="an">code-annotations:</span><span class="co"> hover</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="an">execute:</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">  warning: false</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">  render-on-save: true</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">---</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="in">```{r library_setup, include=FALSE}</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;pacman&quot;</span>)) </span>
+<span id="cb3-24"><a href="#cb3-24"></a>    <span class="fu">install.packages</span>(<span class="st">&quot;pacman&quot;</span>)</span>
+<span id="cb3-25"><a href="#cb3-25"></a></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co"># Use pacman::p_load to install and load CRAN packages</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb3-28"><a href="#cb3-28"></a>    dplyr,</span>
+<span id="cb3-29"><a href="#cb3-29"></a>    readr,</span>
+<span id="cb3-30"><a href="#cb3-30"></a>    tidyverse</span>
+<span id="cb3-31"><a href="#cb3-31"></a>)</span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="in">```</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="fu">## Dataset</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a></span>
+<span id="cb3-38"><a href="#cb3-38"></a><span class="in">```{r}</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="co">#| label: load-dataset</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="co">#| message: false</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a></span>
+<span id="cb3-42"><a href="#cb3-42"></a>vesuvius <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./data/vesuvius.csv&quot;</span>)</span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="fu">glimpse</span>(vesuvius)</span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="in">```</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a></span>
+<span id="cb3-46"><a href="#cb3-46"></a>The Mount Vesuvius seismic activity dataset contains detailed information on 12,027 seismic events recorded between 2011 and 2024. Provided by the Istituto Nazionale di Geofisica e Vulcanologia and made available through the TidyTuesday project (May 13, 2025), the dataset captures both the temporal and spatial aspects of each event. Each record includes the event&#39;s timestamp, latitude and longitude, depth in kilometers, magnitude based on duration (<span class="in">`duration_magnitude_md`</span>), and an associated error estimate. Additional fields identify the type of event (such as &quot;earthquake&quot;), the review level of the data (e.g., &quot;revised&quot; or &quot;preliminary&quot;), and the year in which the event occurred. All events are local to the Mount Vesuvius region.</span>
+<span id="cb3-47"><a href="#cb3-47"></a></span>
+<span id="cb3-48"><a href="#cb3-48"></a>This dataset was selected because volcanoes are exciting! Mount Vesuvius is a historical icon and this dataset allows for real-world analysis of ongoing volcanic activity. It also offers both temporal and spacial components for visualizations and exploratory data analysis.</span>
+<span id="cb3-49"><a href="#cb3-49"></a></span>
+<span id="cb3-50"><a href="#cb3-50"></a><span class="fu">## Questions</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a></span>
+<span id="cb3-52"><a href="#cb3-52"></a><span class="ss">1.  </span>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</span>
+<span id="cb3-53"><a href="#cb3-53"></a></span>
+<span id="cb3-54"><a href="#cb3-54"></a><span class="ss">2.  </span>How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?</span>
+<span id="cb3-55"><a href="#cb3-55"></a></span>
+<span id="cb3-56"><a href="#cb3-56"></a><span class="fu">## Analysis plan</span></span>
+<span id="cb3-57"><a href="#cb3-57"></a></span>
+<span id="cb3-58"><a href="#cb3-58"></a><span class="ss">-   </span>A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).</span>
+<span id="cb3-59"><a href="#cb3-59"></a><span class="ss">    -   </span>In our analysis, we will review the ideal way to represent the seismic events over time. There are multiple ways to represent the data, we will choose the most effective illustration to show the behavior of the seismic events. These are the basic type of plots that we will create:</span>
+<span id="cb3-60"><a href="#cb3-60"></a><span class="ss">        -   </span>Line plots in the time domain</span>
+<span id="cb3-61"><a href="#cb3-61"></a><span class="ss">            -   </span>This kind of plot are best to show trends over time</span>
+<span id="cb3-62"><a href="#cb3-62"></a><span class="ss">        -   </span>Histogram</span>
+<span id="cb3-63"><a href="#cb3-63"></a><span class="ss">            -   </span>This plot will be used to view if there are more activities at certain time of the year</span>
+<span id="cb3-64"><a href="#cb3-64"></a><span class="ss">        -   </span>Box plots</span>
+<span id="cb3-65"><a href="#cb3-65"></a><span class="ss">            -   </span>This can be used to view the deviation of the seismic event within a month or within the year</span>
+<span id="cb3-66"><a href="#cb3-66"></a><span class="ss">        -   </span>Joint plots</span>
+<span id="cb3-67"><a href="#cb3-67"></a><span class="ss">            -   </span>This can be used to observe any specific trends</span>
+<span id="cb3-68"><a href="#cb3-68"></a><span class="ss">        -   </span>Pair plots</span>
+<span id="cb3-69"><a href="#cb3-69"></a><span class="ss">    -   </span>On the other hand, the second question can be answered by reviewing the seismic events as follow:</span>
+<span id="cb3-70"><a href="#cb3-70"></a><span class="ss">        -   </span>Scatter plot of lat &amp; lon</span>
+<span id="cb3-71"><a href="#cb3-71"></a><span class="ss">            -   </span>Including the geographical features</span>
+<span id="cb3-72"><a href="#cb3-72"></a><span class="ss">            -   </span>Vary the size of the markers based on the magnitude</span>
+<span id="cb3-73"><a href="#cb3-73"></a><span class="ss">        -   </span>Plot the data in 3D</span>
+<span id="cb3-74"><a href="#cb3-74"></a><span class="ss">            -   </span>Our data is in lat, lon, depth and magnitude</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
