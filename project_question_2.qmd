@@ -56,7 +56,7 @@ devtools::install_github("tidyverse/dsbox")
       library(dsbox)
 }
 
-ggplot2::theme_set(ggplot2::theme_light(base_size = 14))
+ggplot2::theme_set(ggplot2::theme_light(base_size = 12))
 options(width = 65)
 
 knitr::opts_chunk$set(
@@ -183,10 +183,10 @@ original <-
     
     labs(
         title = "Seismic Events at Mount Vesuvius",
-        subtitle = "Point Color by Magnitude (Inferno), Transparency by Depth",
+        subtitle = "Point Color by Magnitude\nPoint Transparency by Depth",
         x = "Longitude",
         y = "Latitude",
-        caption = NULL
+        caption = "Source: Seismic data for Mount Vesuvius\nTidyTuesday 2025-05-13\nGraphic: Weston Scott"
     ) 
 
 original
@@ -216,10 +216,10 @@ histogram <-
 
     labs(
         title = "Histogram of Duration Magnitude",
-        subtitle = "Faceted by Depth",
+        subtitle = "Distribution Facets by Depth",
         x = "Magnitude (md)",
         y = "Count",
-        caption = "Source: "
+        caption = "Source: Seismic data for Mount Vesuvius\nTidyTuesday 2025-05-13\nGraphic: Weston Scott"
     ) +
     
     theme(
@@ -313,7 +313,7 @@ static_plot <- ggplot() +
         subtitle = "Point Color by Magnitude\nPoint Size by Depth",
         x = "Longitude",
         y = "Latitude",
-        caption = "Source: "
+        caption = "Source: Seismic data for Mount Vesuvius\nTidyTuesday 2025-05-13\nGraphic: Weston Scott"
     ) +
 
     theme(
@@ -333,13 +333,13 @@ static_plot <- ggplot() +
         fill = guide_colorbar(  # Elevation
             direction = "horizontal",
             title.position = "top",
-            barwidth = unit(2.75, "cm"),
+            barwidth = unit(2.8, "cm"),
             barheight = unit(0.4, "cm"),
             order = 1),
         color = guide_colorbar(  # Magnitude
             direction = "horizontal",
             title.position = "top",
-            barwidth = unit(2.75, "cm"),
+            barwidth = unit(2.8, "cm"),
             barheight = unit(0.4, "cm"),
             order = 2),
         size = guide_legend(  # Depth
@@ -410,12 +410,18 @@ vesuvius_anim_plot <- ggplot() +
         subtitle = "Point Color by Magnitude\nPoint Size by Depth: {closest_state}",
         x = "Longitude",
         y = "Latitude",
-        caption = "Source: "
+        caption = paste(
+            "Source: Seismic data for Mount Vesuvius",
+            "TidyTuesday 2025-05-13",
+            "Graphic: Weston Scott",
+            sep = "\n"
+        )
+        # caption = "Source: Seismic data for Mount Vesuvius\nTidyTuesday 2025-05-13\nGraphic: Weston Scott"
     ) +
 
     theme(
         plot.title.position = "plot",
-        plot.title = element_text(margin = margin(b = 20), 
+        plot.title = element_text(margin = margin(b = 23), 
                                   size = 18),
         axis.text = element_text(size = 12),
         legend.direction = "horizontal",
@@ -424,14 +430,15 @@ vesuvius_anim_plot <- ggplot() +
         legend.spacing.x = unit(0.3, "cm"),  # tighter spacing
         legend.spacing.y = unit(0.3, "cm"),  # tighter spacing
         legend.title = element_text(size = 12),
-        legend.text = element_text(size = 10)
+        legend.text = element_text(size = 10),
+        plot.caption = element_text(margin = margin(t = 30), size = 10, hjust = 1)
     ) +
 
     guides(
         color = guide_colorbar(
             direction = "horizontal",
             title.position = "top",
-            barwidth = unit(2.75, "cm"),
+            barwidth = unit(2.8, "cm"),
             barheight = unit(0.4, "cm"),
             order = 1),
         size = guide_legend(
