@@ -152,9 +152,10 @@ plot_3 <- ggplot(aggregated_data_2,
   geom_smooth(method = "loess", 
               se = TRUE)  +
   scale_x_date(date_labels = "%Y", date_breaks = "12 month") +
- labs(title = "Depth averaged per year & month", 
-         caption = "Source: Seismic data for Mount Vesuvius \n TidyTuesday 2025-05-13 \n Graphic: Cedric Destin",
-         x = "Year", y = "Depth Km")
+ labs(title = "Depth averaged per year & month",
+         y = "Depth Km", x = NULL) +
+theme(axis.text.x = element_blank(),  
+        axis.ticks.x = element_blank())
 plot_3
 if (save_figs) {
     ggsave("images/depth_by_year_month.png", plot_3)
@@ -176,6 +177,13 @@ if (save_figs) {
     ggsave("images/duration_magnitude_by_year_month.png", plot_4)
 }
 
+```
+
+```{r}
+plot_3_4 <- grid.arrange(plot_3, plot_4, nrow = 2)
+if (save_figs) {
+    ggsave("images/by_year_month.png", plot_3_4)
+}
 ```
 ```{r}
 plot_5 <- ggplot(filter(vesuvius_data_filtered, year >= 2013), aes(x = depth_km)) +
@@ -506,7 +514,7 @@ plot_12 <- ggplot() +
     name = "Count Duration Magnitude",
     guide = guide_legend(override.aes = list(color = "red"))
   )+
-  labs(size = "Count Duration Magnitude", y = "Duration Magnitude / Bin Midpoint", x = "Year",
+  labs(size = "Count Duration Magnitude", y = "Duration Magnitude", x = "Year",
   caption = "Source: Seismic data for Mount Vesuvius \n TidyTuesday 2025-05-13 \n Graphic: Cedric Destin")+
   scale_x_continuous(breaks = pretty(aggregated_data$year, n = 10))
 

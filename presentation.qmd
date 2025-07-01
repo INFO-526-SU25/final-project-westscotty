@@ -17,7 +17,6 @@ execute:
   render-on-save: true
 ---
 
-
 ## The Data
 
 -   Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025)
@@ -42,11 +41,71 @@ Interpret the underlying relationships between variables of interest including t
 
 **How have the frequency and depth of seismic events at Mount Vesuvius changed over time?**
 
--   \<Add stuff here\>
+-   This section of the presentation reviews the seismic events' behavior over time
+-   The following plots are used to analyze the Duration Magnitude and the Depth of the seismic events
+    -   Line plots
+    -   Histograms
+    -   Error plots
 
 ## Approach
 
+1.  Any NaN were removed for the Duration Magnitude and the Depth
+
+2.  The data was smoothed by calculating the average of the Duration Magnitude and the Depth per year & month
+
+3.  The time had to be wrangled to remove undesired characters
+
 ## Plots
+
+:::::::::::: panel-tabset
+<!-- ## Initial View  :::{.columns} ::: {.column width="65%"} ![Description...](images/original_vesuvius_plot.png){width=100%} :::  ::: {.column width="35%"} <span style="font-size: 0.75em; line-height: 1.4;"> **Note:** This plot shows the seismic events over time after having been smoothed. </span> ::: ::: -->
+
+<!-- --- -->
+
+## Timeplots
+
+::::: columns
+::: {.column width="65%"}
+![](images/by_year_month.png){width="88%"}
+:::
+
+::: {.column width="35%"}
+[**Note:** Time plot of `duration_magnitude_md` and`depth_km`.<br> This shows that the average depth and duration magnitude measured have stabilized.]{style="font-size: 0.75em; line-height: 1.4;"}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Depth Stats
+
+::::: columns
+::: {.column width="65%"}
+![Description...](images/depth_error_binned_mount.png){width="100%"}
+:::
+
+::: {.column width="35%"}
+<span style="font-size: 0.75em; line-height: 1.4;"> **Note:** Another view of the Depth of the seismic events over time.<br>
+
+</span>
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Duration Magnitude Stats
+
+::::: columns
+::: {.column width="65%"}
+![](images/duration_magnitude_error_binned.png){width="100%"}
+:::
+
+::: {.column width="35%"}
+<span style="font-size: 0.75em; line-height: 1.4;"> **Note:** Another view of the Duration Magnitude of the seismic events over time.<br>
+
+</span>
+:::
+:::::
+::::::::::::
 
 ## Analysis
 
@@ -66,7 +125,8 @@ Interpret the underlying relationships between variables of interest including t
 
 ## Seismic Activity Plots
 
-::: {.panel-tabset}
+:::::::::::: panel-tabset
+```{=html}
 <!-- ## Initial View
 
 :::{.columns}
@@ -83,60 +143,54 @@ Use this as a baseline for comparison.
 </span>
 :::
 ::: -->
+```
 
 <!-- --- -->
 
 ## Histogram View
 
-:::{.columns}
+::::: columns
 ::: {.column width="65%"}
-![Description...](images/histogram_vesuvius_plot.png){width=100%}
+![Description...](images/histogram_vesuvius_plot.png){width="100%"}
 :::
 
 ::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;">
-**Note:** Histogram of `duration_magnitude_md`, faceted by `depth_boundary_0.5km`.<br>
-This confirms distribution shapes and valid bins for all layers.
-</span>
+[**Note:** Histogram of `duration_magnitude_md`, faceted by `depth_boundary_0.5km`.<br> This confirms distribution shapes and valid bins for all layers.]{style="font-size: 0.75em; line-height: 1.4;"}
 :::
-:::
+:::::
 
----
+------------------------------------------------------------------------
 
 ## Static View
 
-
-:::{.columns}
+::::: columns
 ::: {.column width="65%"}
-![Description...](images/static_vesuvius_plot.png){width=100%}
+![Description...](images/static_vesuvius_plot.png){width="100%"}
 :::
 
 ::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;">
-**Note:** Final refined static map with elevation contours and refined legend formatting.<br>
+<span style="font-size: 0.75em; line-height: 1.4;"> **Note:** Final refined static map with elevation contours and refined legend formatting.<br>
 
 </span>
 :::
-:::
+:::::
 
----
+------------------------------------------------------------------------
 
 ## Animated View
 
-:::{.columns}
+::::: columns
 ::: {.column width="65%"}
-![Description...](images/vesuvius_animation.gif){width=100%}
+![Description...](images/vesuvius_animation.gif){width="100%"}
 :::
 
 ::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;">
-**Note:** Animation shows seismic activity over depth layers using alpha fading.<br>
+<span style="font-size: 0.75em; line-height: 1.4;"> **Note:** Animation shows seismic activity over depth layers using alpha fading.<br>
 
 </span>
 :::
-:::
-
-:::
+:::::
+::::::::::::
 
 ## Analysis
 
