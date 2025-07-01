@@ -243,19 +243,26 @@ Cedric Destin &amp; Weston Scott
 <summary style="color: black;">
 <p>Any NaN were removed from the <code>depth_md</code> and <code>duration_magnitude_md</code> data</p>
 </summary>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(duration_magnitude_md) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(depth_km))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(duration_magnitude_md) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(depth_km))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary style="color: black;">
 <p>The data was down-sampled by calculating the averages per month and year.</p>
 </summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>aggregated_data <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">%&gt;%</span>   <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span>   <span class="fu">summarise</span>(<span class="at">mean_duration_magnitude_md =</span> <span class="fu">mean</span>(duration_magnitude_md),             <span class="at">mean_depth_km =</span> <span class="fu">mean</span>(depth_km))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>aggregated_data <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">|&gt;</span>   </span>
+<span id="cb2-2"><a></a>    <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span>   </span>
+<span id="cb2-3"><a></a>    <span class="fu">summarise</span>(<span class="at">mean_duration_magnitude_md =</span> <span class="fu">mean</span>(duration_magnitude_md),             </span>
+<span id="cb2-4"><a></a>    <span class="at">mean_depth_km =</span> <span class="fu">mean</span>(depth_km))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary style="color: black;">
 <p>The time had to be wrangled to remove undesired characters</p>
 </summary>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>vesuvius_data <span class="ot">&lt;-</span> vesuvius_data <span class="sc">|&gt;</span>     <span class="fu">mutate</span>(         <span class="at">date =</span> <span class="fu">str_replace_all</span>(time, <span class="st">"T"</span>, <span class="st">" "</span>),         <span class="at">date =</span> <span class="fu">str_replace_all</span>(date, <span class="st">"Z"</span>, <span class="st">""</span>),         <span class="at">date =</span> <span class="fu">as.POSIXct</span>(date, <span class="at">format =</span> <span class="st">"%Y-%m-%d %H:%M:%S"</span>)     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>vesuvius_data <span class="ot">&lt;-</span> vesuvius_data <span class="sc">|&gt;</span>     <span class="fu">mutate</span>(         </span>
+<span id="cb3-2"><a></a>    <span class="at">date =</span> <span class="fu">str_replace_all</span>(time, <span class="st">"T"</span>, <span class="st">" "</span>),         </span>
+<span id="cb3-3"><a></a>    <span class="at">date =</span> <span class="fu">str_replace_all</span>(date, <span class="st">"Z"</span>, <span class="st">""</span>),         </span>
+<span id="cb3-4"><a></a>    <span class="at">date =</span> <span class="fu">as.POSIXct</span>(date, <span class="at">format =</span> <span class="st">"%Y-%m-%d %H:%M:%S"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
