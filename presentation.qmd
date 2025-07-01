@@ -66,11 +66,11 @@ Interpret the underlying relationships between variables of interest including t
 
 ::::: columns
 ::: {.column width="65%"}
-![](images/by_year_month.png){width="88%"}
+![](images/by_year_month.png){width="75%"}
 :::
 
 ::: {.column width="35%"}
-[**Note:** Time plot of `duration_magnitude_md` and`depth_km`.<br> This shows that the average depth and duration magnitude measured have stabilized.]{style="font-size: 0.75em; line-height: 1.4;"}
+[**Note:** Time plot of `duration_magnitude_md` and `depth_km`.<br> This shows that the average depth and duration magnitude measured have stabilized.]{style="font-size: 0.75em; line-height: 1.4;"}
 :::
 :::::
 
@@ -80,7 +80,7 @@ Interpret the underlying relationships between variables of interest including t
 
 ::::: columns
 ::: {.column width="65%"}
-![Description...](images/depth_error_binned_mount.png){width="100%"}
+![Description...](images/depth_error_binned_mount.png){width="75%"}
 :::
 
 ::: {.column width="35%"}
@@ -96,7 +96,7 @@ Interpret the underlying relationships between variables of interest including t
 
 ::::: columns
 ::: {.column width="65%"}
-![](images/duration_magnitude_error_binned.png){width="100%"}
+![](images/duration_magnitude_error_binned.png){width="75%"}
 :::
 
 ::: {.column width="35%"}
@@ -108,6 +108,14 @@ Interpret the underlying relationships between variables of interest including t
 ::::::::::::
 
 ## Analysis
+
+Reviewing the behavior of the seismic events in time, here are some observations:
+
+-   The Depth and the Duration Magnitude of the seismic events are became smaller
+
+-   More Events have been recorded since 2016
+
+-   The Duration Magnitude remains low (below 3)
 
 ## Challenges Faced
 

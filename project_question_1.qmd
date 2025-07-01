@@ -46,7 +46,7 @@ knitr::opts_chunk$set(
 save_figs = TRUE
 ```
 
-```{}
+```         
 ```
 
 ## Plan out layer mappings
@@ -185,6 +185,7 @@ if (save_figs) {
     ggsave("images/by_year_month.png", plot_3_4)
 }
 ```
+
 ```{r}
 plot_5 <- ggplot(filter(vesuvius_data_filtered, year >= 2013), aes(x = depth_km)) +
   geom_histogram(fill = "skyblue", color = "black", bins = 100) +
