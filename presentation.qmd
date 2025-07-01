@@ -119,6 +119,8 @@ Reviewing the behavior of the seismic events in time, here are some observations
 
 ## Challenges Faced
 
+The data is very straight forward, hence the challenges we that were around how to interpret and plot the data with so high deviation. The data is also very random, as if these behaviors follow a binomial distribution.
+
 ## Question 2
 
 **How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?**
