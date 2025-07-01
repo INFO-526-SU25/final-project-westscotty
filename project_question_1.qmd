@@ -515,7 +515,8 @@ plot_12 <- ggplot() +
     name = "Count Duration Magnitude",
     guide = guide_legend(override.aes = list(color = "red"))
   )+
-  labs(size = "Count Duration Magnitude", y = "Duration Magnitude", x = "Year",
+  labs(title = "Duration Magnitude of Seismic Events at Mount Vesuvius Over Time",
+    size = "Count Duration Magnitude", y = "Duration Magnitude", x = "Year",
   caption = "Source: Seismic data for Mount Vesuvius \n TidyTuesday 2025-05-13 \n Graphic: Cedric Destin")+
   scale_x_continuous(breaks = pretty(aggregated_data$year, n = 10))
 
@@ -632,7 +633,8 @@ geom_segment(data = v_section, aes(x = x_rescaled_to_date, xend = x_rescaled_to_
     name = "Count Seismic events",
     guide = guide_legend(override.aes = list(color = "red"))
   )+
-  labs(size = "Count Seismic Events", y = "Depth Km", x = "Year", 
+  labs(title = "Depth of Seismic Events at Mount Vesuvius Over Time",
+  size = "Count Seismic Events", y = "Depth Km", x = "Year", 
   caption = "Source: Seismic data for Mount Vesuvius \n TidyTuesday 2025-05-13 \n Graphic: Cedric Destin")+
   scale_x_continuous(breaks = pretty(aggregated_data$year, n = 10))
 plot_13

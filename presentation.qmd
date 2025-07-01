@@ -39,8 +39,8 @@ execute:
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 **How have the frequency and depth of seismic events at Mount Vesuvius changed over time?**
 
--   This section of the presentation reviews the seismic events' behavior over time
--   The following plots are used to analyze the Duration Magnitude and the Depth of the seismic events
+-   This section of the presentation reviews the behaviors of the seismic events' over time
+-   The following plots are used to analyze the `duration_magnitude_md` and the `depth_md` of the seismic events
     -   Line plots
     -   Histograms
     -   Error plots
@@ -49,11 +49,47 @@ execute:
 ## Approach
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
-1.  Any NaN were removed for the Duration Magnitude and the Depth
+<details>
 
-2.  The data was smoothed by calculating the average of the Duration Magnitude and the Depth per year & month
+<summary style="color: black;">
 
-3.  The time had to be wrangled to remove undesired characters
+Any NaN were removed from the `depth_md` and `duration_magnitude_md` data
+
+</summary>
+
+``` r
+vesuvius_data_filtered <- vesuvius_data %>% filter(!is.na(duration_magnitude_md) & !is.na(depth_km))
+```
+
+</details>
+
+<details>
+
+<summary style="color: black;">
+
+The data was down-sampled by calculating the averages per month and year.
+
+</summary>
+
+``` r
+aggregated_data <- vesuvius_data_filtered %>%   group_by(year) %>%   summarise(mean_duration_magnitude_md = mean(duration_magnitude_md),             mean_depth_km = mean(depth_km))
+```
+
+</details>
+
+<details>
+
+<summary style="color: black;">
+
+The time had to be wrangled to remove undesired characters
+
+</summary>
+
+``` r
+vesuvius_data <- vesuvius_data |>     mutate(         date = str_replace_all(time, "T", " "),         date = str_replace_all(date, "Z", ""),         date = as.POSIXct(date, format = "%Y-%m-%d %H:%M:%S")     )
+```
+
+</details>
 :::
 
 ## Plots
@@ -63,12 +99,14 @@ execute:
 
 :::::: columns
 ::: {.column width="65%"}
-![Description ...](images/by_year_month.png)
+![](images/by_year_month.png)
+
+Time plot of the `duration_magnitude` and `dept_km` for seismic event down-sampled.
 :::
 
 :::: {.column width="35%"}
 ::: {style="font-size: 0.75em; line-height: 1.25"}
-**Note:** Time plot of `duration_magnitude_md` and `depth_km`. This shows that the average depth and duration magnitude measured have stabilized.
+**Note:** This shows that the average `depth_md` and `duration_magnitude_md` measured have lowered within the years.
 :::
 ::::
 ::::::
@@ -79,12 +117,12 @@ execute:
 
 :::::: columns
 ::: {.column width="65%"}
-![Description...](images/depth_error_binned_mount.png)
+![This plot shows the "trend" of `depth_md`, the spread of the `depth_md` and breaks down the frequency of the `depth_md` for each year.](images/depth_error_binned_mount.png)
 :::
 
 :::: {.column width="35%"}
 ::: {style="font-size: 0.75em; line-height: 1.25"}
-**Note:** Another view of the Depth of the seismic events over time.
+**Note:** Another view of the Depth of the seismic events over time. This view shows the frequency of the `depth_md` for each year.
 :::
 ::::
 ::::::
@@ -95,7 +133,7 @@ execute:
 
 :::::: columns
 ::: {.column width="65%"}
-![Description ...](images/duration_magnitude_error_binned.png)
+![This plot shows the "trend" of the `duration_magnitude_md`, the spread of the `duration_magnitude_md` and breaks down the frequency of the duration_magnitude for each year.](images/duration_magnitude_error_binned.png)
 :::
 
 :::: {.column width="35%"}
@@ -109,14 +147,28 @@ execute:
 ## Analysis
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
-Reviewing the behavior of the seismic events in time, here are some observations:
-
 -   The Depth and the Duration Magnitude of the seismic events are became smaller
+
 -   More Events have been recorded since 2016
+
 -   The Duration Magnitude remains low (below 3)
 :::
 
 ## Challenges Faced
+
+::: {style="font-size: 0.75em; line-height: 1.25"}
+-   How to interpret and down-sample the data.
+
+    -   Since the data has such a high variation it was not evident to notice a pattern unless the data was down-sampled.
+
+-   Choosing the plots that best illustrate behavior of the data.
+
+    -   After down-sampling the data, it was challenging to decide on what type of plot would illustrate the behavior of the data.
+
+-   Creating bins and counting the frequency if the events
+
+-   Overlaying the mountain over the `depth_md` seismic events, the latitude and longitude needed to be translated to time to add within the plots of `depth_md`
+:::
 
 ## Exploratory Question 2
 
