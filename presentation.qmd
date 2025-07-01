@@ -99,9 +99,9 @@ vesuvius_data <- vesuvius_data |>     mutate(         date = str_replace_all(tim
 
 :::::: columns
 ::: {.column width="65%"}
-![](images/by_year_month.png)
+![Time plot of the `duration_magnitude` and `dept_km` for seismic event down-sampled.](images/by_year_month.png)
 
-Time plot of the `duration_magnitude` and `dept_km` for seismic event down-sampled.
+
 :::
 
 :::: {.column width="35%"}
@@ -133,7 +133,7 @@ Time plot of the `duration_magnitude` and `dept_km` for seismic event down-sampl
 
 :::::: columns
 ::: {.column width="65%"}
-![This plot shows the "trend" of the `duration_magnitude_md`, the spread of the `duration_magnitude_md` and breaks down the frequency of the duration_magnitude for each year.](images/duration_magnitude_error_binned.png)
+![This plot shows the "trend" of the `duration_magnitude_md`, the spread of the `duration_magnitude_md` and breaks down the frequency of the duration_magnitude by year.](images/duration_magnitude_error_binned.png)
 :::
 
 :::: {.column width="35%"}
@@ -142,6 +142,9 @@ Time plot of the `duration_magnitude` and `dept_km` for seismic event down-sampl
 :::
 ::::
 ::::::
+
+------------------------------------------------------------------------
+
 :::::::::::::::
 
 ## Analysis
@@ -470,6 +473,9 @@ static_plot <- ggplot() +
 :::
 ::::
 ::::::
+
+------------------------------------------------------------------------
+
 :::::::::::::::::::
 
 ## Analysis
