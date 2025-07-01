@@ -48,73 +48,73 @@ execute:
 
 ## Approach
 
+::: {style="font-size: 0.75em; line-height: 1.25"}
 1.  Any NaN were removed for the Duration Magnitude and the Depth
 
 2.  The data was smoothed by calculating the average of the Duration Magnitude and the Depth per year & month
 
 3.  The time had to be wrangled to remove undesired characters
+:::
 
 ## Plots
 
-:::::::::::: panel-tabset
-<!-- ## Initial View  :::{.columns} ::: {.column width="65%"} ![Description...](images/original_vesuvius_plot.png){width=100%} :::  ::: {.column width="35%"} <span style="font-size: 0.75em; line-height: 1.4;"> **Note:** This plot shows the seismic events over time after having been smoothed. </span> ::: ::: -->
-
-<!-- --- -->
-
+::::::::::::::: panel-tabset
 ## Timeplots
 
-::::: columns
+:::::: columns
 ::: {.column width="65%"}
-![](images/by_year_month.png){width="75%"}
+![Description ...](images/by_year_month.png)
 :::
 
-::: {.column width="35%"}
-[**Note:** Time plot of `duration_magnitude_md` and `depth_km`.<br> This shows that the average depth and duration magnitude measured have stabilized.]{style="font-size: 0.75em; line-height: 1.4;"}
+:::: {.column width="35%"}
+::: {style="font-size: 0.75em; line-height: 1.25"}
+**Note:** Time plot of `duration_magnitude_md` and `depth_km`. This shows that the average depth and duration magnitude measured have stabilized.
 :::
-:::::
+::::
+::::::
 
 ------------------------------------------------------------------------
 
 ## Depth Stats
 
-::::: columns
+:::::: columns
 ::: {.column width="65%"}
-![Description...](images/depth_error_binned_mount.png){width="75%"}
+![Description...](images/depth_error_binned_mount.png)
 :::
 
-::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;"> **Note:** Another view of the Depth of the seismic events over time.<br>
-
-</span>
+:::: {.column width="35%"}
+::: {style="font-size: 0.75em; line-height: 1.25"}
+**Note:** Another view of the Depth of the seismic events over time.
 :::
-:::::
+::::
+::::::
 
 ------------------------------------------------------------------------
 
 ## Duration Magnitude Stats
 
-::::: columns
+:::::: columns
 ::: {.column width="65%"}
-![](images/duration_magnitude_error_binned.png){width="75%"}
+![Description ...](images/duration_magnitude_error_binned.png)
 :::
 
-::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;"> **Note:** Another view of the Duration Magnitude of the seismic events over time.<br>
-
-</span>
+:::: {.column width="35%"}
+::: {style="font-size: 0.75em; line-height: 1.25"}
+**Note:** Another view of the Duration Magnitude of the seismic events over time.
 :::
-:::::
-::::::::::::
+::::
+::::::
+:::::::::::::::
 
 ## Analysis
 
+::: {style="font-size: 0.75em; line-height: 1.25"}
 Reviewing the behavior of the seismic events in time, here are some observations:
 
 -   The Depth and the Duration Magnitude of the seismic events are became smaller
-
 -   More Events have been recorded since 2016
-
 -   The Duration Magnitude remains low (below 3)
+:::
 
 ## Challenges Faced
 
@@ -431,7 +431,7 @@ static_plot <- ggplot() +
 ## Challenges Faced
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
--   Manipulating the depth_km field was challenging due to the amount of data in each bin. It was essential that at least one data point was in each division, but showing the fewer bins than what was used proved to not be effective in showing the trends
+-   Manipulating the `depth_km` field was challenging due to the amount of data in each bin. It was essential that at least one data point was in each division, but showing the fewer bins than what was used proved to not be effective in showing the trends
 -   `gganimate` does not preserve all the theme options that were established and called out, leading to a plot that closely resembles it's static counterpart, but not equivalent in the features desired. Contour lines seemed to not work right, now drawing the layers as intended.
 -   Formatting legends also proved to be a labor of love, as there are many ways to show them, but keeping consistency among the plots created a rigorous amount of testing with many options added to ensure they appeared 'uniform'
 :::
