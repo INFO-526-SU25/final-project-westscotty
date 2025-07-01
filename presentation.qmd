@@ -17,37 +17,6 @@ execute:
   render-on-save: true
 ---
 
-```{r}
-#| label: load-packages
-#| include: false
-
-# Load packages here
-pacman::p_load(
-    tidymodels,
-    tidyverse,
-    here,
-    dplyr,
-    tidyr,
-    scales
-)
-
-```
-
-```{r}
-#| label: setup
-#| include: false
-
-# Plot theme
-ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
-
-# For better figure resolution
-knitr::opts_chunk$set(
-  fig.retina = 3, 
-  dpi = 300, 
-  fig.width = 6, 
-  fig.asp = 0.618 
-  )
-```
 
 ## The Data
 
@@ -97,18 +66,76 @@ Interpret the underlying relationships between variables of interest including t
 
 ## Seismic Activity Plots
 
-::: {.panel-tabset width="80%"}
+::: {.panel-tabset}
+<!-- ## Initial View
+
+:::{.columns}
+::: {.column width="65%"}
+![Description...](images/original_vesuvius_plot.png){width=100%}
+:::
+
+::: {.column width="35%"}
+<span style="font-size: 0.75em; line-height: 1.4;">
+**Note:** This plot shows initial conditions of seismic events around Mount Vesuvius.<br>
+Color represents magnitude.<br>
+Transparency reflects depth.<br>
+Use this as a baseline for comparison.
+</span>
+:::
+::: -->
+
+<!-- --- -->
+
 ## Histogram View
 
-![Histogram of Events](images/histogram_vesuvius_plot.png) *Note: Plotting a histogram of the `duration_magnitude_md` values, faceted by `depth_boundary_0.5km` allows for verification of valid data in each layer and shape of distribution visibility*
+:::{.columns}
+::: {.column width="65%"}
+![Description...](images/histogram_vesuvius_plot.png){width=100%}
+:::
+
+::: {.column width="35%"}
+<span style="font-size: 0.75em; line-height: 1.4;">
+**Note:** Histogram of `duration_magnitude_md`, faceted by `depth_boundary_0.5km`.<br>
+This confirms distribution shapes and valid bins for all layers.
+</span>
+:::
+:::
+
+---
 
 ## Static View
 
-![Static Seismic Events](images/static_vesuvius_plot.png) *Note:*
+
+:::{.columns}
+::: {.column width="65%"}
+![Description...](images/static_vesuvius_plot.png){width=100%}
+:::
+
+::: {.column width="35%"}
+<span style="font-size: 0.75em; line-height: 1.4;">
+**Note:** Final refined static map with elevation contours and refined legend formatting.<br>
+
+</span>
+:::
+:::
+
+---
 
 ## Animated View
 
-![Animated Seismic Events](images/vesuvius_animation.gif) *Note:*
+:::{.columns}
+::: {.column width="65%"}
+![Description...](images/vesuvius_animation.gif){width=100%}
+:::
+
+::: {.column width="35%"}
+<span style="font-size: 0.75em; line-height: 1.4;">
+**Note:** Animation shows seismic activity over depth layers using alpha fading.<br>
+
+</span>
+:::
+:::
+
 :::
 
 ## Analysis
