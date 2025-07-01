@@ -21,15 +21,27 @@ execute:
 
 -   Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025)
 
--   The data contains records of seismic activity at or near Mt. Vesuvius, Italy over the last decade or so
+-   The data contains records of seismic activity
 
--   Source: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md>
+    -   At or near Mt. Vesuvius, Italy
+
+    -   Over the last decade or so
+
+-   Source:
+
+    -   [Tidytuesday](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md){.uri}
 
 ## The Goal
 
 ::::: columns
 ::: {.column width="60%"}
-Interpret the underlying relationships between variables of interest including time series and static analysis of the seismic data recorded at the famous Mt. Vesuvius.
+Interpret the underlying relationships between variables of interest of the seismic data recorded at the famous Mt. Vesuvius.
+
+-   Time series
+
+-   Static analysis
+
+-   Histograms
 :::
 
 ::: {.column width="40%"}
@@ -51,9 +63,9 @@ Interpret the underlying relationships between variables of interest including t
 
 1.  Any NaN were removed for the Duration Magnitude and the Depth
 
-2.  The data was smoothed by calculating the average of the Duration Magnitude and the Depth per year & month
+2.  The data was smoothed out by calculating the averages per year & month
 
-3.  The time had to be wrangled to remove undesired characters
+3.  The time was wrangled to remove undesired characters
 
 ## Plots
 
@@ -109,7 +121,7 @@ Interpret the underlying relationships between variables of interest including t
 
 ## Analysis
 
-Reviewing the behavior of the seismic events in time, here are some observations:
+Here are some observations:
 
 -   The Depth and the Duration Magnitude of the seismic events are became smaller
 
@@ -119,7 +131,7 @@ Reviewing the behavior of the seismic events in time, here are some observations
 
 ## Challenges Faced
 
-The data is very straight forward, hence the challenges we that were around how to interpret and plot the data with so high deviation. The data is also very random, as if these behaviors follow a binomial distribution.
+The challenges were around how to interpret and plot the data with so high deviation. The data is also very random, as if these behaviors follow a binomial distribution.
 
 ## Question 2
 
