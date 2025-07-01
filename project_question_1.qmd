@@ -1,9 +1,26 @@
 ---
-title: "Project Question 1"
-format: html
+title: "Mt. Vesuvius Lives"
+subtitle: "INFO 526 - Summer 2025 - Final Project"
+author: 
+  - name: "Seismic Minds - Cedric Destin"
+    affiliations:
+      - name: "School of Information, University of Arizona"
+description: "Exploratory Analysis of Seismic Activity: Mt. Vesuvius"
+format:
+   html:
+    code-tools: true
+    code-overflow: wrap
+    code-line-numbers: true
+    embed-resources: true
+editor: visual
+code-annotations: hover
+execute:
+  warning: false
+  echo: false
+  render-on-save: true
 ---
 
-```{r}
+```{r include=FALSE}
 # Load necessary libraries
 options(warn=-1)
 if (!require("pacman")) 
@@ -44,9 +61,6 @@ knitr::opts_chunk$set(
 )
 
 save_figs = TRUE
-```
-
-```         
 ```
 
 ## Plan out layer mappings
@@ -209,7 +223,7 @@ if (save_figs) {
 }
 ```
 
-```{r}
+```{r include=FALSE}
 
 # p1 <- ggplot(filter(vesuvius_data_filtered, year == 2013), aes(x = depth_km)) +
 #   geom_histogram(fill = "skyblue", color = "black", bins = 100) +
@@ -254,7 +268,7 @@ if (save_figs) {
 # grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, ncol = 3)   
 ```
 
-```{r}
+```{r include=FALSE}
 # p1 <- ggplot(filter(vesuvius_data_filtered, year == 2013), aes(x = duration_magnitude_md)) +
 #   geom_histogram(fill = "skyblue", color = "black", bins = 100) +
 #   labs(title = "Histogram of your_column", x = "your_column", y = "Count")
@@ -298,7 +312,7 @@ if (save_figs) {
 # grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, ncol = 3)   
 ```
 
-```{r}
+```{r include=FALSE}
 # ggplot(vesuvius_data_filtered, aes(x = date, y = duration_magnitude_md)) +
 #   geom_point(position = position_dodge(width = 0.5)) +
 #   stat_dist_halfeye(
@@ -322,7 +336,7 @@ if (save_figs) {
   # )
 ```
 
-```{r}
+```{r  include=FALSE}
 # Replace 'aggregated_data', 'x_column', and 'y_column' with your data and columns
 plot_7 <- ggpairs(aggregated_data_2, columns = c("mean_depth_km", "mean_duration_magnitude_md"),
         upper = list(continuous = wrap("points", alpha = 0.5)),

@@ -58,7 +58,8 @@ Any NaN were removed from the `depth_md` and `duration_magnitude_md` data
 </summary>
 
 ``` r
-vesuvius_data_filtered <- vesuvius_data %>% filter(!is.na(duration_magnitude_md) & !is.na(depth_km))
+vesuvius_data_filtered <- vesuvius_data |> 
+    filter(!is.na(duration_magnitude_md) & !is.na(depth_km))
 ```
 
 </details>
@@ -72,7 +73,10 @@ The data was down-sampled by calculating the averages per month and year.
 </summary>
 
 ``` r
-aggregated_data <- vesuvius_data_filtered %>%   group_by(year) %>%   summarise(mean_duration_magnitude_md = mean(duration_magnitude_md),             mean_depth_km = mean(depth_km))
+aggregated_data <- vesuvius_data_filtered |>   
+    group_by(year) |>   
+    summarise(mean_duration_magnitude_md = mean(duration_magnitude_md),             
+    mean_depth_km = mean(depth_km))
 ```
 
 </details>
@@ -86,7 +90,10 @@ The time had to be wrangled to remove undesired characters
 </summary>
 
 ``` r
-vesuvius_data <- vesuvius_data |>     mutate(         date = str_replace_all(time, "T", " "),         date = str_replace_all(date, "Z", ""),         date = as.POSIXct(date, format = "%Y-%m-%d %H:%M:%S")     )
+vesuvius_data <- vesuvius_data |>     mutate(         
+    date = str_replace_all(time, "T", " "),         
+    date = str_replace_all(date, "Z", ""),         
+    date = as.POSIXct(date, format = "%Y-%m-%d %H:%M:%S"))
 ```
 
 </details>
