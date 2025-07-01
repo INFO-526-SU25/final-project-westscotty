@@ -226,8 +226,8 @@ Cedric Destin &amp; Weston Scott
 <div style="font-size: 0.75em; line-height: 1.25">
 <p><strong>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</strong></p>
 <ul>
-<li>This section of the presentation reviews the seismic events’ behavior over time</li>
-<li>The following plots are used to analyze the Duration Magnitude and the Depth of the seismic events
+<li>This section of the presentation reviews the behaviors of the seismic events’ over time</li>
+<li>The following plots are used to analyze the <code>duration_magnitude_md</code> and the <code>depth_md</code> of the seismic events
 <ul>
 <li>Line plots</li>
 <li>Histograms</li>
@@ -239,11 +239,24 @@ Cedric Destin &amp; Weston Scott
 <section id="approach" class="slide level2">
 <h2>Approach</h2>
 <div style="font-size: 0.75em; line-height: 1.25">
-<ol type="1">
-<li><p>Any NaN were removed for the Duration Magnitude and the Depth</p></li>
-<li><p>The data was smoothed by calculating the average of the Duration Magnitude and the Depth per year &amp; month</p></li>
-<li><p>The time had to be wrangled to remove undesired characters</p></li>
-</ol>
+<details>
+<summary style="color: black;">
+<p>Any NaN were removed from the <code>depth_md</code> and <code>duration_magnitude_md</code> data</p>
+</summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(duration_magnitude_md) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(depth_km))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary style="color: black;">
+<p>The data was down-sampled by calculating the averages per month and year.</p>
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>aggregated_data <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">%&gt;%</span>   <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span>   <span class="fu">summarise</span>(<span class="at">mean_duration_magnitude_md =</span> <span class="fu">mean</span>(duration_magnitude_md),             <span class="at">mean_depth_km =</span> <span class="fu">mean</span>(depth_km))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary style="color: black;">
+<p>The time had to be wrangled to remove undesired characters</p>
+</summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>vesuvius_data <span class="ot">&lt;-</span> vesuvius_data <span class="sc">|&gt;</span>     <span class="fu">mutate</span>(         <span class="at">date =</span> <span class="fu">str_replace_all</span>(time, <span class="st">"T"</span>, <span class="st">" "</span>),         <span class="at">date =</span> <span class="fu">str_replace_all</span>(date, <span class="st">"Z"</span>, <span class="st">""</span>),         <span class="at">date =</span> <span class="fu">as.POSIXct</span>(date, <span class="at">format =</span> <span class="st">"%Y-%m-%d %H:%M:%S"</span>)     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="plots" class="slide level2">
@@ -257,12 +270,12 @@ Cedric Destin &amp; Weston Scott
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/by_year_month.png"></p>
-<figcaption>Description …</figcaption>
+<figcaption>Time plot of the <code>duration_magnitude</code> and <code>dept_km</code> for seismic event down-sampled.</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:35%;">
 <div style="font-size: 0.75em; line-height: 1.25">
-<p><strong>Note:</strong> Time plot of <code>duration_magnitude_md</code> and <code>depth_km</code>. This shows that the average depth and duration magnitude measured have stabilized.</p>
+<p><strong>Note:</strong> This shows that the average <code>depth_md</code> and <code>duration_magnitude_md</code> measured have lowered within the years.</p>
 </div>
 </div></div>
 <hr>
@@ -273,12 +286,12 @@ Cedric Destin &amp; Weston Scott
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/depth_error_binned_mount.png"></p>
-<figcaption>Description…</figcaption>
+<figcaption>This plot shows the “trend” of <code>depth_md</code>, the spread of the <code>depth_md</code> and breaks down the frequency of the <code>depth_md</code> for each year.</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:35%;">
 <div style="font-size: 0.75em; line-height: 1.25">
-<p><strong>Note:</strong> Another view of the Depth of the seismic events over time.</p>
+<p><strong>Note:</strong> Another view of the Depth of the seismic events over time. This view shows the frequency of the <code>depth_md</code> for each year.</p>
 </div>
 </div></div>
 <hr>
@@ -289,7 +302,7 @@ Cedric Destin &amp; Weston Scott
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/duration_magnitude_error_binned.png"></p>
-<figcaption>Description …</figcaption>
+<figcaption>This plot shows the “trend” of the <code>duration_magnitude_md</code>, the spread of the <code>duration_magnitude_md</code> and breaks down the frequency of the duration_magnitude by year.</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:35%;">
@@ -297,6 +310,7 @@ Cedric Destin &amp; Weston Scott
 <p><strong>Note:</strong> Another view of the Duration Magnitude of the seismic events over time.</p>
 </div>
 </div></div>
+<hr>
 </div>
 </div>
 </div>
@@ -304,16 +318,29 @@ Cedric Destin &amp; Weston Scott
 <section id="analysis" class="slide level2">
 <h2>Analysis</h2>
 <div style="font-size: 0.75em; line-height: 1.25">
-<p>Reviewing the behavior of the seismic events in time, here are some observations:</p>
 <ul>
-<li>The Depth and the Duration Magnitude of the seismic events are became smaller</li>
-<li>More Events have been recorded since 2016</li>
-<li>The Duration Magnitude remains low (below 3)</li>
+<li><p>The Depth and the Duration Magnitude of the seismic events are became smaller</p></li>
+<li><p>More Events have been recorded since 2016</p></li>
+<li><p>The Duration Magnitude remains low (below 3)</p></li>
 </ul>
 </div>
 </section>
 <section id="challenges-faced" class="slide level2">
 <h2>Challenges Faced</h2>
+<div style="font-size: 0.75em; line-height: 1.25">
+<ul>
+<li><p>How to interpret and down-sample the data.</p>
+<ul>
+<li>Since the data has such a high variation it was not evident to notice a pattern unless the data was down-sampled.</li>
+</ul></li>
+<li><p>Choosing the plots that best illustrate behavior of the data.</p>
+<ul>
+<li>After down-sampling the data, it was challenging to decide on what type of plot would illustrate the behavior of the data.</li>
+</ul></li>
+<li><p>Creating bins and counting the frequency if the events</p></li>
+<li><p>Overlaying the mountain over the <code>depth_md</code> seismic events, the latitude and longitude needed to be translated to time to add within the plots of <code>depth_md</code></p></li>
+</ul>
+</div>
 </section>
 <section id="exploratory-question-2" class="slide level2">
 <h2>Exploratory Question 2</h2>
@@ -333,175 +360,175 @@ Cedric Destin &amp; Weston Scott
 <summary style="color: black;">
 <p>The first step was to remove bad (or missing) data by dropping rows with NA in <code>latitude</code>, <code>longitude</code>, <code>depth_km</code>, and <code>duration_magnitude_md</code></p>
 </summary>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a></a>    <span class="fu">drop_na</span>(</span>
-<span id="cb1-3"><a></a>        latitude, </span>
-<span id="cb1-4"><a></a>        longitude, </span>
-<span id="cb1-5"><a></a>        depth_km, </span>
-<span id="cb1-6"><a></a>        duration_magnitude_md</span>
-<span id="cb1-7"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a></a>    <span class="fu">drop_na</span>(</span>
+<span id="cb4-3"><a></a>        latitude, </span>
+<span id="cb4-4"><a></a>        longitude, </span>
+<span id="cb4-5"><a></a>        depth_km, </span>
+<span id="cb4-6"><a></a>        duration_magnitude_md</span>
+<span id="cb4-7"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary style="color: black;">
 <p>The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled <code>depth_boundary_0.5km</code>, plotting in ascending depth order meaning that deeper values will appear first</p>
 </summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>vesuvius_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"vesuvius.csv"</span>))</span>
-<span id="cb2-2"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a></a>    <span class="fu">mutate</span>(</span>
-<span id="cb2-4"><a></a>        <span class="at">depth_abs =</span> <span class="fu">abs</span>(depth_km),</span>
-<span id="cb2-5"><a></a>        <span class="at">depth_boundary_1km =</span> <span class="fu">case_when</span>(</span>
-<span id="cb2-6"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"&lt; 1 km"</span>,</span>
-<span id="cb2-7"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"&lt; 2 km"</span>,</span>
-<span id="cb2-8"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"&lt; 3 km"</span>,</span>
-<span id="cb2-9"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"&lt; 4 km"</span>,</span>
-<span id="cb2-10"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"&lt; 5 km"</span>,</span>
-<span id="cb2-11"><a></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"&gt; 5 km"</span>),</span>
-<span id="cb2-12"><a></a>        </span>
-<span id="cb2-13"><a></a>        <span class="at">depth_boundary_1km =</span> <span class="fu">factor</span>(</span>
-<span id="cb2-14"><a></a>            depth_boundary_1km, </span>
-<span id="cb2-15"><a></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"&lt; 1 km"</span>, </span>
-<span id="cb2-16"><a></a>                      <span class="st">"&lt; 2 km"</span>, </span>
-<span id="cb2-17"><a></a>                      <span class="st">"&lt; 3 km"</span>, </span>
-<span id="cb2-18"><a></a>                      <span class="st">"&lt; 4 km"</span>, </span>
-<span id="cb2-19"><a></a>                      <span class="st">"&lt; 5 km"</span>, </span>
-<span id="cb2-20"><a></a>                      <span class="st">"&gt; 5 km"</span>)),</span>
-<span id="cb2-21"><a></a>        </span>
-<span id="cb2-22"><a></a>        <span class="at">depth_boundary_0.5km =</span> <span class="fu">case_when</span>(</span>
-<span id="cb2-23"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">0.5</span> <span class="sc">~</span> <span class="st">"&lt; 0.5 km"</span>,</span>
-<span id="cb2-24"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"0.5 ~ 1 km"</span>,</span>
-<span id="cb2-25"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="st">"1 ~ 1.5 km"</span>,</span>
-<span id="cb2-26"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"1.5 ~ 2 km"</span>,</span>
-<span id="cb2-27"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">2.5</span> <span class="sc">~</span> <span class="st">"2 ~ 2.5 km"</span>,</span>
-<span id="cb2-28"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"2.5 ~ 3 km"</span>,</span>
-<span id="cb2-29"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">3.5</span> <span class="sc">~</span> <span class="st">"3 ~ 3.5 km"</span>,</span>
-<span id="cb2-30"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"3.5 ~ 4 km"</span>,</span>
-<span id="cb2-31"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">4.5</span> <span class="sc">~</span> <span class="st">"4 ~ 4.5 km"</span>,</span>
-<span id="cb2-32"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"4.5 ~ 5 km"</span>,</span>
-<span id="cb2-33"><a></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"&gt; 5 km"</span>),</span>
-<span id="cb2-34"><a></a>        </span>
-<span id="cb2-35"><a></a>        <span class="at">depth_boundary_0.5km =</span> <span class="fu">factor</span>(</span>
-<span id="cb2-36"><a></a>            depth_boundary_0<span class="fl">.5</span>km, </span>
-<span id="cb2-37"><a></a>            <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"&lt; 0.5 km"</span>, </span>
-<span id="cb2-38"><a></a>                      <span class="st">"0.5 ~ 1 km"</span>, </span>
-<span id="cb2-39"><a></a>                      <span class="st">"1 ~ 1.5 km"</span>, </span>
-<span id="cb2-40"><a></a>                      <span class="st">"1.5 ~ 2 km"</span>, </span>
-<span id="cb2-41"><a></a>                      <span class="st">"2 ~ 2.5 km"</span>, </span>
-<span id="cb2-42"><a></a>                      <span class="st">"2.5 ~ 3 km"</span>,</span>
-<span id="cb2-43"><a></a>                      <span class="st">"3 ~ 3.5 km"</span>, </span>
-<span id="cb2-44"><a></a>                      <span class="st">"3.5 ~ 4 km"</span>, </span>
-<span id="cb2-45"><a></a>                      <span class="st">"4 ~ 4.5 km"</span>, </span>
-<span id="cb2-46"><a></a>                      <span class="st">"4.5 ~ 5 km"</span>, </span>
-<span id="cb2-47"><a></a>                      <span class="st">"&gt; 5 km"</span>)))</span>
-<span id="cb2-48"><a></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb2-49"><a></a></span>
-<span id="cb2-50"><a></a>    <span class="fu">filter</span>(</span>
-<span id="cb2-51"><a></a>        <span class="sc">!</span><span class="fu">is.na</span>(depth_boundary_0<span class="fl">.5</span>km)</span>
-<span id="cb2-52"><a></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb2-53"><a></a></span>
-<span id="cb2-54"><a></a>    <span class="fu">arrange</span>(</span>
-<span id="cb2-55"><a></a>        depth_boundary_0<span class="fl">.5</span>km, </span>
-<span id="cb2-56"><a></a>        <span class="fu">desc</span>(depth_rescaled)</span>
-<span id="cb2-57"><a></a>    ) <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>vesuvius_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"vesuvius.csv"</span>))</span>
+<span id="cb5-2"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a></a>    <span class="fu">mutate</span>(</span>
+<span id="cb5-4"><a></a>        <span class="at">depth_abs =</span> <span class="fu">abs</span>(depth_km),</span>
+<span id="cb5-5"><a></a>        <span class="at">depth_boundary_1km =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-6"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"&lt; 1 km"</span>,</span>
+<span id="cb5-7"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"&lt; 2 km"</span>,</span>
+<span id="cb5-8"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"&lt; 3 km"</span>,</span>
+<span id="cb5-9"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"&lt; 4 km"</span>,</span>
+<span id="cb5-10"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"&lt; 5 km"</span>,</span>
+<span id="cb5-11"><a></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"&gt; 5 km"</span>),</span>
+<span id="cb5-12"><a></a>        </span>
+<span id="cb5-13"><a></a>        <span class="at">depth_boundary_1km =</span> <span class="fu">factor</span>(</span>
+<span id="cb5-14"><a></a>            depth_boundary_1km, </span>
+<span id="cb5-15"><a></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"&lt; 1 km"</span>, </span>
+<span id="cb5-16"><a></a>                      <span class="st">"&lt; 2 km"</span>, </span>
+<span id="cb5-17"><a></a>                      <span class="st">"&lt; 3 km"</span>, </span>
+<span id="cb5-18"><a></a>                      <span class="st">"&lt; 4 km"</span>, </span>
+<span id="cb5-19"><a></a>                      <span class="st">"&lt; 5 km"</span>, </span>
+<span id="cb5-20"><a></a>                      <span class="st">"&gt; 5 km"</span>)),</span>
+<span id="cb5-21"><a></a>        </span>
+<span id="cb5-22"><a></a>        <span class="at">depth_boundary_0.5km =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-23"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">0.5</span> <span class="sc">~</span> <span class="st">"&lt; 0.5 km"</span>,</span>
+<span id="cb5-24"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"0.5 ~ 1 km"</span>,</span>
+<span id="cb5-25"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="st">"1 ~ 1.5 km"</span>,</span>
+<span id="cb5-26"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"1.5 ~ 2 km"</span>,</span>
+<span id="cb5-27"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">2.5</span> <span class="sc">~</span> <span class="st">"2 ~ 2.5 km"</span>,</span>
+<span id="cb5-28"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"2.5 ~ 3 km"</span>,</span>
+<span id="cb5-29"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">3.5</span> <span class="sc">~</span> <span class="st">"3 ~ 3.5 km"</span>,</span>
+<span id="cb5-30"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"3.5 ~ 4 km"</span>,</span>
+<span id="cb5-31"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">4.5</span> <span class="sc">~</span> <span class="st">"4 ~ 4.5 km"</span>,</span>
+<span id="cb5-32"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"4.5 ~ 5 km"</span>,</span>
+<span id="cb5-33"><a></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"&gt; 5 km"</span>),</span>
+<span id="cb5-34"><a></a>        </span>
+<span id="cb5-35"><a></a>        <span class="at">depth_boundary_0.5km =</span> <span class="fu">factor</span>(</span>
+<span id="cb5-36"><a></a>            depth_boundary_0<span class="fl">.5</span>km, </span>
+<span id="cb5-37"><a></a>            <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"&lt; 0.5 km"</span>, </span>
+<span id="cb5-38"><a></a>                      <span class="st">"0.5 ~ 1 km"</span>, </span>
+<span id="cb5-39"><a></a>                      <span class="st">"1 ~ 1.5 km"</span>, </span>
+<span id="cb5-40"><a></a>                      <span class="st">"1.5 ~ 2 km"</span>, </span>
+<span id="cb5-41"><a></a>                      <span class="st">"2 ~ 2.5 km"</span>, </span>
+<span id="cb5-42"><a></a>                      <span class="st">"2.5 ~ 3 km"</span>,</span>
+<span id="cb5-43"><a></a>                      <span class="st">"3 ~ 3.5 km"</span>, </span>
+<span id="cb5-44"><a></a>                      <span class="st">"3.5 ~ 4 km"</span>, </span>
+<span id="cb5-45"><a></a>                      <span class="st">"4 ~ 4.5 km"</span>, </span>
+<span id="cb5-46"><a></a>                      <span class="st">"4.5 ~ 5 km"</span>, </span>
+<span id="cb5-47"><a></a>                      <span class="st">"&gt; 5 km"</span>)))</span>
+<span id="cb5-48"><a></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb5-49"><a></a></span>
+<span id="cb5-50"><a></a>    <span class="fu">filter</span>(</span>
+<span id="cb5-51"><a></a>        <span class="sc">!</span><span class="fu">is.na</span>(depth_boundary_0<span class="fl">.5</span>km)</span>
+<span id="cb5-52"><a></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb5-53"><a></a></span>
+<span id="cb5-54"><a></a>    <span class="fu">arrange</span>(</span>
+<span id="cb5-55"><a></a>        depth_boundary_0<span class="fl">.5</span>km, </span>
+<span id="cb5-56"><a></a>        <span class="fu">desc</span>(depth_rescaled)</span>
+<span id="cb5-57"><a></a>    ) <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary style="color: black;">
 <p>A size re-scaling for points was created from this new depth layer variable</p>
 </summary>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>  vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a></a>      <span class="fu">mutate</span>(</span>
-<span id="cb3-3"><a></a>        <span class="at">depth_rescaled =</span> <span class="fu">rescale</span>(depth_km, <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>)),</span>
-<span id="cb3-4"><a></a>        <span class="at">mag_rescaled =</span> <span class="fu">rescale</span>(duration_magnitude_md, <span class="at">to =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.9</span>))</span>
-<span id="cb3-5"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>  vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a></a>      <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a></a>        <span class="at">depth_rescaled =</span> <span class="fu">rescale</span>(depth_km, <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>)),</span>
+<span id="cb6-4"><a></a>        <span class="at">mag_rescaled =</span> <span class="fu">rescale</span>(duration_magnitude_md, <span class="at">to =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.9</span>))</span>
+<span id="cb6-5"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary style="color: black;">
 <p>Initially a visualization was created to simply view lat/long axes with points that were colored by the <code>duration_magnitude_md</code> and a transparency difference based on <code>depth_km</code> (see Initial View on next slide)</p>
 </summary>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>original <span class="ot">&lt;-</span></span>
-<span id="cb4-2"><a></a>    <span class="fu">ggplot</span>(</span>
-<span id="cb4-3"><a></a>        vesuvius_data_filtered, </span>
-<span id="cb4-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> longitude, </span>
-<span id="cb4-5"><a></a>            <span class="at">y =</span> latitude)</span>
-<span id="cb4-6"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb4-7"><a></a>    </span>
-<span id="cb4-8"><a></a>    <span class="fu">geom_point</span>(</span>
-<span id="cb4-9"><a></a>        <span class="fu">aes</span>(<span class="at">color =</span> duration_magnitude_md,</span>
-<span id="cb4-10"><a></a>            <span class="at">alpha =</span> depth_abs),</span>
-<span id="cb4-11"><a></a>        <span class="at">size =</span> <span class="dv">3</span></span>
-<span id="cb4-12"><a></a>    ) <span class="sc">+</span>                     </span>
-<span id="cb4-13"><a></a>    </span>
-<span id="cb4-14"><a></a>    <span class="fu">scale_color_viridis_c</span>(</span>
-<span id="cb4-15"><a></a>        <span class="at">option =</span> <span class="st">"inferno"</span>,</span>
-<span id="cb4-16"><a></a>        <span class="at">name =</span> <span class="st">"Magnitude"</span></span>
-<span id="cb4-17"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb4-18"><a></a>    </span>
-<span id="cb4-19"><a></a>    <span class="fu">scale_alpha_continuous</span>(</span>
-<span id="cb4-20"><a></a>        <span class="at">name =</span> <span class="st">"Depth (km)"</span>,</span>
-<span id="cb4-21"><a></a>        <span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.25</span>)</span>
-<span id="cb4-22"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb4-23"><a></a></span>
-<span id="cb4-24"><a></a>        <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb4-25"><a></a>            <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">14.34</span>, <span class="fl">14.48</span>), </span>
-<span id="cb4-26"><a></a>            <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb4-27"><a></a>        ) <span class="sc">+</span></span>
-<span id="cb4-28"><a></a>        <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb4-29"><a></a>            <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">40.78</span>, <span class="fl">40.88</span>), </span>
-<span id="cb4-30"><a></a>            <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb4-31"><a></a>        ) <span class="sc">+</span> </span>
-<span id="cb4-32"><a></a>        ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>original <span class="ot">&lt;-</span></span>
+<span id="cb7-2"><a></a>    <span class="fu">ggplot</span>(</span>
+<span id="cb7-3"><a></a>        vesuvius_data_filtered, </span>
+<span id="cb7-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> longitude, </span>
+<span id="cb7-5"><a></a>            <span class="at">y =</span> latitude)</span>
+<span id="cb7-6"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb7-7"><a></a>    </span>
+<span id="cb7-8"><a></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb7-9"><a></a>        <span class="fu">aes</span>(<span class="at">color =</span> duration_magnitude_md,</span>
+<span id="cb7-10"><a></a>            <span class="at">alpha =</span> depth_abs),</span>
+<span id="cb7-11"><a></a>        <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb7-12"><a></a>    ) <span class="sc">+</span>                     </span>
+<span id="cb7-13"><a></a>    </span>
+<span id="cb7-14"><a></a>    <span class="fu">scale_color_viridis_c</span>(</span>
+<span id="cb7-15"><a></a>        <span class="at">option =</span> <span class="st">"inferno"</span>,</span>
+<span id="cb7-16"><a></a>        <span class="at">name =</span> <span class="st">"Magnitude"</span></span>
+<span id="cb7-17"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb7-18"><a></a>    </span>
+<span id="cb7-19"><a></a>    <span class="fu">scale_alpha_continuous</span>(</span>
+<span id="cb7-20"><a></a>        <span class="at">name =</span> <span class="st">"Depth (km)"</span>,</span>
+<span id="cb7-21"><a></a>        <span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.25</span>)</span>
+<span id="cb7-22"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb7-23"><a></a></span>
+<span id="cb7-24"><a></a>        <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb7-25"><a></a>            <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">14.34</span>, <span class="fl">14.48</span>), </span>
+<span id="cb7-26"><a></a>            <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb7-27"><a></a>        ) <span class="sc">+</span></span>
+<span id="cb7-28"><a></a>        <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb7-29"><a></a>            <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">40.78</span>, <span class="fl">40.88</span>), </span>
+<span id="cb7-30"><a></a>            <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb7-31"><a></a>        ) <span class="sc">+</span> </span>
+<span id="cb7-32"><a></a>        ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary style="color: black;">
 <p>Next the data was plotted as histograms of the <code>duration_magnitude_md</code>, but faceted by the newer <code>depth_boundary_0.5km</code> variable, showing the groupings of points clearer, as well as their distributions across the magnitude scale</p>
 </summary>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>histogram <span class="ot">&lt;-</span> </span>
-<span id="cb5-2"><a></a>    <span class="fu">ggplot</span>(</span>
-<span id="cb5-3"><a></a>        vesuvius_data_filtered, </span>
-<span id="cb5-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> duration_magnitude_md)</span>
-<span id="cb5-5"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb5-6"><a></a></span>
-<span id="cb5-7"><a></a>    <span class="fu">geom_histogram</span>(</span>
-<span id="cb5-8"><a></a>        <span class="at">binwidth =</span> <span class="fl">0.2</span>, </span>
-<span id="cb5-9"><a></a>        <span class="at">fill =</span> <span class="st">'red'</span>, </span>
-<span id="cb5-10"><a></a>        <span class="at">color =</span> <span class="st">"white"</span></span>
-<span id="cb5-11"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb5-12"><a></a></span>
-<span id="cb5-13"><a></a>    <span class="fu">facet_wrap</span>(</span>
-<span id="cb5-14"><a></a>        <span class="sc">~</span> depth_boundary_0<span class="fl">.5</span>km, </span>
-<span id="cb5-15"><a></a>        <span class="at">scales =</span> <span class="st">"free_y"</span></span>
-<span id="cb5-16"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb5-17"><a></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>histogram <span class="ot">&lt;-</span> </span>
+<span id="cb8-2"><a></a>    <span class="fu">ggplot</span>(</span>
+<span id="cb8-3"><a></a>        vesuvius_data_filtered, </span>
+<span id="cb8-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> duration_magnitude_md)</span>
+<span id="cb8-5"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb8-6"><a></a></span>
+<span id="cb8-7"><a></a>    <span class="fu">geom_histogram</span>(</span>
+<span id="cb8-8"><a></a>        <span class="at">binwidth =</span> <span class="fl">0.2</span>, </span>
+<span id="cb8-9"><a></a>        <span class="at">fill =</span> <span class="st">'red'</span>, </span>
+<span id="cb8-10"><a></a>        <span class="at">color =</span> <span class="st">"white"</span></span>
+<span id="cb8-11"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb8-12"><a></a></span>
+<span id="cb8-13"><a></a>    <span class="fu">facet_wrap</span>(</span>
+<span id="cb8-14"><a></a>        <span class="sc">~</span> depth_boundary_0<span class="fl">.5</span>km, </span>
+<span id="cb8-15"><a></a>        <span class="at">scales =</span> <span class="st">"free_y"</span></span>
+<span id="cb8-16"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb8-17"><a></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <details>
 <summary style="color: black;">
 <p>After learning from the histogram, the initial plot was updated to plot the points with varying sizes based on <code>depth_boundary_0.5km</code>, with contour lines of the elevation in the same region, an accompanying animated plot followed it</p>
 </summary>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>static_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-2"><a></a>    metR<span class="sc">::</span><span class="fu">geom_contour_fill</span>(</span>
-<span id="cb6-3"><a></a>        <span class="at">data =</span> elev_df,</span>
-<span id="cb6-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> x, </span>
-<span id="cb6-5"><a></a>            <span class="at">y =</span> y,</span>
-<span id="cb6-6"><a></a>            <span class="at">z =</span> elevation<span class="sc">/</span><span class="dv">1000</span>, </span>
-<span id="cb6-7"><a></a>            <span class="at">group =</span> <span class="cn">NULL</span>),</span>
-<span id="cb6-8"><a></a>        <span class="at">bins =</span> <span class="dv">10</span></span>
-<span id="cb6-9"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb6-10"><a></a></span>
-<span id="cb6-11"><a></a>    <span class="fu">scale_fill_gradientn</span>(</span>
-<span id="cb6-12"><a></a>        <span class="at">colors =</span> <span class="fu">gray.colors</span>(<span class="dv">10</span>, <span class="at">start =</span> <span class="fl">1.0</span>, <span class="at">end =</span> <span class="fl">0.3</span>),</span>
-<span id="cb6-13"><a></a>        <span class="at">name =</span> <span class="st">"Elevation (km)"</span>,</span>
-<span id="cb6-14"><a></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.111</span>, <span class="fl">1.246</span>),  <span class="co"># Match elevation range from elev_df (km)</span></span>
-<span id="cb6-15"><a></a>        <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">1.2</span>, <span class="at">by =</span> <span class="fl">0.3</span>)</span>
-<span id="cb6-16"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb6-17"><a></a></span>
-<span id="cb6-18"><a></a>    <span class="fu">geom_point</span>(</span>
-<span id="cb6-19"><a></a>        <span class="at">data =</span> vesuvius_data_filtered,</span>
-<span id="cb6-20"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> longitude, </span>
-<span id="cb6-21"><a></a>            <span class="at">y =</span> latitude,</span>
-<span id="cb6-22"><a></a>            <span class="at">color =</span> duration_magnitude_md,</span>
-<span id="cb6-23"><a></a>            <span class="at">size =</span> depth_rescaled),</span>
-<span id="cb6-24"><a></a>        <span class="at">alpha =</span> <span class="fl">0.75</span></span>
-<span id="cb6-25"><a></a>    ) <span class="sc">+</span></span>
-<span id="cb6-26"><a></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>static_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-2"><a></a>    metR<span class="sc">::</span><span class="fu">geom_contour_fill</span>(</span>
+<span id="cb9-3"><a></a>        <span class="at">data =</span> elev_df,</span>
+<span id="cb9-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> x, </span>
+<span id="cb9-5"><a></a>            <span class="at">y =</span> y,</span>
+<span id="cb9-6"><a></a>            <span class="at">z =</span> elevation<span class="sc">/</span><span class="dv">1000</span>, </span>
+<span id="cb9-7"><a></a>            <span class="at">group =</span> <span class="cn">NULL</span>),</span>
+<span id="cb9-8"><a></a>        <span class="at">bins =</span> <span class="dv">10</span></span>
+<span id="cb9-9"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb9-10"><a></a></span>
+<span id="cb9-11"><a></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb9-12"><a></a>        <span class="at">colors =</span> <span class="fu">gray.colors</span>(<span class="dv">10</span>, <span class="at">start =</span> <span class="fl">1.0</span>, <span class="at">end =</span> <span class="fl">0.3</span>),</span>
+<span id="cb9-13"><a></a>        <span class="at">name =</span> <span class="st">"Elevation (km)"</span>,</span>
+<span id="cb9-14"><a></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.111</span>, <span class="fl">1.246</span>),  <span class="co"># Match elevation range from elev_df (km)</span></span>
+<span id="cb9-15"><a></a>        <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">1.2</span>, <span class="at">by =</span> <span class="fl">0.3</span>)</span>
+<span id="cb9-16"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb9-17"><a></a></span>
+<span id="cb9-18"><a></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb9-19"><a></a>        <span class="at">data =</span> vesuvius_data_filtered,</span>
+<span id="cb9-20"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> longitude, </span>
+<span id="cb9-21"><a></a>            <span class="at">y =</span> latitude,</span>
+<span id="cb9-22"><a></a>            <span class="at">color =</span> duration_magnitude_md,</span>
+<span id="cb9-23"><a></a>            <span class="at">size =</span> depth_rescaled),</span>
+<span id="cb9-24"><a></a>        <span class="at">alpha =</span> <span class="fl">0.75</span></span>
+<span id="cb9-25"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb9-26"><a></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -572,6 +599,7 @@ Cedric Destin &amp; Weston Scott
 <p><strong>Note:</strong> The animation highlights each depth bin (0.5 km region) starting from the deepest points, highlighting the localized groups of points in each layer</p>
 </div>
 </div></div>
+<hr>
 </div>
 </div>
 </div>
