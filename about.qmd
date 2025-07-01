@@ -10,4 +10,4 @@ This project was developed by **Seismic Minds** for [INFO 526 - Data Analysis an
 
 -   Cedric Destin: I am an Electrical Engineer major, I specialized in communication and Signal Processing. 2025 will be my last year of graduate school.
 
--   Weston Scott: I am an Algorithms and Signal Processing Engineer in my second to last semester for my Master's in Electrical and Computer Engineering program. (e.g., year, major, etc.).
+-   Weston Scott: I am an Algorithms and Signal Processing Engineer in my second to last semester for my Master's in Electrical and Computer Engineering program.
