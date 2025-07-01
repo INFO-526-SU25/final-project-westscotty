@@ -8,6 +8,6 @@ execute:
 
 This project was developed by **Seismic Minds** for [INFO 526 - Data Analysis and Visualization](#0) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.
 
--   Cedric Destin: One sentence description of Team member 1 (e.g., year, major, etc.).
+-   Cedric Destin: I am an Electrical Engineer major, I specialized in communication and Signal Processing. 2025 will be my last year of graduate school.
 
 -   Weston Scott: I am an Algorithms and Signal Processing Engineer in my second to last semester for my Master's in Electrical and Computer Engineering program. (e.g., year, major, etc.).
