@@ -21,15 +21,14 @@ execute:
 
 | Task ID | Task Name | Status | Due | Priority | Summary |
 |------------|------------|------------|------------|------------|------------|
-| 1 | Plan out data wrangling methods | Not Started | 06/13/2025 | High | Determine necessary data fields (filters?) Any new data fields (data wrangling - mutate?) |
-| 2 | Plan out layer mappings | Not Started | 06/09/2025 | High | Map out the various layers needed for displaying the data for each plots |
-| 3 | Plan out functions/packages | Not Started | 06/11/2025 | High | List functions and packages needed for working with said layers |
-| 4 | Plan out data mappings to aesthetics | Not Started | 06/16/2025 | Moderate | Map out aesthetic choices (what axes should look like, colors, etc.) |
-| 5 | Development stage 1 | Not Started | 06/19/2025 | Moderate | Create initial pass at plot 1 |
-| 6 | Development stage 2 | Not Started | 06/23/2025 | Moderate | Create initial pass at plot 2 |
-| 7 | Review stage | Not Started | 06/25/2025 | Low | Review plots, plan changes |
-| 8 | Project summary | Not Started | 06/27/2025 | Low | Report development (presentation planning) |
-
-: Plan of attack for completing the outlined project in the proposal.
-
-## Data Wrangling:
+| 1 | Plan out data wrangling methods | Complete | 06/13/2025 | NA | Determine necessary data fields (filters?) Any new data fields (data wrangling - mutate?) |
+| 2 | Plan out layer mappings | Complete | 06/13/2025 | NA | Map out the various layers needed for displaying the data for each plots |
+| 3 | Plan out functions/packages | Complete | 06/15/2025 | NA | List functions and packages needed for working with said layers |
+| 4 | Plan out data mappings to aesthetics | Complete | 06/18/2025 | NA | Map out aesthetic choices (what axes should look like, colors, etc.) |
+| 5 | Development question 1 | Complete | 06/21/2025 | NA | Create initial pass at plot 1 |
+| 6 | Development question 2 | Complete | 06/21/2025 | NA | Create initial pass at plot 2 |
+| 7 | Finalize question 1 | Complete | 06/29/2025 | NA | Create final pass at plot 1 |
+| 8 | Finalize question 2 | Complete | 06/28/2025 | NA | Create final pass at plot 2 |
+| 9 | Review stage | Complete | 06/30/2025 | NA | Review plots, plan changes |
+| 10 | Project summary | In Progress | 06/30/2025 | High | Report development (presentation planning) |
+| 11 | Finalize Project | Not Started | 7/01/2025 | High | Put final pieces together, record presentation, and commit final changes |
