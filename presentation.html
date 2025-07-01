@@ -28,6 +28,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-6ce922b8680ebe0bca138a5c7813e404.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -141,71 +207,54 @@ Cedric Destin &amp; Weston Scott
 </section>
 <section id="the-data" class="slide level2">
 <h2>The Data</h2>
-<ul>
-<li><p>Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025)</p></li>
-<li><p>The data contains records of seismic activity at or near Mt. Vesuvius, Italy over the last decade or so</p></li>
-<li><p>Source: <a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md" class="uri">https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md</a></p></li>
-</ul>
-</section>
-<section id="the-goal" class="slide level2">
-<h2>The Goal</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p>Interpret the underlying relationships between variables of interest including time series and static analysis of the seismic data recorded at the famous Mt. Vesuvius.</p>
+<div style="font-size: 0.75em; line-height: 1.25">
+<ul>
+<li>Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025)</li>
+<li>The data contains records of seismic activity at or near Mt. Vesuvius, Italy over the last 2 decades</li>
+<li>The goal is to interpret the underlying relationships between variables of interest including time series and static analyses of the seismic data recorded at the famous Mt. Vesuvius.</li>
+<li><a href="https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md">TidyTuesday Source</a></li>
+</ul>
+</div>
 </div><div class="column" style="width:40%;">
 <p><img data-src="images/mt_vesuvius.jpg" alt="https://www.pexels.com/photo/buildings-near-the-rock-mountains-6540758/"></p>
 </div></div>
 </section>
-<section id="question-1" class="slide level2">
-<h2>Question 1</h2>
+<section id="exploratory-question-1" class="slide level2">
+<h2>Exploratory Question 1</h2>
+<div style="font-size: 0.75em; line-height: 1.25">
 <p><strong>How have the frequency and depth of seismic events at Mount Vesuvius changed over time?</strong></p>
 <ul>
-<li>&lt;Add stuff here&gt;</li>
+<li>This section of the presentation reviews the seismic events’ behavior over time</li>
+<li>The following plots are used to analyze the Duration Magnitude and the Depth of the seismic events
+<ul>
+<li>Line plots</li>
+<li>Histograms</li>
+<li>Error plots</li>
+</ul></li>
 </ul>
+</div>
 </section>
 <section id="approach" class="slide level2">
 <h2>Approach</h2>
+<ol type="1">
+<li><p>Any NaN were removed for the Duration Magnitude and the Depth</p></li>
+<li><p>The data was smoothed by calculating the average of the Duration Magnitude and the Depth per year &amp; month</p></li>
+<li><p>The time had to be wrangled to remove undesired characters</p></li>
+</ol>
 </section>
 <section id="plots" class="slide level2">
 <h2>Plots</h2>
-</section>
-<section id="analysis" class="slide level2">
-<h2>Analysis</h2>
-</section>
-<section id="challenges-faced" class="slide level2">
-<h2>Challenges Faced</h2>
-</section>
-<section id="question-2" class="slide level2">
-<h2>Question 2</h2>
-<p><strong>How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?</strong></p>
-<ul>
-<li>&lt;Add stuff here&gt;</li>
-</ul>
-</section>
-<section id="approach-1" class="slide level2">
-<h2>Approach</h2>
-<ul>
-<li>The first step was to remove bad (or missing) data by dropping rows with NA in <code>latitude</code>, <code>longitude</code>, <code>depth_km</code>, and <code>duration_magnitude_md</code></li>
-<li>The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled <code>depth_boundary_0.5km</code>, plotting in ascending depth order meaning that deeper values will appear first</li>
-<li>A size re-scaling for points was created from this new depth layer variable</li>
-</ul>
-</section>
-<section id="seismic-activity-plots" class="slide level2">
-<h2>Seismic Activity Plots</h2>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Histogram View</a></li><li><a href="#tabset-1-2">Static View</a></li><li><a href="#tabset-1-3">Animated View</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Timeplots</a></li><li><a href="#tabset-1-2">Depth Stats</a></li><li><a href="#tabset-1-3">Duration Magnitude Stats</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="columns">
 <div class="column" style="width:65%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/histogram_vesuvius_plot.png" style="width:100.0%"></p>
-<figcaption>Description…</figcaption>
-</figure>
-</div>
+<p><img data-src="images/by_year_month.png" style="width:75.0%"></p>
 </div><div class="column" style="width:35%;">
-<p><span style="font-size: 0.75em; line-height: 1.4;"> <strong>Note:</strong> Histogram of <code>duration_magnitude_md</code>, faceted by <code>depth_boundary_0.5km</code>.<br> This confirms distribution shapes and valid bins for all layers. </span></p>
+<p><span style="font-size: 0.75em; line-height: 1.4;"><strong>Note:</strong> Time plot of <code>duration_magnitude_md</code> and <code>depth_km</code>.<br> This shows that the average depth and duration magnitude measured have stabilized.</span></p>
 </div></div>
 <hr>
 </div>
@@ -214,12 +263,12 @@ Cedric Destin &amp; Weston Scott
 <div class="column" style="width:65%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/static_vesuvius_plot.png" style="width:100.0%"></p>
+<p><img data-src="images/depth_error_binned_mount.png" style="width:75.0%"></p>
 <figcaption>Description…</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:35%;">
-<p><span style="font-size: 0.75em; line-height: 1.4;"> <strong>Note:</strong> Final refined static map with elevation contours and refined legend formatting.<br></span></p>
+<p><span style="font-size: 0.75em; line-height: 1.4;"> <strong>Note:</strong> Another view of the Depth of the seismic events over time.<br></span></p>
 <p></p>
 </div></div>
 <hr>
@@ -227,15 +276,283 @@ Cedric Destin &amp; Weston Scott
 <div id="tabset-1-3">
 <div class="columns">
 <div class="column" style="width:65%;">
+<p><img data-src="images/duration_magnitude_error_binned.png" style="width:75.0%"></p>
+</div><div class="column" style="width:35%;">
+<p><span style="font-size: 0.75em; line-height: 1.4;"> <strong>Note:</strong> Another view of the Duration Magnitude of the seismic events over time.<br></span></p>
+<p></p>
+</div></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis" class="slide level2">
+<h2>Analysis</h2>
+<p>Reviewing the behavior of the seismic events in time, here are some observations:</p>
+<ul>
+<li><p>The Depth and the Duration Magnitude of the seismic events are became smaller</p></li>
+<li><p>More Events have been recorded since 2016</p></li>
+<li><p>The Duration Magnitude remains low (below 3)</p></li>
+</ul>
+</section>
+<section id="challenges-faced" class="slide level2">
+<h2>Challenges Faced</h2>
+</section>
+<section id="exploratory-question-2" class="slide level2">
+<h2>Exploratory Question 2</h2>
+<div style="font-size: 0.75em; line-height: 1.25">
+<p><strong>How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?</strong></p>
+<ul>
+<li>Exploring this question requires extraction of hidden data to synthesize new variable, aiding in exploring the seismic activity at Mt. Vesuvius</li>
+<li>Extracting data into effective visualizations involved utilizing <code>ggplot</code>, <code>geom_point</code>, <code>geom_contour_fill</code>, <code>geom_hist</code>, and integrating with <code>gganimate</code></li>
+<li>These visuals provide a viewing window into the trends connecting seismic event magnitudes with depth</li>
+</ul>
+</div>
+</section>
+<section id="approach-1" class="slide level2">
+<h2>Approach</h2>
+<div style="font-size: 0.75em; line-height: 1.25">
+<details>
+<summary style="color: black;">
+<p>The first step was to remove bad (or missing) data by dropping rows with NA in <code>latitude</code>, <code>longitude</code>, <code>depth_km</code>, and <code>duration_magnitude_md</code></p>
+</summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a></a>    <span class="fu">drop_na</span>(</span>
+<span id="cb1-3"><a></a>        latitude, </span>
+<span id="cb1-4"><a></a>        longitude, </span>
+<span id="cb1-5"><a></a>        depth_km, </span>
+<span id="cb1-6"><a></a>        duration_magnitude_md</span>
+<span id="cb1-7"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary style="color: black;">
+<p>The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled <code>depth_boundary_0.5km</code>, plotting in ascending depth order meaning that deeper values will appear first</p>
+</summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>vesuvius_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"vesuvius.csv"</span>))</span>
+<span id="cb2-2"><a></a>vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a></a>    <span class="fu">mutate</span>(</span>
+<span id="cb2-4"><a></a>        <span class="at">depth_abs =</span> <span class="fu">abs</span>(depth_km),</span>
+<span id="cb2-5"><a></a>        <span class="at">depth_boundary_1km =</span> <span class="fu">case_when</span>(</span>
+<span id="cb2-6"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"&lt; 1 km"</span>,</span>
+<span id="cb2-7"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"&lt; 2 km"</span>,</span>
+<span id="cb2-8"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"&lt; 3 km"</span>,</span>
+<span id="cb2-9"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"&lt; 4 km"</span>,</span>
+<span id="cb2-10"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"&lt; 5 km"</span>,</span>
+<span id="cb2-11"><a></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"&gt; 5 km"</span>),</span>
+<span id="cb2-12"><a></a>        </span>
+<span id="cb2-13"><a></a>        <span class="at">depth_boundary_1km =</span> <span class="fu">factor</span>(</span>
+<span id="cb2-14"><a></a>            depth_boundary_1km, </span>
+<span id="cb2-15"><a></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"&lt; 1 km"</span>, </span>
+<span id="cb2-16"><a></a>                      <span class="st">"&lt; 2 km"</span>, </span>
+<span id="cb2-17"><a></a>                      <span class="st">"&lt; 3 km"</span>, </span>
+<span id="cb2-18"><a></a>                      <span class="st">"&lt; 4 km"</span>, </span>
+<span id="cb2-19"><a></a>                      <span class="st">"&lt; 5 km"</span>, </span>
+<span id="cb2-20"><a></a>                      <span class="st">"&gt; 5 km"</span>)),</span>
+<span id="cb2-21"><a></a>        </span>
+<span id="cb2-22"><a></a>        <span class="at">depth_boundary_0.5km =</span> <span class="fu">case_when</span>(</span>
+<span id="cb2-23"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">0.5</span> <span class="sc">~</span> <span class="st">"&lt; 0.5 km"</span>,</span>
+<span id="cb2-24"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"0.5 ~ 1 km"</span>,</span>
+<span id="cb2-25"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="st">"1 ~ 1.5 km"</span>,</span>
+<span id="cb2-26"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"1.5 ~ 2 km"</span>,</span>
+<span id="cb2-27"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">2.5</span> <span class="sc">~</span> <span class="st">"2 ~ 2.5 km"</span>,</span>
+<span id="cb2-28"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"2.5 ~ 3 km"</span>,</span>
+<span id="cb2-29"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">3.5</span> <span class="sc">~</span> <span class="st">"3 ~ 3.5 km"</span>,</span>
+<span id="cb2-30"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"3.5 ~ 4 km"</span>,</span>
+<span id="cb2-31"><a></a>            depth_km <span class="sc">&lt;</span> <span class="fl">4.5</span> <span class="sc">~</span> <span class="st">"4 ~ 4.5 km"</span>,</span>
+<span id="cb2-32"><a></a>            depth_km <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"4.5 ~ 5 km"</span>,</span>
+<span id="cb2-33"><a></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"&gt; 5 km"</span>),</span>
+<span id="cb2-34"><a></a>        </span>
+<span id="cb2-35"><a></a>        <span class="at">depth_boundary_0.5km =</span> <span class="fu">factor</span>(</span>
+<span id="cb2-36"><a></a>            depth_boundary_0<span class="fl">.5</span>km, </span>
+<span id="cb2-37"><a></a>            <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"&lt; 0.5 km"</span>, </span>
+<span id="cb2-38"><a></a>                      <span class="st">"0.5 ~ 1 km"</span>, </span>
+<span id="cb2-39"><a></a>                      <span class="st">"1 ~ 1.5 km"</span>, </span>
+<span id="cb2-40"><a></a>                      <span class="st">"1.5 ~ 2 km"</span>, </span>
+<span id="cb2-41"><a></a>                      <span class="st">"2 ~ 2.5 km"</span>, </span>
+<span id="cb2-42"><a></a>                      <span class="st">"2.5 ~ 3 km"</span>,</span>
+<span id="cb2-43"><a></a>                      <span class="st">"3 ~ 3.5 km"</span>, </span>
+<span id="cb2-44"><a></a>                      <span class="st">"3.5 ~ 4 km"</span>, </span>
+<span id="cb2-45"><a></a>                      <span class="st">"4 ~ 4.5 km"</span>, </span>
+<span id="cb2-46"><a></a>                      <span class="st">"4.5 ~ 5 km"</span>, </span>
+<span id="cb2-47"><a></a>                      <span class="st">"&gt; 5 km"</span>)))</span>
+<span id="cb2-48"><a></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb2-49"><a></a></span>
+<span id="cb2-50"><a></a>    <span class="fu">filter</span>(</span>
+<span id="cb2-51"><a></a>        <span class="sc">!</span><span class="fu">is.na</span>(depth_boundary_0<span class="fl">.5</span>km)</span>
+<span id="cb2-52"><a></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb2-53"><a></a></span>
+<span id="cb2-54"><a></a>    <span class="fu">arrange</span>(</span>
+<span id="cb2-55"><a></a>        depth_boundary_0<span class="fl">.5</span>km, </span>
+<span id="cb2-56"><a></a>        <span class="fu">desc</span>(depth_rescaled)</span>
+<span id="cb2-57"><a></a>    ) <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary style="color: black;">
+<p>A size re-scaling for points was created from this new depth layer variable</p>
+</summary>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>  vesuvius_data_filtered <span class="ot">&lt;-</span> vesuvius_data_filtered <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a></a>      <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a></a>        <span class="at">depth_rescaled =</span> <span class="fu">rescale</span>(depth_km, <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>)),</span>
+<span id="cb3-4"><a></a>        <span class="at">mag_rescaled =</span> <span class="fu">rescale</span>(duration_magnitude_md, <span class="at">to =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.9</span>))</span>
+<span id="cb3-5"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary style="color: black;">
+<p>Initially a visualization was created to simply view lat/long axes with points that were colored by the <code>duration_magnitude_md</code> and a transparency difference based on <code>depth_km</code> (see Initial View on next slide)</p>
+</summary>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>original <span class="ot">&lt;-</span></span>
+<span id="cb4-2"><a></a>    <span class="fu">ggplot</span>(</span>
+<span id="cb4-3"><a></a>        vesuvius_data_filtered, </span>
+<span id="cb4-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> longitude, </span>
+<span id="cb4-5"><a></a>            <span class="at">y =</span> latitude)</span>
+<span id="cb4-6"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb4-7"><a></a>    </span>
+<span id="cb4-8"><a></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb4-9"><a></a>        <span class="fu">aes</span>(<span class="at">color =</span> duration_magnitude_md,</span>
+<span id="cb4-10"><a></a>            <span class="at">alpha =</span> depth_abs),</span>
+<span id="cb4-11"><a></a>        <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb4-12"><a></a>    ) <span class="sc">+</span>                     </span>
+<span id="cb4-13"><a></a>    </span>
+<span id="cb4-14"><a></a>    <span class="fu">scale_color_viridis_c</span>(</span>
+<span id="cb4-15"><a></a>        <span class="at">option =</span> <span class="st">"inferno"</span>,</span>
+<span id="cb4-16"><a></a>        <span class="at">name =</span> <span class="st">"Magnitude"</span></span>
+<span id="cb4-17"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb4-18"><a></a>    </span>
+<span id="cb4-19"><a></a>    <span class="fu">scale_alpha_continuous</span>(</span>
+<span id="cb4-20"><a></a>        <span class="at">name =</span> <span class="st">"Depth (km)"</span>,</span>
+<span id="cb4-21"><a></a>        <span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.25</span>)</span>
+<span id="cb4-22"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb4-23"><a></a></span>
+<span id="cb4-24"><a></a>        <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb4-25"><a></a>            <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">14.34</span>, <span class="fl">14.48</span>), </span>
+<span id="cb4-26"><a></a>            <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb4-27"><a></a>        ) <span class="sc">+</span></span>
+<span id="cb4-28"><a></a>        <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb4-29"><a></a>            <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">40.78</span>, <span class="fl">40.88</span>), </span>
+<span id="cb4-30"><a></a>            <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb4-31"><a></a>        ) <span class="sc">+</span> </span>
+<span id="cb4-32"><a></a>        ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary style="color: black;">
+<p>Next the data was plotted as histograms of the <code>duration_magnitude_md</code>, but faceted by the newer <code>depth_boundary_0.5km</code> variable, showing the groupings of points clearer, as well as their distributions across the magnitude scale</p>
+</summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>histogram <span class="ot">&lt;-</span> </span>
+<span id="cb5-2"><a></a>    <span class="fu">ggplot</span>(</span>
+<span id="cb5-3"><a></a>        vesuvius_data_filtered, </span>
+<span id="cb5-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> duration_magnitude_md)</span>
+<span id="cb5-5"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb5-6"><a></a></span>
+<span id="cb5-7"><a></a>    <span class="fu">geom_histogram</span>(</span>
+<span id="cb5-8"><a></a>        <span class="at">binwidth =</span> <span class="fl">0.2</span>, </span>
+<span id="cb5-9"><a></a>        <span class="at">fill =</span> <span class="st">'red'</span>, </span>
+<span id="cb5-10"><a></a>        <span class="at">color =</span> <span class="st">"white"</span></span>
+<span id="cb5-11"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb5-12"><a></a></span>
+<span id="cb5-13"><a></a>    <span class="fu">facet_wrap</span>(</span>
+<span id="cb5-14"><a></a>        <span class="sc">~</span> depth_boundary_0<span class="fl">.5</span>km, </span>
+<span id="cb5-15"><a></a>        <span class="at">scales =</span> <span class="st">"free_y"</span></span>
+<span id="cb5-16"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb5-17"><a></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<details>
+<summary style="color: black;">
+<p>After learning from the histogram, the initial plot was updated to plot the points with varying sizes based on <code>depth_boundary_0.5km</code>, with contour lines of the elevation in the same region, an accompanying animated plot followed it</p>
+</summary>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>static_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-2"><a></a>    metR<span class="sc">::</span><span class="fu">geom_contour_fill</span>(</span>
+<span id="cb6-3"><a></a>        <span class="at">data =</span> elev_df,</span>
+<span id="cb6-4"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> x, </span>
+<span id="cb6-5"><a></a>            <span class="at">y =</span> y,</span>
+<span id="cb6-6"><a></a>            <span class="at">z =</span> elevation<span class="sc">/</span><span class="dv">1000</span>, </span>
+<span id="cb6-7"><a></a>            <span class="at">group =</span> <span class="cn">NULL</span>),</span>
+<span id="cb6-8"><a></a>        <span class="at">bins =</span> <span class="dv">10</span></span>
+<span id="cb6-9"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb6-10"><a></a></span>
+<span id="cb6-11"><a></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb6-12"><a></a>        <span class="at">colors =</span> <span class="fu">gray.colors</span>(<span class="dv">10</span>, <span class="at">start =</span> <span class="fl">1.0</span>, <span class="at">end =</span> <span class="fl">0.3</span>),</span>
+<span id="cb6-13"><a></a>        <span class="at">name =</span> <span class="st">"Elevation (km)"</span>,</span>
+<span id="cb6-14"><a></a>        <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.111</span>, <span class="fl">1.246</span>),  <span class="co"># Match elevation range from elev_df (km)</span></span>
+<span id="cb6-15"><a></a>        <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">1.2</span>, <span class="at">by =</span> <span class="fl">0.3</span>)</span>
+<span id="cb6-16"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb6-17"><a></a></span>
+<span id="cb6-18"><a></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb6-19"><a></a>        <span class="at">data =</span> vesuvius_data_filtered,</span>
+<span id="cb6-20"><a></a>        <span class="fu">aes</span>(<span class="at">x =</span> longitude, </span>
+<span id="cb6-21"><a></a>            <span class="at">y =</span> latitude,</span>
+<span id="cb6-22"><a></a>            <span class="at">color =</span> duration_magnitude_md,</span>
+<span id="cb6-23"><a></a>            <span class="at">size =</span> depth_rescaled),</span>
+<span id="cb6-24"><a></a>        <span class="at">alpha =</span> <span class="fl">0.75</span></span>
+<span id="cb6-25"><a></a>    ) <span class="sc">+</span></span>
+<span id="cb6-26"><a></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="seismic-activity-plots" class="slide level2">
+<h2>Seismic Activity Plots</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Initial View</a></li><li><a href="#tabset-2-2">Histogram View</a></li><li><a href="#tabset-2-3">Static View</a></li><li><a href="#tabset-2-4">Animated View</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="columns">
+<div class="column" style="width:65%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/vesuvius_animation.gif" style="width:100.0%"></p>
-<figcaption>Description…</figcaption>
+<p><img data-src="images/original_vesuvius_plot.png" style="width:100.0%"></p>
+<figcaption>First pass at plotting depth and mangitude on lat/lon</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:35%;">
-<p><span style="font-size: 0.75em; line-height: 1.4;"> <strong>Note:</strong> Animation shows seismic activity over depth layers using alpha fading.<br></span></p>
-<p></p>
+<div style="font-size: 0.75em; line-height: 1.25">
+<p><strong>Note:</strong> This plot shows initial conditions of seismic events around Mount Vesuvius, with the color representing the magnitude and transparency reflecting depth (use this as a baseline for comparison)</p>
+</div>
+</div></div>
+<hr>
+</div>
+<div id="tabset-2-2">
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/histogram_vesuvius_plot.png" style="width:100.0%"></p>
+<figcaption>Binned the depth variable into discreted bins of 0.5 km</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:35%;">
+<div style="font-size: 0.75em; line-height: 1.25">
+<p><strong>Note:</strong> Histogram of <code>duration_magnitude_md</code>, faceted by <code>depth_boundary_0.5km</code>, confirming confirms distribution shapes and valid bins for all layers</p>
+</div>
+</div></div>
+<hr>
+</div>
+<div id="tabset-2-3">
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/static_vesuvius_plot.png" style="width:100.0%"></p>
+<figcaption>Upgraded initial plot to adjust sizing of points based on depth bin</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:35%;">
+<div style="font-size: 0.75em; line-height: 1.25">
+<p><strong>Note:</strong> With the addition of the elevation contours and the the sizing of points based on depth, it is clearer where the points are localized and the depths associated (relative to sea level)</p>
+</div>
+</div></div>
+<hr>
+</div>
+<div id="tabset-2-4">
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/vesuvius_animation.gif" style="width:100.0%"></p>
+<figcaption>Animation of the finalized static plot, highlighting each depth bin in a loop</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:35%;">
+<div style="font-size: 0.75em; line-height: 1.25">
+<p><strong>Note:</strong> The animation highlights each depth bin (0.5 km region) starting from the deepest points, highlighting the localized groups of points in each layer</p>
+</div>
 </div></div>
 </div>
 </div>
@@ -243,15 +560,29 @@ Cedric Destin &amp; Weston Scott
 </section>
 <section id="analysis-1" class="slide level2">
 <h2>Analysis</h2>
-<p>&lt;Add stuff here&gt;</p>
+<div style="font-size: 0.75em; line-height: 1.25">
+<ul>
+<li>Seismic activity occurs quite frequently, and looking at the histogram alone, it is clear that more events occur at the shallower depths</li>
+<li>Though there are data points that suggest powerful magnitude events can occur at shallow depths, the static plot, animated plot, and histogram agree that more powerful events occur at deeper depths on average, but are much less frequent as compared to the activity closer to the surface</li>
+<li>It should be noted that with the elevation contour lines that the deeper events are truly much deeper than the points localized in the center of Mt. Vesuvius. There is about a 1.2 km elevation gain from the outer region of the landmark compared to the center.</li>
+</ul>
+</div>
 </section>
 <section id="challenges-faced-1" class="slide level2">
 <h2>Challenges Faced</h2>
-<p>&lt;Add stuff here&gt;</p>
+<div style="font-size: 0.75em; line-height: 1.25">
+<ul>
+<li>Manipulating the depth_km field was challenging due to the amount of data in each bin. It was essential that at least one data point was in each division, but showing the fewer bins than what was used proved to not be effective in showing the trends</li>
+<li><code>gganimate</code> does not preserve all the theme options that were established and called out, leading to a plot that closely resembles it’s static counterpart, but not equivalent in the features desired. Contour lines seemed to not work right, now drawing the layers as intended.</li>
+<li>Formatting legends also proved to be a labor of love, as there are many ways to show them, but keeping consistency among the plots created a rigorous amount of testing with many options added to ensure they appeared ‘uniform’</li>
+</ul>
+</div>
 </section>
 <section id="final-remarks" class="slide level2">
 <h2>Final Remarks</h2>
-<p>&lt;Add stuff here&gt;</p>
+<div style="font-size: 0.75em; line-height: 1.25">
+<p>TODO</p>
+</div>
 
 
 </section>
