@@ -132,9 +132,14 @@ Reviewing the behavior of the seismic events in time, here are some observations
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 <details>
-  <summary style="color: black;">The first step was to remove bad (or missing) data by dropping rows with NA in `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`</summary>
 
-  ```r
+<summary style="color: black;">
+
+The first step was to remove bad (or missing) data by dropping rows with NA in `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`
+
+</summary>
+
+``` r
 vesuvius_data_filtered <- vesuvius_data |>
     drop_na(
         latitude, 
@@ -147,9 +152,14 @@ vesuvius_data_filtered <- vesuvius_data |>
 </details>
 
 <details>
-  <summary style="color: black;">The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled `depth_boundary_0.5km`, plotting in ascending depth order meaning that deeper values will appear first</summary>
 
-  ```r
+<summary style="color: black;">
+
+The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled `depth_boundary_0.5km`, plotting in ascending depth order meaning that deeper values will appear first
+
+</summary>
+
+``` r
 vesuvius_data <- read.csv(here("data","vesuvius.csv"))
 vesuvius_data_filtered <- vesuvius_data_filtered |>
     mutate(
@@ -207,27 +217,37 @@ vesuvius_data_filtered <- vesuvius_data_filtered |>
         depth_boundary_0.5km, 
         desc(depth_rescaled)
     ) |> glimpse()
-  ```
+```
 
 </details>
 
 <details>
-  <summary style="color: black;">A size re-scaling for points was created from this new depth layer variable</summary>
 
-  ```r
+<summary style="color: black;">
+
+A size re-scaling for points was created from this new depth layer variable
+
+</summary>
+
+``` r
   vesuvius_data_filtered <- vesuvius_data_filtered |>
       mutate(
         depth_rescaled = rescale(depth_km, to = c(1, 11)),
         mag_rescaled = rescale(duration_magnitude_md, to = c(0.4, 0.9))
     )
-  ```
+```
 
 </details>
 
 <details>
-  <summary style="color: black;">Initially a visualization was created to simply view lat/long axes with points that were colored by the `duration_magnitude_md` and a transparency difference based on `depth_km` (see Initial View on next slide)</summary>
 
-  ```r
+<summary style="color: black;">
+
+Initially a visualization was created to simply view lat/long axes with points that were colored by the `duration_magnitude_md` and a transparency difference based on `depth_km` (see Initial View on next slide)
+
+</summary>
+
+``` r
 original <-
     ggplot(
         vesuvius_data_filtered, 
@@ -260,14 +280,19 @@ original <-
             expand = c(0, 0)
         ) + 
         ...
-  ```
+```
 
 </details>
 
 <details>
-  <summary style="color: black;">Next the data was plotted as histograms of the `duration_magnitude_md`, but faceted by the newer `depth_boundary_0.5km` variable, showing the groupings of points clearer, as well as their distributions across the magnitude scale</summary>
 
-  ```r
+<summary style="color: black;">
+
+Next the data was plotted as histograms of the `duration_magnitude_md`, but faceted by the newer `depth_boundary_0.5km` variable, showing the groupings of points clearer, as well as their distributions across the magnitude scale
+
+</summary>
+
+``` r
 histogram <- 
     ggplot(
         vesuvius_data_filtered, 
@@ -285,14 +310,19 @@ histogram <-
         scales = "free_y"
     ) +
     ...
-  ```
+```
 
 </details>
 
 <details>
-  <summary style="color: black;">After learning from the histogram, the initial plot was updated to plot the points with varying sizes based on `depth_boundary_0.5km`, with contour lines of the elevation in the same region, an accompanying animated plot followed it</summary>
 
-  ```r
+<summary style="color: black;">
+
+After learning from the histogram, the initial plot was updated to plot the points with varying sizes based on `depth_boundary_0.5km`, with contour lines of the elevation in the same region, an accompanying animated plot followed it
+
+</summary>
+
+``` r
 static_plot <- ggplot() +
     metR::geom_contour_fill(
         data = elev_df,
@@ -319,10 +349,9 @@ static_plot <- ggplot() +
         alpha = 0.75
     ) +
     ...
-  ```
+```
 
 </details>
-
 :::
 
 ## Seismic Activity Plots
@@ -394,9 +423,9 @@ static_plot <- ggplot() +
 ## Analysis
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
-- Seismic activity occurs quite frequently, and looking at the histogram alone, it is clear that more events occur at the shallower depths
-- Though there are data points that suggest powerful magnitude events can occur at shallow depths, the static plot, animated plot, and histogram agree that more powerful events occur at deeper depths on average, but are much less frequent as compared to the activity closer to the surface
-- It should be noted that with the elevation contour lines that the deeper events are truly much deeper than the points localized in the center of Mt. Vesuvius. There is about a 1.2 km elevation gain from the outer region of the landmark compared to the center.
+-   Seismic activity occurs quite frequently, and looking at the histogram alone, it is clear that more events occur at the shallower depths
+-   Though there are data points that suggest powerful magnitude events can occur at shallow depths, the static plot, animated plot, and histogram agree that more powerful events occur at deeper depths on average, but are much less frequent as compared to the activity closer to the surface
+-   It should be noted that with the elevation contour lines that the deeper events are truly much deeper than the points localized in the center of Mt. Vesuvius. There is about a 1.2 km elevation gain from the outer region of the landmark compared to the center.
 :::
 
 ## Challenges Faced
