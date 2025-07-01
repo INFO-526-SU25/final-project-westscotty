@@ -70,3 +70,4 @@ This dataset was selected because volcanoes are exciting! Mount Vesuvius is a hi
             -   Vary the size of the markers based on the magnitude
         -   Plot the data in 3D
             -   Our data is in lat, lon, depth and magnitude
+        -   Animate the plot to show patterns not seen by all data at once

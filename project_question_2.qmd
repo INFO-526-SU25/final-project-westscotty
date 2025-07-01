@@ -1,18 +1,25 @@
 ---
-title: "Project Question 2"
-format: 
-  html:
+title: "Mt. Vesuvius Lives"
+subtitle: "INFO 526 - Summer 2025 - Final Project"
+author: 
+  - name: "Seismic Minds - Weston Scott"
+    affiliations:
+      - name: "School of Information, University of Arizona"
+description: "Exploratory Analysis of Seismic Activity: Mt. Vesuvius"
+format:
+   html:
+    code-tools: true
+    code-overflow: wrap
+    code-line-numbers: true
     embed-resources: true
-toc: true
-editor:
-  render-on-save: true
+editor: visual
+code-annotations: hover
 execute:
   warning: false
+  render-on-save: true
 ---
 
-## 0 - Setup
-
-```{r library_setup}
+```{r library_setup, include=FALSE}
 if (!require("pacman")) 
     install.packages("pacman")
 
@@ -69,6 +76,8 @@ knitr::opts_chunk$set(
 
 save_figs <- TRUE
 ```
+
+## Data Wrangling
 
 ```{r}
 vesuvius_data <- read.csv(here("data","vesuvius.csv"))
@@ -143,6 +152,8 @@ vesuvius_data_filtered <- vesuvius_data |>
 
 ```
 
+## Display Basic Stats
+
 ```{r}
 
 max_depth <- max(vesuvius_data$depth_km, na.rm = TRUE)
@@ -157,6 +168,8 @@ min_mag <- min(vesuvius_data$duration_magnitude_md, na.rm = TRUE)
 print(paste("Maximum Magnitude:", max_mag))
 print(paste("Minimum Magnitude:", min_mag))
 ```
+
+## Make Initial Scatter Plot
 
 ```{r}
 original <-
@@ -173,7 +186,7 @@ original <-
     ) +                     
     
     scale_color_viridis_c(
-        option = "inferno",
+        option = "magma",
         name = "Magnitude"
     ) +
     
@@ -238,6 +251,8 @@ if (save_figs) {
 }
 ```
 
+## Generate Histogram for Depth Analysis
+
 ```{r}
 histogram <- 
     ggplot(
@@ -275,6 +290,8 @@ if (save_figs) {
 }
 ```
 
+## Capture Elevation Data for Contour Mapping
+
 ```{r}
 # Define Vesuvius bounding box (in WGS84 lon/lat)
 vesuvius_bbox <- matrix(c(14.33, 40.78, 14.48, 40.89), ncol = 2, byrow = TRUE)
@@ -301,7 +318,11 @@ elev_df <- as.data.frame(
     xy = TRUE)
 
 colnames(elev_df) <- c("x", "y", "elevation")
+
+glimpse(elev_df)
 ```
+
+## Create Static Display of Depth Bins
 
 ```{r}
 static_plot <- ggplot() +
@@ -404,7 +425,7 @@ if (save_figs) {
 }
 ```
 
-```{r}
+```{r include=FALSE}
 ggplot2::theme_set(ggplot2::theme_light(base_size = 14))
 options(width = 65)
 
@@ -416,6 +437,8 @@ knitr::opts_chunk$set(
   dpi = 150 # higher dpi, sharper image
 )
 ```
+
+## Create Animated Display of Depth Bins
 
 ```{r}
 vesuvius_anim_plot <- ggplot() +

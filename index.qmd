@@ -20,4 +20,38 @@ execute:
 
 ## Abstract
 
-Add project abstract here.
+This presentation, analyzes seismic activity at Mount Vesuvius using the Tidy Tuesday dataset (May 13, 2025), exploring how frequency and depth have changed over time through scatter plots, histograms, and error plots, and how depth relates to magnitude with scatter plots, histograms, and animations. For the first question, the analysis reveals stabilized average depth and duration magnitude with increased frequency since 2016, while the second question shows frequent shallow events with varied magnitudes and less frequent, potentially more powerful deeper events, enhanced by elevation contours. The study employs well-documented R code and clear visualizations, though challenges with data resolution and animation consistency suggest areas for future improvement.
+
+## Introduction
+
+Exploratory analysis was conducted of seismic activity at Mount Vesuvius, Italy, utilizing the Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025). The dataset, spanning the last two decades, includes key variables such as `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`, which record the geographic coordinates, depth, and magnitude of seismic events. The project aims to uncover underlying relationships between these variables through time series and static analyses, addressing two primary research questions: (1) How have the frequency and depth of seismic events at Mount Vesuvius changed over time? and (2) How does the depth of seismic events relate to their magnitude, and are deeper events more powerful?
+
+## Analysis
+
+### Question 1: How have the frequency and depth of seismic events at Mount Vesuvius changed over time?
+
+**See Tab: Question 1**
+
+The analysis examines temporal changes in the frequency and depth of seismic events by first wrangling the time column of the Mount Vesuvius Dataset to convert it into a usable date format, replacing "T" with a space and removing "Z", then extracting year and month for aggregation. Data is filtered to remove missing `duration_magnitude_md` and `depth_km` values, and aggregated by year and month to calculate mean values, enabling a more fluid trend analysis. This approach employs a variety of visualizations (quite numerous) including scatter plots with `geom_jitter` and `geom_smooth`, histograms with `geom_histogram`, and error plots with `geom_linerange` and `geom_errorbar`—to assess frequency and depth changes over time. This multi-method strategy is supported by tidyverse and ggplot2 aiding in learning both overall and detailed distribution-level trends across the two-decade dataset.
+
+The code is well-structured and has a good work-flow. Data wrangling with mutate and str_replace_all transforms the time column into a `POSIXct` date, while `group_by` and `summarise` aggregate the means by year and month. Visualization code, such as `geom_jitter` with `geom_smooth` and faceted `geom_histogram`, is clearly formatted with labeled axes and titles.
+
+The visualizations are appropriate and clearly labeled. Scatter plots (plot_1, plot_2) show mean `duration_magnitude_md` and `mean_depth_km` by year with `geom_jitter` and a LOESS `geom_smooth`, using custom axes. Monthly plots (plot_3, plot_4) extend this to year-month with `scale_x_date`. Histograms (plot_5, plot_6) facet `depth_km` and `duration_magnitude_md` by `year`. Error plots (plot_9, plot_10) use `geom_linerange` and `geom_errorbar` to display ranges for tracking the temporal changes.
+
+The analysis reveals that average depth and duration magnitude have stabilized over time, with a noticeable increase in event frequency since 2013, as indicated by histogram facets showing consistent depth distributions and low magnitude values (typically below 3). The LOESS smooths suggest a leveling off of trends, while error plots highlight variability, with deeper events becoming less frequent but still present. The rise in recorded events since 2016 aligns with improved data collection standard. This project aimed to analyze the data at a high level looking into the years overall, merging the more granular monthly data into an aggregate statistic.
+
+### Question 2: How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?
+
+**See Tab: Question 2**
+
+The analysis investigates the relationship between seismic event depth and magnitude by cleaning the dataset to remove missing values in `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`. A new variable, `depth_boundary_0.5km`, is created to bin depths into 0.5 km intervals, with an additional `depth_boundary_1km` for broader categorization, enabling detailed spatial and statistical exploration. Point sizes are rescaled using rescale to reflect depth variations, and visualizations are developed in stages: an initial scatter plot maps magnitude and depth, a histogram facets magnitude by depth bins, a static plot adds elevation contours, and an animated plot transitions through depth layers using `gganimate`. This approach,uses a variety of methods to discoverer trends in a spatial context.
+
+The code is well-organized and legible (though it could use commentary), utilizing dplyr for data manipulations including `drop_na`, `mutate`, `filter`, `arrange`. The `case_when` function creates depth bins with precise level definitions, and `rescale` adjusts point sizes and magnitudes. Elevation data is fetched with `elevatr` and processed into a dataframe, while `gganimate` configures transitions for the animated plot.
+
+The visualizations are appropriate and labeled consistently. The initial scatter plot uses a Viridis "magma" color scale for `duration_magnitude_md` and alpha transparency for `depth_abs`, with axes limited to \[14.34, 14.48\] longitude and \[40.78, 40.88\] latitude. The histogram employs red fill and white outlines, faceted by `depth_boundary_0.5km`. The static plot integrates `metR::geom_contour_fill` with a gray-scale elevation discrete gradient color-bar and points sized by `depth_rescaled`, while the animated plot transitions through depth bins, using additional shadow effects. Legends are horizontally placed in all figures with titles and captions, adding consistency.
+
+Diving into question 2 and the associated visualizations reveals that seismic activity is frequent at shallower depths (\< 1 km), with varied magnitudes, while deeper events (\> 5 km) are less frequent but exhibit higher average magnitudes, suggesting deeper events may be more powerful on average. The histogram confirms a skewed distribution toward lower magnitudes across all depths, and the static plot, visually improved by elevation contours, indicates a 1.2 km elevation gain toward the center, embedding depth relative to sea level. However, challenges with gganimate include theme preservation and contour accuracy highlight limitations.
+
+## Conclusion
+
+This project effectively combines thoughtful data wrangling, well-planned visualizations, and insightful discussions to explore seismic activity at Mount Vesuvius, offering a foundation for future research into volcanic behavior.

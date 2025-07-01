@@ -18,6 +18,10 @@ website:
         href: presentation.qmd
       - text: About
         href: about.qmd
+      - text: Question 1
+        href: project_question_1.qmd
+      - text: Question 2
+        href: project_question_2.qmd
 
 format:
   html:
