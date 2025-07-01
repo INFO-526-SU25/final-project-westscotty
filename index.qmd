@@ -20,7 +20,7 @@ execute:
 
 ## Abstract
 
-This presentation, analyzes seismic activity at Mount Vesuvius using the Tidy Tuesday dataset (May 13, 2025), exploring how frequency and depth have changed over time through scatter plots, histograms, and error plots, and how depth relates to magnitude with scatter plots, histograms, and animations. For the first question, the analysis reveals stabilized average depth and duration magnitude with increased frequency since 2016, while the second question shows frequent shallow events with varied magnitudes and less frequent, potentially more powerful deeper events, enhanced by elevation contours. The study employs well-documented R code and clear visualizations, though challenges with data resolution and animation consistency suggest areas for future improvement.
+This presentation analyzes seismic activity at Mount Vesuvius using the Tidy Tuesday dataset (May 13, 2025), exploring how frequency and depth have changed over time through scatter plots, histograms, and error plots, and how depth relates to magnitude with scatter plots, histograms, and animations. For the first question, the analysis reveals stabilized average depth and duration magnitude with increased frequency since 2016, while the second question shows frequent shallow events with varied magnitudes and less frequent, potentially more powerful deeper events, enhanced by elevation contours. The study employs well-documented R code and clear visualizations, though challenges with data resolution and animation consistency suggest areas for future improvement.
 
 ## Introduction
 
