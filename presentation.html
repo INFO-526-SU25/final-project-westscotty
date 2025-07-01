@@ -238,11 +238,13 @@ Cedric Destin &amp; Weston Scott
 </section>
 <section id="approach" class="slide level2">
 <h2>Approach</h2>
+<div style="font-size: 0.75em; line-height: 1.25">
 <ol type="1">
 <li><p>Any NaN were removed for the Duration Magnitude and the Depth</p></li>
 <li><p>The data was smoothed by calculating the average of the Duration Magnitude and the Depth per year &amp; month</p></li>
 <li><p>The time had to be wrangled to remove undesired characters</p></li>
 </ol>
+</div>
 </section>
 <section id="plots" class="slide level2">
 <h2>Plots</h2>
@@ -252,9 +254,16 @@ Cedric Destin &amp; Weston Scott
 <div id="tabset-1-1">
 <div class="columns">
 <div class="column" style="width:65%;">
-<p><img data-src="images/by_year_month.png" style="width:75.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/by_year_month.png"></p>
+<figcaption>Description …</figcaption>
+</figure>
+</div>
 </div><div class="column" style="width:35%;">
-<p><span style="font-size: 0.75em; line-height: 1.4;"><strong>Note:</strong> Time plot of <code>duration_magnitude_md</code> and <code>depth_km</code>.<br> This shows that the average depth and duration magnitude measured have stabilized.</span></p>
+<div style="font-size: 0.75em; line-height: 1.25">
+<p><strong>Note:</strong> Time plot of <code>duration_magnitude_md</code> and <code>depth_km</code>. This shows that the average depth and duration magnitude measured have stabilized.</p>
+</div>
 </div></div>
 <hr>
 </div>
@@ -263,23 +272,30 @@ Cedric Destin &amp; Weston Scott
 <div class="column" style="width:65%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/depth_error_binned_mount.png" style="width:75.0%"></p>
+<p><img data-src="images/depth_error_binned_mount.png"></p>
 <figcaption>Description…</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:35%;">
-<p><span style="font-size: 0.75em; line-height: 1.4;"> <strong>Note:</strong> Another view of the Depth of the seismic events over time.<br></span></p>
-<p></p>
+<div style="font-size: 0.75em; line-height: 1.25">
+<p><strong>Note:</strong> Another view of the Depth of the seismic events over time.</p>
+</div>
 </div></div>
 <hr>
 </div>
 <div id="tabset-1-3">
 <div class="columns">
 <div class="column" style="width:65%;">
-<p><img data-src="images/duration_magnitude_error_binned.png" style="width:75.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/duration_magnitude_error_binned.png"></p>
+<figcaption>Description …</figcaption>
+</figure>
+</div>
 </div><div class="column" style="width:35%;">
-<p><span style="font-size: 0.75em; line-height: 1.4;"> <strong>Note:</strong> Another view of the Duration Magnitude of the seismic events over time.<br></span></p>
-<p></p>
+<div style="font-size: 0.75em; line-height: 1.25">
+<p><strong>Note:</strong> Another view of the Duration Magnitude of the seismic events over time.</p>
+</div>
 </div></div>
 </div>
 </div>
@@ -287,12 +303,14 @@ Cedric Destin &amp; Weston Scott
 </section>
 <section id="analysis" class="slide level2">
 <h2>Analysis</h2>
+<div style="font-size: 0.75em; line-height: 1.25">
 <p>Reviewing the behavior of the seismic events in time, here are some observations:</p>
 <ul>
-<li><p>The Depth and the Duration Magnitude of the seismic events are became smaller</p></li>
-<li><p>More Events have been recorded since 2016</p></li>
-<li><p>The Duration Magnitude remains low (below 3)</p></li>
+<li>The Depth and the Duration Magnitude of the seismic events are became smaller</li>
+<li>More Events have been recorded since 2016</li>
+<li>The Duration Magnitude remains low (below 3)</li>
 </ul>
+</div>
 </section>
 <section id="challenges-faced" class="slide level2">
 <h2>Challenges Faced</h2>
@@ -572,7 +590,7 @@ Cedric Destin &amp; Weston Scott
 <h2>Challenges Faced</h2>
 <div style="font-size: 0.75em; line-height: 1.25">
 <ul>
-<li>Manipulating the depth_km field was challenging due to the amount of data in each bin. It was essential that at least one data point was in each division, but showing the fewer bins than what was used proved to not be effective in showing the trends</li>
+<li>Manipulating the <code>depth_km</code> field was challenging due to the amount of data in each bin. It was essential that at least one data point was in each division, but showing the fewer bins than what was used proved to not be effective in showing the trends</li>
 <li><code>gganimate</code> does not preserve all the theme options that were established and called out, leading to a plot that closely resembles it’s static counterpart, but not equivalent in the features desired. Contour lines seemed to not work right, now drawing the layers as intended.</li>
 <li>Formatting legends also proved to be a labor of love, as there are many ways to show them, but keeping consistency among the plots created a rigorous amount of testing with many options added to ensure they appeared ‘uniform’</li>
 </ul>

@@ -81,21 +81,21 @@
     "href": "presentation.html#approach",
     "title": "Mt. Vesuvius Lives",
     "section": "Approach",
-    "text": "Approach\n\nAny NaN were removed for the Duration Magnitude and the Depth\nThe data was smoothed by calculating the average of the Duration Magnitude and the Depth per year & month\nThe time had to be wrangled to remove undesired characters"
+    "text": "Approach\n\n\nAny NaN were removed for the Duration Magnitude and the Depth\nThe data was smoothed by calculating the average of the Duration Magnitude and the Depth per year & month\nThe time had to be wrangled to remove undesired characters"
   },
   {
     "objectID": "presentation.html#plots",
     "href": "presentation.html#plots",
     "title": "Mt. Vesuvius Lives",
     "section": "Plots",
-    "text": "Plots\n\nTimeplotsDepth StatsDuration Magnitude Stats\n\n\n\n\n\n\nNote: Time plot of duration_magnitude_md and depth_km. This shows that the average depth and duration magnitude measured have stabilized.\n\n\n\n\n\n\n\n\n\nDescription…\n\n\n\n Note: Another view of the Depth of the seismic events over time.\n\n\n\n\n\n\n\n\n\n Note: Another view of the Duration Magnitude of the seismic events over time."
+    "text": "Plots\n\nTimeplotsDepth StatsDuration Magnitude Stats\n\n\n\n\n\n\n\nDescription …\n\n\n\n\nNote: Time plot of duration_magnitude_md and depth_km. This shows that the average depth and duration magnitude measured have stabilized.\n\n\n\n\n\n\n\n\n\n\nDescription…\n\n\n\n\nNote: Another view of the Depth of the seismic events over time.\n\n\n\n\n\n\n\n\n\n\nDescription …\n\n\n\n\nNote: Another view of the Duration Magnitude of the seismic events over time."
   },
   {
     "objectID": "presentation.html#analysis",
     "href": "presentation.html#analysis",
     "title": "Mt. Vesuvius Lives",
     "section": "Analysis",
-    "text": "Analysis\nReviewing the behavior of the seismic events in time, here are some observations:\n\nThe Depth and the Duration Magnitude of the seismic events are became smaller\nMore Events have been recorded since 2016\nThe Duration Magnitude remains low (below 3)"
+    "text": "Analysis\n\nReviewing the behavior of the seismic events in time, here are some observations:\n\nThe Depth and the Duration Magnitude of the seismic events are became smaller\nMore Events have been recorded since 2016\nThe Duration Magnitude remains low (below 3)"
   },
   {
     "objectID": "presentation.html#challenges-faced",
