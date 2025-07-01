@@ -17,32 +17,30 @@ execute:
   render-on-save: true
 ---
 
-
 ## The Data
 
+:::::: columns
+:::: {.column width="60%"}
+::: {style="font-size: 0.75em; line-height: 1.25"}
 -   Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025)
-
--   The data contains records of seismic activity at or near Mt. Vesuvius, Italy over the last decade or so
-
--   Source: <https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md>
-
-## The Goal
-
-::::: columns
-::: {.column width="60%"}
-Interpret the underlying relationships between variables of interest including time series and static analysis of the seismic data recorded at the famous Mt. Vesuvius.
+-   The data contains records of seismic activity at or near Mt. Vesuvius, Italy over the last 2 decades
+-   The goal is to interpret the underlying relationships between variables of interest including time series and static analyses of the seismic data recorded at the famous Mt. Vesuvius.
+-   [TidyTuesday Source](https://github.com/rfordatascience/tidytuesday/blob/main/data/2025/2025-05-13/readme.md)
 :::
+::::
 
 ::: {.column width="40%"}
 ![](images/mt_vesuvius.jpg){fig-alt="https://www.pexels.com/photo/buildings-near-the-rock-mountains-6540758/"}
 :::
-:::::
+::::::
 
-## Question 1
+## Exploratory Question 1
 
+::: {style="font-size: 0.75em; line-height: 1.25"}
 **How have the frequency and depth of seismic events at Mount Vesuvius changed over time?**
 
 -   \<Add stuff here\>
+:::
 
 ## Approach
 
@@ -52,100 +50,297 @@ Interpret the underlying relationships between variables of interest including t
 
 ## Challenges Faced
 
-## Question 2
+## Exploratory Question 2
 
+::: {style="font-size: 0.75em; line-height: 1.25"}
 **How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?**
 
--   \<Add stuff here\>
+-   Exploring this question requires extraction of hidden data to synthesize new variable, aiding in exploring the seismic activity at Mt. Vesuvius
+-   Extracting data into effective visualizations involved utilizing `ggplot`, `geom_point`, `geom_contour_fill`, `geom_hist`, and integrating with `gganimate`
+-   These visuals provide a viewing window into the trends connecting seismic event magnitudes with depth
+:::
 
 ## Approach
 
--   The first step was to remove bad (or missing) data by dropping rows with NA in `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`
--   The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled `depth_boundary_0.5km`, plotting in ascending depth order meaning that deeper values will appear first
--   A size re-scaling for points was created from this new depth layer variable
+::: {style="font-size: 0.75em; line-height: 1.25"}
+<details>
+  <summary style="color: black;">The first step was to remove bad (or missing) data by dropping rows with NA in `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`</summary>
+
+  ```r
+vesuvius_data_filtered <- vesuvius_data |>
+    drop_na(
+        latitude, 
+        longitude, 
+        depth_km, 
+        duration_magnitude_md
+    )
+```
+
+</details>
+
+<details>
+  <summary style="color: black;">The first step was to down-sample the raw depth data into levels only depth boundaries spanning 0.5 km bands, creating a new variable titled `depth_boundary_0.5km`, plotting in ascending depth order meaning that deeper values will appear first</summary>
+
+  ```r
+vesuvius_data <- read.csv(here("data","vesuvius.csv"))
+vesuvius_data_filtered <- vesuvius_data_filtered |>
+    mutate(
+        depth_abs = abs(depth_km),
+        depth_boundary_1km = case_when(
+            depth_km < 1 ~ "< 1 km",
+            depth_km < 2 ~ "< 2 km",
+            depth_km < 3 ~ "< 3 km",
+            depth_km < 4 ~ "< 4 km",
+            depth_km < 5 ~ "< 5 km",
+            TRUE ~ "> 5 km"),
+        
+        depth_boundary_1km = factor(
+            depth_boundary_1km, 
+            levels = c("< 1 km", 
+                      "< 2 km", 
+                      "< 3 km", 
+                      "< 4 km", 
+                      "< 5 km", 
+                      "> 5 km")),
+        
+        depth_boundary_0.5km = case_when(
+            depth_km < 0.5 ~ "< 0.5 km",
+            depth_km < 1 ~ "0.5 ~ 1 km",
+            depth_km < 1.5 ~ "1 ~ 1.5 km",
+            depth_km < 2 ~ "1.5 ~ 2 km",
+            depth_km < 2.5 ~ "2 ~ 2.5 km",
+            depth_km < 3 ~ "2.5 ~ 3 km",
+            depth_km < 3.5 ~ "3 ~ 3.5 km",
+            depth_km < 4 ~ "3.5 ~ 4 km",
+            depth_km < 4.5 ~ "4 ~ 4.5 km",
+            depth_km < 5 ~ "4.5 ~ 5 km",
+            TRUE ~ "> 5 km"),
+        
+        depth_boundary_0.5km = factor(
+            depth_boundary_0.5km, 
+            levels = rev(c("< 0.5 km", 
+                      "0.5 ~ 1 km", 
+                      "1 ~ 1.5 km", 
+                      "1.5 ~ 2 km", 
+                      "2 ~ 2.5 km", 
+                      "2.5 ~ 3 km",
+                      "3 ~ 3.5 km", 
+                      "3.5 ~ 4 km", 
+                      "4 ~ 4.5 km", 
+                      "4.5 ~ 5 km", 
+                      "> 5 km")))
+    ) |>
+
+    filter(
+        !is.na(depth_boundary_0.5km)
+    ) |>
+
+    arrange(
+        depth_boundary_0.5km, 
+        desc(depth_rescaled)
+    ) |> glimpse()
+  ```
+
+</details>
+
+<details>
+  <summary style="color: black;">A size re-scaling for points was created from this new depth layer variable</summary>
+
+  ```r
+  vesuvius_data_filtered <- vesuvius_data_filtered |>
+      mutate(
+        depth_rescaled = rescale(depth_km, to = c(1, 11)),
+        mag_rescaled = rescale(duration_magnitude_md, to = c(0.4, 0.9))
+    )
+  ```
+
+</details>
+
+<details>
+  <summary style="color: black;">Initially a visualization was created to simply view lat/long axes with points that were colored by the `duration_magnitude_md` and a transparency difference based on `depth_km` (see Initial View on next slide)</summary>
+
+  ```r
+original <-
+    ggplot(
+        vesuvius_data_filtered, 
+        aes(x = longitude, 
+            y = latitude)
+    ) +
+    
+    geom_point(
+        aes(color = duration_magnitude_md,
+            alpha = depth_abs),
+        size = 3
+    ) +                     
+    
+    scale_color_viridis_c(
+        option = "inferno",
+        name = "Magnitude"
+    ) +
+    
+    scale_alpha_continuous(
+        name = "Depth (km)",
+        range = c(0.75, 0.25)
+    ) +
+
+        scale_x_continuous(
+            limits = c(14.34, 14.48), 
+            expand = c(0, 0)
+        ) +
+        scale_y_continuous(
+            limits = c(40.78, 40.88), 
+            expand = c(0, 0)
+        ) + 
+        ...
+  ```
+
+</details>
+
+<details>
+  <summary style="color: black;">Next the data was plotted as histograms of the `duration_magnitude_md`, but faceted by the newer `depth_boundary_0.5km` variable, showing the groupings of points clearer, as well as their distributions across the magnitude scale</summary>
+
+  ```r
+histogram <- 
+    ggplot(
+        vesuvius_data_filtered, 
+        aes(x = duration_magnitude_md)
+    ) +
+
+    geom_histogram(
+        binwidth = 0.2, 
+        fill = 'red', 
+        color = "white"
+    ) +
+
+    facet_wrap(
+        ~ depth_boundary_0.5km, 
+        scales = "free_y"
+    ) +
+    ...
+  ```
+
+</details>
+
+<details>
+  <summary style="color: black;">After learning from the histogram, the initial plot was updated to plot the points with varying sizes based on `depth_boundary_0.5km`, with contour lines of the elevation in the same region, an accompanying animated plot followed it</summary>
+
+  ```r
+static_plot <- ggplot() +
+    metR::geom_contour_fill(
+        data = elev_df,
+        aes(x = x, 
+            y = y,
+            z = elevation/1000, 
+            group = NULL),
+        bins = 10
+    ) +
+
+    scale_fill_gradientn(
+        colors = gray.colors(10, start = 1.0, end = 0.3),
+        name = "Elevation (km)",
+        limits = c(-0.111, 1.246),  # Match elevation range from elev_df (km)
+        breaks = seq(0, 1.2, by = 0.3)
+    ) +
+
+    geom_point(
+        data = vesuvius_data_filtered,
+        aes(x = longitude, 
+            y = latitude,
+            color = duration_magnitude_md,
+            size = depth_rescaled),
+        alpha = 0.75
+    ) +
+    ...
+  ```
+
+</details>
+
+:::
 
 ## Seismic Activity Plots
 
-::: {.panel-tabset}
-<!-- ## Initial View
+::::::::::::::::::: panel-tabset
+## Initial View
 
-:::{.columns}
+:::::: columns
 ::: {.column width="65%"}
-![Description...](images/original_vesuvius_plot.png){width=100%}
+![First pass at plotting depth and mangitude on lat/lon](images/original_vesuvius_plot.png){width="100%"}
 :::
 
-::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;">
-**Note:** This plot shows initial conditions of seismic events around Mount Vesuvius.<br>
-Color represents magnitude.<br>
-Transparency reflects depth.<br>
-Use this as a baseline for comparison.
-</span>
+:::: {.column width="35%"}
+::: {style="font-size: 0.75em; line-height: 1.25"}
+**Note:** This plot shows initial conditions of seismic events around Mount Vesuvius, with the color representing the magnitude and transparency reflecting depth (use this as a baseline for comparison)
 :::
-::: -->
+::::
+::::::
 
-<!-- --- -->
+------------------------------------------------------------------------
 
 ## Histogram View
 
-:::{.columns}
+:::::: columns
 ::: {.column width="65%"}
-![Description...](images/histogram_vesuvius_plot.png){width=100%}
+![Binned the depth variable into discreted bins of 0.5 km](images/histogram_vesuvius_plot.png){width="100%"}
 :::
 
-::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;">
-**Note:** Histogram of `duration_magnitude_md`, faceted by `depth_boundary_0.5km`.<br>
-This confirms distribution shapes and valid bins for all layers.
-</span>
+:::: {.column width="35%"}
+::: {style="font-size: 0.75em; line-height: 1.25"}
+**Note:** Histogram of `duration_magnitude_md`, faceted by `depth_boundary_0.5km`, confirming confirms distribution shapes and valid bins for all layers
 :::
-:::
+::::
+::::::
 
----
+------------------------------------------------------------------------
 
 ## Static View
 
-
-:::{.columns}
+:::::: columns
 ::: {.column width="65%"}
-![Description...](images/static_vesuvius_plot.png){width=100%}
+![Upgraded initial plot to adjust sizing of points based on depth bin](images/static_vesuvius_plot.png){width="100%"}
 :::
 
-::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;">
-**Note:** Final refined static map with elevation contours and refined legend formatting.<br>
-
-</span>
+:::: {.column width="35%"}
+::: {style="font-size: 0.75em; line-height: 1.25"}
+**Note:** With the addition of the elevation contours and the the sizing of points based on depth, it is clearer where the points are localized and the depths associated (relative to sea level)
 :::
-:::
+::::
+::::::
 
----
+------------------------------------------------------------------------
 
 ## Animated View
 
-:::{.columns}
+:::::: columns
 ::: {.column width="65%"}
-![Description...](images/vesuvius_animation.gif){width=100%}
+![Animation of the finalized static plot, highlighting each depth bin in a loop](images/vesuvius_animation.gif){width="100%"}
 :::
 
-::: {.column width="35%"}
-<span style="font-size: 0.75em; line-height: 1.4;">
-**Note:** Animation shows seismic activity over depth layers using alpha fading.<br>
-
-</span>
+:::: {.column width="35%"}
+::: {style="font-size: 0.75em; line-height: 1.25"}
+**Note:** The animation highlights each depth bin (0.5 km region) starting from the deepest points, highlighting the localized groups of points in each layer
 :::
-:::
-
-:::
+::::
+::::::
+:::::::::::::::::::
 
 ## Analysis
 
-\<Add stuff here\>
+::: {style="font-size: 0.75em; line-height: 1.25"}
+- Seismic activity occurs quite frequently, and looking at the histogram alone, it is clear that more events occur at the shallower depths
+- Though there are data points that suggest powerful magnitude events can occur at shallow depths, the static plot, animated plot, and histogram agree that more powerful events occur at deeper depths on average, but are much less frequent as compared to the activity closer to the surface
+- It should be noted that with the elevation contour lines that the deeper events are truly much deeper than the points localized in the center of Mt. Vesuvius. There is about a 1.2 km elevation gain from the outer region of the landmark compared to the center.
+:::
 
 ## Challenges Faced
 
-\<Add stuff here\>
+::: {style="font-size: 0.75em; line-height: 1.25"}
+-   Manipulating the depth_km field was challenging due to the amount of data in each bin. It was essential that at least one data point was in each division, but showing the fewer bins than what was used proved to not be effective in showing the trends
+-   `gganimate` does not preserve all the theme options that were established and called out, leading to a plot that closely resembles it's static counterpart, but not equivalent in the features desired. Contour lines seemed to not work right, now drawing the layers as intended.
+-   Formatting legends also proved to be a labor of love, as there are many ways to show them, but keeping consistency among the plots created a rigorous amount of testing with many options added to ensure they appeared 'uniform'
+:::
 
 ## Final Remarks
 
-\<Add stuff here\>
+::: {style="font-size: 0.75em; line-height: 1.25"}
+TODO
+:::
