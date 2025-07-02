@@ -24,7 +24,7 @@ This presentation analyzes seismic activity at Mount Vesuvius using the Tidy Tue
 
 ## Introduction
 
-Exploratory analysis was conducted of seismic activity at Mount Vesuvius, Italy, utilizing the Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025). The dataset, spanning the last two decades, includes key variables such as `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`, which record the geographic coordinates, depth, and magnitude of seismic events. The project aims to uncover underlying relationships between these variables through time series and static analyses, addressing two primary research questions: (1) How have the frequency and depth of seismic events at Mount Vesuvius changed over time? and (2) How does the depth of seismic events relate to their magnitude, and are deeper events more powerful?
+Exploratory analysis was conducted for seismic activity at Mount Vesuvius, Italy, utilizing the Mount Vesuvius Dataset from Tidy Tuesday (May 13, 2025). The dataset, spanning the last two decades, includes key variables such as `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`, which record the geographic coordinates, depth, and magnitude of seismic events. The project aims to uncover underlying relationships between these variables through time series and static analyses, addressing two primary research questions: (1) How have the frequency and depth of seismic events at Mount Vesuvius changed over time? and (2) How does the depth of seismic events relate to their magnitude, and are deeper events more powerful?
 
 ## Analysis
 
@@ -44,7 +44,7 @@ The analysis reveals that average depth and duration magnitude have stabilized o
 
 **See Tab: Question 2**
 
-The analysis investigates the relationship between seismic event depth and magnitude by cleaning the dataset to remove missing values in `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`. A new variable, `depth_boundary_0.5km`, is created to bin depths into 0.5 km intervals, with an additional `depth_boundary_1km` for broader categorization, enabling detailed spatial and statistical exploration. Point sizes are rescaled using rescale to reflect depth variations, and visualizations are developed in stages: an initial scatter plot maps magnitude and depth, a histogram facets magnitude by depth bins, a static plot adds elevation contours, and an animated plot transitions through depth layers using `gganimate`. This approach,uses a variety of methods to discoverer trends in a spatial context.
+The analysis investigates the relationship between seismic event depth and magnitude by cleaning the dataset to remove missing values in `latitude`, `longitude`, `depth_km`, and `duration_magnitude_md`. A new variable, `depth_boundary_0.5km`, is created to bin depths into 0.5 km intervals, with an additional `depth_boundary_1km` for broader categorization, enabling detailed spatial and statistical exploration. Point sizes are rescaled using rescale to reflect depth variations, and visualizations are developed in stages: an initial scatter plot maps magnitude and depth, a histogram facets magnitude by depth bins, a static plot adds elevation contours, and an animated plot transitions through depth layers using `gganimate`. This approach uses a variety of methods to discoverer trends in a spatial context.
 
 The code is well-organized and legible (though it could use commentary), utilizing dplyr for data manipulations including `drop_na`, `mutate`, `filter`, `arrange`. The `case_when` function creates depth bins with precise level definitions, and `rescale` adjusts point sizes and magnitudes. Elevation data is fetched with `elevatr` and processed into a dataframe, while `gganimate` configures transitions for the animated plot.
 
@@ -54,4 +54,4 @@ Diving into question 2 and the associated visualizations reveals that seismic ac
 
 ## Conclusion
 
-This project effectively combines thoughtful data wrangling, well-planned visualizations, and insightful discussions to explore seismic activity at Mount Vesuvius, offering a foundation for future research into volcanic behavior.
+In conclusion, this project effectively combines thoughtful data wrangling, well-planned visualizations using R. The plots created allowed us to explore seismic activity at Mount Vesuvius, offering a foundation for future research into volcanic behavior.
