@@ -423,7 +423,7 @@ static_plot <- ggplot() +
 
 :::::: columns
 ::: {.column width="65%"}
-![First pass at plotting depth and mangitude on lat/lon](images/original_vesuvius_plot.png){width="100%"}
+![First pass at plotting depth and magnitude on lat/lon](images/original_vesuvius_plot.png){width="100%"}
 :::
 
 :::: {.column width="35%"}
