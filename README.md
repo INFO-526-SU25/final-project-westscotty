@@ -3,5 +3,13 @@
 
 Final Project repo for INFO 526 - Summer 2025.
 
+## Mount Vesuvius Lives
+by Scott Weston & Cedric Destin
+
+This repository analyzes the seismic events on Mount Vesuvius using the Tidy Tuesday dataset from May 13 2025. Using R, the projects aims to explore the behavior of the seismic eents over time and through space (latitude ant longitude).
+Finally, a short presentation can be found in the link below summarizing the results.
+
+[Mount Vesuvius Lives](https://arizona.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=069ce7cb-4ffe-404b-9fa1-b30e005cceef)
+
 #### Disclosure:
 Derived from the original course by Mine Çetinkaya-Rundel @ Duke University
