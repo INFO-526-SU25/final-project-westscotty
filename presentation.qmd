@@ -504,5 +504,6 @@ static_plot <- ggplot() +
 ## Final Remarks {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
-TODO
+- Mt. Vesuvius is a historical landmark and over the last decade the seismic activity has been succesfully recorded aiding in understanding it's behaviors, ultimately lending itself to being better prepared for any future seismic events
+- Utilizing R and ggplot to visualize and explore data fosters more creative thinkers in the world as well as enabling greater understanding of topics worth exploring
 :::
