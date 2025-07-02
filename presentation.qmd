@@ -17,7 +17,7 @@ execute:
   render-on-save: true
 ---
 
-## The Data
+## The Data {style="font-size: 0.7em; line-height: 0.75"}
 
 :::::: columns
 :::: {.column width="60%"}
@@ -34,7 +34,7 @@ execute:
 :::
 ::::::
 
-## Exploratory Question 1
+## Exploratory Question 1 {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 **How have the frequency and depth of seismic events at Mount Vesuvius changed over time?**
@@ -46,7 +46,7 @@ execute:
     -   Error plots
 :::
 
-## Approach
+## Approach {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 <details>
@@ -99,10 +99,10 @@ vesuvius_data <- vesuvius_data |>     mutate(
 </details>
 :::
 
-## Plots
+## Plots {style="font-size: 0.7em; line-height: 0.75"}
 
 ::::::::::::::: panel-tabset
-## Timeplots
+## Timeplots {style="font-size: 0.7em; line-height: 0.75"}
 
 :::::: columns
 ::: {.column width="65%"}
@@ -120,7 +120,7 @@ vesuvius_data <- vesuvius_data |>     mutate(
 
 ------------------------------------------------------------------------
 
-## Depth Stats
+## Depth Stats {style="font-size: 0.7em; line-height: 0.75"}
 
 :::::: columns
 ::: {.column width="65%"}
@@ -136,7 +136,7 @@ vesuvius_data <- vesuvius_data |>     mutate(
 
 ------------------------------------------------------------------------
 
-## Duration Magnitude Stats
+## Duration Magnitude Stats {style="font-size: 0.7em; line-height: 0.75"}
 
 :::::: columns
 ::: {.column width="65%"}
@@ -154,7 +154,7 @@ vesuvius_data <- vesuvius_data |>     mutate(
 
 :::::::::::::::
 
-## Analysis
+## Analysis {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 -   The Depth and the Duration Magnitude of the seismic events are became smaller
@@ -164,7 +164,7 @@ vesuvius_data <- vesuvius_data |>     mutate(
 -   The Duration Magnitude remains low (below 3)
 :::
 
-## Challenges Faced
+## Challenges Faced {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 -   How to interpret and down-sample the data.
@@ -180,7 +180,7 @@ vesuvius_data <- vesuvius_data |>     mutate(
 -   Overlaying the mountain over the `depth_md` seismic events, the latitude and longitude needed to be translated to time to add within the plots of `depth_md`
 :::
 
-## Exploratory Question 2
+## Exploratory Question 2 {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 **How does the depth of seismic events relate to their magnitude? Are deeper events more powerful?**
@@ -190,7 +190,7 @@ vesuvius_data <- vesuvius_data |>     mutate(
 -   These visuals provide a viewing window into the trends connecting seismic event magnitudes with depth
 :::
 
-## Approach
+## Approach {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 <details>
@@ -416,10 +416,10 @@ static_plot <- ggplot() +
 </details>
 :::
 
-## Seismic Activity Plots
+## Seismic Activity Plots {style="font-size: 0.7em; line-height: 0.75"}
 
 ::::::::::::::::::: panel-tabset
-## Initial View
+## Initial View {style="font-size: 0.7em; line-height: 0.75"}
 
 :::::: columns
 ::: {.column width="65%"}
@@ -435,7 +435,7 @@ static_plot <- ggplot() +
 
 ------------------------------------------------------------------------
 
-## Histogram View
+## Histogram View {style="font-size: 0.7em; line-height: 0.75"}
 
 :::::: columns
 ::: {.column width="65%"}
@@ -451,7 +451,7 @@ static_plot <- ggplot() +
 
 ------------------------------------------------------------------------
 
-## Static View
+## Static View {style="font-size: 0.7em; line-height: 0.75"}
 
 :::::: columns
 ::: {.column width="65%"}
@@ -467,7 +467,7 @@ static_plot <- ggplot() +
 
 ------------------------------------------------------------------------
 
-## Animated View
+## Animated View {style="font-size: 0.7em; line-height: 0.75"}
 
 :::::: columns
 ::: {.column width="65%"}
@@ -485,7 +485,7 @@ static_plot <- ggplot() +
 
 :::::::::::::::::::
 
-## Analysis
+## Analysis {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 -   Seismic activity occurs quite frequently, and looking at the histogram alone, it is clear that more events occur at the shallower depths
@@ -493,7 +493,7 @@ static_plot <- ggplot() +
 -   It should be noted that with the elevation contour lines that the deeper events are truly much deeper than the points localized in the center of Mt. Vesuvius. There is about a 1.2 km elevation gain from the outer region of the landmark compared to the center.
 :::
 
-## Challenges Faced
+## Challenges Faced {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 -   Manipulating the `depth_km` field was challenging due to the amount of data in each bin. It was essential that at least one data point was in each division, but showing the fewer bins than what was used proved to not be effective in showing the trends
@@ -501,7 +501,7 @@ static_plot <- ggplot() +
 -   Formatting legends also proved to be a labor of love, as there are many ways to show them, but keeping consistency among the plots created a rigorous amount of testing with many options added to ensure they appeared 'uniform'
 :::
 
-## Final Remarks
+## Final Remarks {style="font-size: 0.7em; line-height: 0.75"}
 
 ::: {style="font-size: 0.75em; line-height: 1.25"}
 TODO
